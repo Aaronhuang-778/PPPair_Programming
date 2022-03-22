@@ -2,3 +2,6 @@
 .vscode/
 .idea/
 */.vs/
+*/.vscode/
+*/.idea/
+*/out/
