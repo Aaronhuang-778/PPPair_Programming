@@ -1,14 +1,14 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using OriginalCode;
 
-namespace t1
+namespace OriginalCode
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void input(string[] args)
         {
             //处理参数,更新Global当中的参数
             DealParas dealParas = new DealParas();
@@ -91,11 +91,11 @@ namespace t1
                             {
                                 if (i == args.Length - 1)
                                 {
-                                    c.wrongHead();
+                                    throw new InvalidInputException(InputErrorType.code.wrong_head);
                                 }
                                 else if (args[i + 1].Length > 1 || (args[i + 1][0] < 97 || args[i + 1][0] > 122))
                                 {
-                                    c.wrongHead();
+                                    throw new InvalidInputException(InputErrorType.code.wrong_head);
                                 }
                                 else
                                 {
@@ -108,11 +108,11 @@ namespace t1
                             {
                                 if (i == args.Length - 1)
                                 {
-                                    c.wrongTail();
+                                    throw new InvalidInputException(InputErrorType.code.wrong_tail);
                                 }
                                 else if (args[i + 1].Length > 1 || (args[i + 1][0] < 97 || args[i + 1][0] > 122))
                                 {
-                                    c.wrongTail();
+                                    throw new InvalidInputException(InputErrorType.code.wrong_tail);
                                 }
                                 else
                                 {
@@ -123,14 +123,15 @@ namespace t1
                         }
                         else if (flag == 0) //指令重复
                         {
-                            Console.WriteLine("ERR[1] The {0} has already appeared or you have chosen output type!", args[i][1]);
+                            Console.WriteLine("{0}:", args[i][1]);
+                            throw new InvalidInputException(InputErrorType.code.dupli_para);
                             break;
                         }
                     }
                     //长度不为2，命令格式错误, 这里可以再细分提示类型
                     else
                     {
-                        c.wrongFormat();
+                        throw new InvalidInputException(InputErrorType.code.wrong_format);
                     }
                 }
                 //检查读取的文件路径
@@ -138,27 +139,26 @@ namespace t1
                 {
                     if (args[i].IndexOfAny(System.IO.Path.GetInvalidPathChars()) >= 0) // 文件路径字符不合法
                     {
-                        c.illegalPath();
+                        throw new InvalidInputException(InputErrorType.code.illegal_path);
                     }
                     else if (GlobalPara.file_name != null)  //已经保存文件路径，那么此条字符就是错误的内容，格式错误！
                     {
-                        c.wrongFormat();
-                 
+                        throw new InvalidInputException(InputErrorType.code.wrong_format);
                     }
                     else //尚未保存文件路径
                     {
                         if (len < 5)
                         {
-                            c.wrongFormat();
+                            throw new InvalidInputException(InputErrorType.code.wrong_format);
                         }
                         string file_type = args[i].Substring((len - 4));
                         if (file_type != ".txt")
                         {
-                            c.illegalFileType();
+                            throw new InvalidInputException(InputErrorType.code.illegal_file_type);
                         }
                         else if (!System.IO.File.Exists(args[i]))
                         {
-                            c.noFile();
+                            throw new InvalidInputException(InputErrorType.code.file_not_found);
                         }
                         else
                         {
@@ -170,12 +170,12 @@ namespace t1
             //没有单词文件
             if (GlobalPara.file_name == null)
             {
-                c.noInputFile();
+                throw new InvalidInputException(InputErrorType.code.no_filename);
             }
             //全部合法，但是-m和-n不能和其他的进行组合
             if ((GlobalPara.type == 'n' || GlobalPara.type == 'm') && (GlobalPara.is_loop == true || GlobalPara.head != '!' || GlobalPara.tail != '!'))
             {
-                c.wrongCombination();
+                throw new InvalidInputException(InputErrorType.code.illegal_para_combination);
             }
             Console.WriteLine(GlobalPara.is_loop);
             Console.WriteLine(GlobalPara.head);
@@ -196,49 +196,6 @@ namespace t1
     //对参数进行检查并且设置
     class Check
     {
-        public void wrongFormat()
-        {
-            Console.WriteLine("ERR[3] Please check your command's format!");
-            Environment.Exit(0);
-        }
-        public void wrongHead()
-        {
-            Console.WriteLine("ERR[4] Please check your -h's character!");
-            Environment.Exit(0);
-        }
-
-        public void wrongTail()
-        {
-            Console.WriteLine("ERR[5] Please check your -t's character!");
-            Environment.Exit(0);
-        }
-
-        public void illegalPath()
-        {
-            Console.WriteLine("ERR[6] Your file path is illegal!");
-            Environment.Exit(0);
-        }
-
-        public void illegalFileType()
-        {
-            Console.WriteLine("ERR[7] Your file type is not .txt!");
-            Environment.Exit(0);
-        }
-        public void noFile()
-        {
-            Console.WriteLine("ERR[8] Can't find your file!");
-            Environment.Exit(0);
-        }
-        public void wrongCombination()
-        {
-            Console.WriteLine("ERR[9] Please check your parameters combination, we don't support your combination!");
-            Environment.Exit(0);
-        }
-        public void noInputFile()
-        {
-            Console.WriteLine("ERR[10] Please input your words file!");
-            Environment.Exit(0);
-        }
         public int checkPara(char c)
         {
             switch (c)
@@ -279,7 +236,7 @@ namespace t1
                 case 'c':
                     if (GlobalPara.type == '!')
                     {
-                        GlobalPara.type = 'w';
+                        GlobalPara.type = 'c';
                         return 1;
                     }
                     else
@@ -319,7 +276,7 @@ namespace t1
                     }
                     break;
                 default:
-                    Console.WriteLine("ERR[2] This command is not supported!");
+                    throw new InvalidInputException(InputErrorType.code.not_support);
                     Environment.Exit(0);
                     break;
 
