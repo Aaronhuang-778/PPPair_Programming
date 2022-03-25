@@ -1,10 +1,72 @@
 ﻿using System;
+using System.IO;
+using System.Text;
+using System.Text.RegularExpressions;
+using OriginalCode;
 
 namespace t1
 {
     class Program
     {
         static void Main(string[] args)
+        {
+            //处理参数,更新Global当中的参数
+            DealParas dealParas = new DealParas();
+            dealParas.dealPara(args);
+
+            //读单词的过程还未完成
+            /*
+            * 
+            *   TODO
+            * 
+            */
+            DealWords dealWords = new DealWords();
+            dealWords.dealWords();
+
+            //分类调用
+            switch (GlobalPara.type)
+            {
+                case 'n':
+                    //统计单词链数量
+                    break;
+                case 'm':
+                    //输出首字母不相同的包含单词数量最多的单词链
+                    break;
+                case 'w':
+                    //需要传入Global的参数进行处理
+                    break;
+                case 'c':
+                    //需要传入Global的参数进行处理
+                    break;
+            }
+        }
+
+    }
+    class DealWords
+    {
+        public void dealWords()
+        {
+            //Console.WriteLine(Path.GetFullPath(GlobalPara.file_name));
+            StreamReader reader = new StreamReader(GlobalPara.file_name);
+            string[] words = null;
+            string str = reader.ReadToEnd();
+            str = str.ToLower();
+            words = Regex.Split(str, "[^(a-zA-Z)]+");
+            for (int i = 0; i < words.Length; i ++)
+            {
+                if (words[i].Length > 1)
+                {
+                    Word word = new Word(words[i]);
+
+
+                }
+            }
+        }
+    }
+    //处理参数
+    class DealParas
+    {
+        public void dealPara(string[] args)
         {
             //开始解析命令
             Check c = new Check();
@@ -81,7 +143,7 @@ namespace t1
                     else if (GlobalPara.file_name != null)  //已经保存文件路径，那么此条字符就是错误的内容，格式错误！
                     {
                         c.wrongFormat();
-                        ;
+                 
                     }
                     else //尚未保存文件路径
                     {
@@ -120,32 +182,7 @@ namespace t1
             Console.WriteLine(GlobalPara.tail);
             Console.WriteLine(GlobalPara.type);
             Console.WriteLine(GlobalPara.file_name);
-
-            //读单词的过程还未完成
-            /*
-            * 
-            *   TODO
-            * 
-            */
-
-            //分类调用
-            switch (GlobalPara.type)
-            {
-                case 'n':
-                    //统计单词链数量
-                    break;
-                case 'm':
-                    //输出首字母不相同的包含单词数量最多的单词链
-                    break;
-                case 'w':
-                    //需要传入Global的参数进行处理
-                    break;
-                case 'c':
-                    //需要传入Global的参数进行处理
-                    break;
-            }
         }
-
     }
     //全局参数，用于后续调用
     public static class GlobalPara
