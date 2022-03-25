@@ -18,6 +18,11 @@ namespace OriginalCode
             DealWords dealWords = new DealWords();
             dealWords.dealWords();
 
+            foreach (Word word in Graph.word_list)
+            {
+                Console.WriteLine(word.word);
+            }
+
             //分类调用
             switch (GlobalPara.type)
             {
@@ -50,15 +55,15 @@ namespace OriginalCode
             string str = reader.ReadToEnd();
             str = str.ToLower();
             words = Regex.Split(str, "[^(a-zA-Z)]+");
+            int k = 0;
             for (int i = 0; i < words.Length; i ++)
             {
                 if (words[i].Length > 1)
                 {
-                    Word word = new Word(words[i]);
-                    /*
-                     * TODO 建立单词表存储单词，数据结构未定
-                     */
-
+                    Word word = new Word(words[i], k);
+                    Console.WriteLine(words[i]);
+                    Graph.AddG(word);
+                    k += 1;
                 }
             }
         }

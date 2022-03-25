@@ -27,7 +27,8 @@ namespace OriginalCode
             illegal_file_type, 
             file_not_found,
             illegal_para_combination,
-            no_filename
+            no_filename,
+            unallowed_circle
         }
     }
 
@@ -74,6 +75,9 @@ namespace OriginalCode
                     break;
                 case InputErrorType.code.no_filename:
                     Console.WriteLine("Please input your words file!");
+                    break;
+                case InputErrorType.code.unallowed_circle:
+                    Console.WriteLine("Your words-file has illegal circle!");
                     break;
                 default:
                     Console.WriteLine("This command is not supported!");
