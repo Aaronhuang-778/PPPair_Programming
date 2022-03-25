@@ -86,4 +86,17 @@ namespace OriginalCode
             Environment.Exit(0);
         }
     }
+
+
+    [Serializable]
+    class CircleException : Exception
+    {
+
+        public CircleException()
+            : base($"CircleException")
+        {
+            Console.WriteLine($"Words list has circle without -r!");
+            Environment.Exit(0);
+        }
+    }
 }

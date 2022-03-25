@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "G:\\Aaron\\semester_6\\软件工程\\结对编程\\CodeStructure\\OriginalCode\\OriginalCode\\OriginalCode.csproj": {}
+    "D:\\GitWareHouse\\PPPair_Programming\\OriginalCode\\OriginalCode\\OriginalCode.csproj": {}
   },
   "projects": {
-    "G:\\Aaron\\semester_6\\软件工程\\结对编程\\CodeStructure\\OriginalCode\\OriginalCode\\OriginalCode.csproj": {
+    "D:\\GitWareHouse\\PPPair_Programming\\OriginalCode\\OriginalCode\\OriginalCode.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\Aaron\\semester_6\\软件工程\\结对编程\\CodeStructure\\OriginalCode\\OriginalCode\\OriginalCode.csproj",
+        "projectUniqueName": "D:\\GitWareHouse\\PPPair_Programming\\OriginalCode\\OriginalCode\\OriginalCode.csproj",
         "projectName": "OriginalCode",
-        "projectPath": "G:\\Aaron\\semester_6\\软件工程\\结对编程\\CodeStructure\\OriginalCode\\OriginalCode\\OriginalCode.csproj",
-        "packagesPath": "C:\\Users\\MECHREVO\\.nuget\\packages\\",
-        "outputPath": "G:\\Aaron\\semester_6\\软件工程\\结对编程\\CodeStructure\\OriginalCode\\OriginalCode\\obj\\",
+        "projectPath": "D:\\GitWareHouse\\PPPair_Programming\\OriginalCode\\OriginalCode\\OriginalCode.csproj",
+        "packagesPath": "C:\\Users\\16096\\.nuget\\packages\\",
+        "outputPath": "D:\\GitWareHouse\\PPPair_Programming\\OriginalCode\\OriginalCode\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\MECHREVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\16096\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -54,7 +54,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.406\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using OriginalCode;
@@ -8,7 +9,7 @@ namespace OriginalCode
 {
     class Program
     {
-        public static void input(string[] args)
+        public static string[] input(string[] args)
         {
             //处理参数,更新Global当中的参数
             DealParas dealParas = new DealParas();
@@ -17,6 +18,7 @@ namespace OriginalCode
             //读取单词
             DealWords dealWords = new DealWords();
             dealWords.dealWords();
+            return dealWords.words;
 
             foreach (Word word in Graph.word_list)
             {
@@ -47,25 +49,15 @@ namespace OriginalCode
     }
     class DealWords
     {
+        public string[] words = null;
         public void dealWords()
         {
             //Console.WriteLine(Path.GetFullPath(GlobalPara.file_name));
             StreamReader reader = new StreamReader(GlobalPara.file_name);
-            string[] words = null;
             string str = reader.ReadToEnd();
             str = str.ToLower();
             words = Regex.Split(str, "[^(a-zA-Z)]+");
-            int k = 0;
-            for (int i = 0; i < words.Length; i ++)
-            {
-                if (words[i].Length > 1)
-                {
-                    Word word = new Word(words[i], k);
-                    Console.WriteLine(words[i]);
-                    Graph.AddG(word);
-                    k += 1;
-                }
-            }
+            words = words.Distinct().ToArray();
         }
     }
     //处理参数
