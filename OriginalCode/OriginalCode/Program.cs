@@ -14,12 +14,7 @@ namespace t1
             DealParas dealParas = new DealParas();
             dealParas.dealPara(args);
 
-            //读单词的过程还未完成
-            /*
-            * 
-            *   TODO
-            * 
-            */
+            //读取单词
             DealWords dealWords = new DealWords();
             dealWords.dealWords();
 
@@ -27,13 +22,16 @@ namespace t1
             switch (GlobalPara.type)
             {
                 case 'n':
-                    //统计单词链数量
+                    //统计单词链数量 只传递单词链
+                  
                     break;
                 case 'm':
-                    //输出首字母不相同的包含单词数量最多的单词链
+                    //输出首字母不相同的包含单词数量最多的单词链 只传递单词链
+
                     break;
                 case 'w':
                     //需要传入Global的参数进行处理
+
                     break;
                 case 'c':
                     //需要传入Global的参数进行处理
@@ -57,7 +55,9 @@ namespace t1
                 if (words[i].Length > 1)
                 {
                     Word word = new Word(words[i]);
-
+                    /*
+                     * TODO 建立单词表存储单词，数据结构未定
+                     */
 
                 }
             }
