@@ -1,0 +1,16 @@
+G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\OriginalCode\OriginalCode\bin\Debug\net5.0\OriginalCode.exe
+G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\OriginalCode\OriginalCode\bin\Debug\net5.0\OriginalCode.deps.json
+G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\OriginalCode\OriginalCode\bin\Debug\net5.0\OriginalCode.runtimeconfig.json
+G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\OriginalCode\OriginalCode\bin\Debug\net5.0\OriginalCode.runtimeconfig.dev.json
+G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\OriginalCode\OriginalCode\bin\Debug\net5.0\OriginalCode.dll
+G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\OriginalCode\OriginalCode\bin\Debug\net5.0\ref\OriginalCode.dll
+G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\OriginalCode\OriginalCode\bin\Debug\net5.0\OriginalCode.pdb
+G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\OriginalCode\OriginalCode\obj\Debug\net5.0\OriginalCode.csproj.AssemblyReference.cache
+G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\OriginalCode\OriginalCode\obj\Debug\net5.0\OriginalCode.GeneratedMSBuildEditorConfig.editorconfig
+G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\OriginalCode\OriginalCode\obj\Debug\net5.0\OriginalCode.AssemblyInfoInputs.cache
+G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\OriginalCode\OriginalCode\obj\Debug\net5.0\OriginalCode.AssemblyInfo.cs
+G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\OriginalCode\OriginalCode\obj\Debug\net5.0\OriginalCode.csproj.CoreCompileInputs.cache
+G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\OriginalCode\OriginalCode\obj\Debug\net5.0\OriginalCode.dll
+G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\OriginalCode\OriginalCode\obj\Debug\net5.0\ref\OriginalCode.dll
+G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\OriginalCode\OriginalCode\obj\Debug\net5.0\OriginalCode.pdb
+G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\OriginalCode\OriginalCode\obj\Debug\net5.0\OriginalCode.genruntimeconfig.cache

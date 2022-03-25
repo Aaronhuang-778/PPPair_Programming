@@ -29,3 +29,8 @@ MaterialDesignThemes
 ShowMeTheXAML.MSBuild
 ```
 
+## 处理代码操作
+
+打开OriginalCode，一路点击到bin当中，找到.exe文件（已在该目录下建立aaa.txt），打开命令行就可以测试了，注意：文件路径按照要求需要输入绝对路径
+
+1. 已完成参数处理和分类，包括参数相关等错误类型EER1~10
