@@ -53,7 +53,20 @@ namespace OriginalCode
             str = str.ToLower();
             words = Regex.Split(str, "[^(a-zA-Z)]+");
             words = words.Distinct().ToArray();
+
+            for (int i = 0; i < words.Length - 1; i ++)
+            {
+                words[i] = words[i + 1];
+            }
+
+            Array.Resize(ref words, words.Length - 1);
+
+            for (int i = 0; i < words.Length; i++)
+            {
+                Console.WriteLine(words[i]);
+            }
         }
+
     }
     //处理参数
     class DealParas

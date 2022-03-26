@@ -101,7 +101,7 @@ namespace OriginalCode
 
         public bool startTopo(Graph G)
         {
-            bool[] visited = new bool[Graph.word_list.Count];
+            bool[] visited = new bool[Graph.original_words_num];
 
             for (int i = 0; i < Graph.word_list.Count; i++) {
                 Word word = (Word)Graph.word_list[i];

@@ -14,6 +14,7 @@ namespace OriginalCode
         public static Dictionary<char, ArrayList> end_list = new Dictionary<char, ArrayList>();
         //权重边
         public static int [,] adj = null;
+        public static int original_words_num = 0;
 
         public Graph() {
         }
@@ -32,7 +33,7 @@ namespace OriginalCode
             return value;
         }
 
-        private ArrayList getLastNode(Word w)
+        public ArrayList getLastNode(Word w)
         {
             // Next边：节点n末尾字母e -> 以e开头的字母的集合
             ArrayList value = new ArrayList();
@@ -45,9 +46,9 @@ namespace OriginalCode
             adj = new int[words.Length, words.Length];
         }
 
-        public void setE(int i, int j)
+        public void setE(int i, int j, int weight)
         {
-            adj[i, j] = 1;
+            adj[i, j] = weight;
         }
 
         public void deletE(int i, int j)
@@ -66,6 +67,7 @@ namespace OriginalCode
                     AddG(new_word);
                 }
             }
+            original_words_num = words.Length;
         }
 
         public void AddG(Word word)
