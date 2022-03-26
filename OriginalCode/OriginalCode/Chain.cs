@@ -47,6 +47,9 @@ namespace OriginalCode
             G.AddG(words);
             if (G.isCyclic())
                 throw new CircleException();
+
+            ChainAlgorithm ca = new ChainAlgorithm();
+            ca.get_chains_all(G);
             return 0;
         }
 
@@ -58,6 +61,9 @@ namespace OriginalCode
             G.AddG(words);
             if (G.isCyclic())
                 throw new CircleException();
+
+            ChainAlgorithm ca = new ChainAlgorithm();
+            ca.get_chain_word_unique(G);
             return 0;
         }
 

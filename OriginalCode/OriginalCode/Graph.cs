@@ -9,13 +9,22 @@ namespace OriginalCode
 {
     public class Graph
     {
-        private static ArrayList word_list = new ArrayList();
-        private static Dictionary<char, ArrayList> start_list = new Dictionary<char, ArrayList>();
-        private static Dictionary<char, ArrayList> end_list = new Dictionary<char, ArrayList>();
+        public static ArrayList word_list = new ArrayList();
+        public static Dictionary<char, ArrayList> start_list = new Dictionary<char, ArrayList>();
+        public static Dictionary<char, ArrayList> end_list = new Dictionary<char, ArrayList>();
+        //权重边
+        public static int [,] adj = null;
 
-        public Graph() {}
+        public Graph() {
+        }
 
-        private ArrayList getNextWordList(Word w)
+
+        public ArrayList getWordList()
+        {
+            return word_list;
+        }
+
+        public ArrayList getNextWordList(Word w)
         {
             // Next边：节点n末尾字母e -> 以e开头的字母的集合
             ArrayList value = new ArrayList();
@@ -31,18 +40,38 @@ namespace OriginalCode
             return value;
         }
 
+        public void generateE(string[] words)
+        {
+            adj = new int[words.Length, words.Length];
+        }
+
+        public void setE(int i, int j)
+        {
+            adj[i, j] = 1;
+        }
+
+        public void deletE(int i, int j)
+        {
+            adj[i, j] = 0;
+        }
 
         public void AddG(string[] words)
         {
+            generateE(words);
             for(int i = 0; i < words.Length; i++)
             {
-                Word new_word = new Word(words[i], i);
-                AddG(new_word);
+                if (words[i].Length > 1)
+                {
+                    Word new_word = new Word(words[i], i);
+                    AddG(new_word);
+                }
             }
         }
 
         public void AddG(Word word)
         {
+            
+            //构造点
             word_list.Add(word);
             ArrayList temp = new ArrayList();
 
@@ -157,4 +186,5 @@ namespace OriginalCode
             return max_dist;
         }
     }
+
 }
