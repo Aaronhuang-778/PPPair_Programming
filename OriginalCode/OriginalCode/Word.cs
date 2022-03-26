@@ -33,10 +33,6 @@ namespace OriginalCode
             }
         }
 
-        public override string ToString()
-        {
-            return this.word;
-        }
 
         override
         public string ToString()
