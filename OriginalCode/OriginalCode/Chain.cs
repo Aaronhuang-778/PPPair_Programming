@@ -20,12 +20,22 @@ namespace OriginalCode
             G.AddG(words);
             if (G.isCyclic() && !enable_loop) 
                 throw new CircleException();
+
             Stack<Word> sortList = new Stack<Word>();
             G.TopologicalSort(sortList);
+            Console.Write("sortList: ");
             foreach (Word w in sortList)
             {
                 Console.Write(w + " ");
             }
+
+            int dist = G.longestPathDAG(sortList, result);
+            Console.Write("\nlongestPathDAG: ");
+            foreach (string s in result)
+            {
+                Console.Write(s + " ");
+            }
+            Console.WriteLine("dist = " + dist);
             return 0;
         }
 

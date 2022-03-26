@@ -9,12 +9,13 @@ namespace OriginalCode
 {
     public class Graph
     {
-        public static ArrayList word_list = new ArrayList();
-        public static Dictionary<char, ArrayList> start_list = new Dictionary<char, ArrayList>();
-        public static Dictionary<char, ArrayList> end_list = new Dictionary<char, ArrayList>();
+        private static ArrayList word_list = new ArrayList();
+        private static Dictionary<char, ArrayList> start_list = new Dictionary<char, ArrayList>();
+        private static Dictionary<char, ArrayList> end_list = new Dictionary<char, ArrayList>();
 
         public Graph() {}
-        public ArrayList getNextWordList(Word w)
+
+        private ArrayList getNextWordList(Word w)
         {
             // Next边：节点n末尾字母e -> 以e开头的字母的集合
             ArrayList value = new ArrayList();
@@ -22,7 +23,7 @@ namespace OriginalCode
             return value;
         }
 
-        public ArrayList getLastNode(Word w)
+        private ArrayList getLastNode(Word w)
         {
             // Next边：节点n末尾字母e -> 以e开头的字母的集合
             ArrayList value = new ArrayList();
@@ -110,6 +111,50 @@ namespace OriginalCode
                 if (visited[i]) continue;
                 TopologicalSortUtil(i, visited, stack);
             }
+        }
+
+        public int longestPathDAG(Stack<Word> sortList, string[] result)
+        {
+            Dictionary<Word, int> dist = new Dictionary<Word, int>();
+            Dictionary<Word, Word> last_edge = new Dictionary<Word, Word>();
+            Word w = sortList.Pop();
+           
+            int max_dist = 0;
+            Word max_des = w;
+
+            while (sortList.Count > 0) {
+                if (!dist.ContainsKey(w)) dist[w] = w.weight;
+                ArrayList next_nodes = getNextWordList(w);
+
+                if (next_nodes != null && next_nodes.Count > 0)
+                {
+                    foreach (Word next_w in next_nodes)
+                    {
+                        if (!dist.ContainsKey(next_w) || dist[next_w] < dist[w] + next_w.weight)
+                        {
+                            Console.WriteLine("change " + w + "->" + next_w);
+                            dist[next_w] = dist[w] + next_w.weight;
+                            last_edge[next_w] = w;
+                            if (dist[next_w] > max_dist)
+                            {
+                                max_dist = dist[next_w];
+                                max_des = next_w;
+                            }
+                        }
+                    }
+                }
+                w = sortList.Pop();
+            }
+
+            Word word = max_des;
+            result[0] = word.word;
+            int k = 1;
+            while (last_edge.ContainsKey(word))
+            {
+                result[k++] = word.word;
+                word = last_edge[word];
+            }
+            return max_dist;
         }
     }
 }

@@ -26,6 +26,9 @@ namespace OriginalCode
             if (GlobalPara.type == 'c')
             {
                 weight = length;
+            } else
+            {
+                weight = 1;
             }
         }
 

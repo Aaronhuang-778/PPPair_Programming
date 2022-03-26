@@ -20,11 +20,6 @@ namespace OriginalCode
             dealWords.dealWords();
             return dealWords.words;
 
-            foreach (Word word in Graph.word_list)
-            {
-                Console.WriteLine(word.word);
-            }
-
             //分类调用
             switch (GlobalPara.type)
             {
