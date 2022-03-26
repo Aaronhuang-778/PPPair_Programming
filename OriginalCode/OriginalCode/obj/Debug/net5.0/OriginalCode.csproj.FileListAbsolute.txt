@@ -29,4 +29,3 @@ D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\obj\Debug\net5.0\Or
 D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\obj\Debug\net5.0\ref\OriginalCode.dll
 D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\obj\Debug\net5.0\OriginalCode.pdb
 D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\obj\Debug\net5.0\OriginalCode.genruntimeconfig.cache
-D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\obj\Debug\net5.0\OriginalCode.csproj.AssemblyReference.cache

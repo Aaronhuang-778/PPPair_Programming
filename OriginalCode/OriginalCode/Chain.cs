@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,22 +19,37 @@ namespace OriginalCode
         {
             Graph G = new Graph();
             G.AddG(words);
-            if (!enable_loop && G.isCyclic()) 
-                throw new CircleException();
-
-            Stack<Word> sortList = new Stack<Word>();
-            G.TopologicalSort(sortList);
-            Console.Write("sortList: ");
-            foreach (Word w in sortList)
+            if (G.isCyclic())
             {
-                Console.Write(w + " ");
+                if (!enable_loop) throw new CircleException();
+                /* 
+                 * TO-DO:
+                 * -r£ºÑ­»·
+                 */
+                return 0;
             }
 
-            int dist = G.longestPathDAG(sortList, result);
-            Console.Write("\nlongestPathDAG: ");
-            foreach (string s in result)
+            ArrayList sortList = new ArrayList();
+            G.TopologicalSort(sortList);
+            Console.WriteLine("sortList: ");
+            foreach (Stack<Word> s in sortList)
             {
-                Console.Write(s + " ");
+                foreach (Word sw in s)
+                    Console.Write(sw + " ");
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("longestPathDAG: ");
+            Stack<Word> res_stack = new Stack<Word>();
+            int dist = G.longestPathDAG(sortList, res_stack, head, tail);
+            if (dist < 0) throw new ChainNotFoundException();
+
+            Console.Write("result: ");
+            int i = 0;
+            foreach (Word w in res_stack)
+            {
+                Console.Write(w + " ");
+                result[i] = w.word;
             }
             Console.WriteLine("dist = " + dist);
             return 0;
@@ -74,8 +90,32 @@ namespace OriginalCode
         {
             Graph G = new Graph();
             G.AddG(words);
-            if (!enable_loop && G.isCyclic())
-                throw new CircleException();
+            if (G.isCyclic())
+            {
+                if (!enable_loop) throw new CircleException();
+                /* 
+                 * TO-DO:
+                 * -r£ºÑ­»·
+                 */
+                return 0;
+            }
+
+            ArrayList sortList = new ArrayList();
+            G.TopologicalSort(sortList);
+            Console.WriteLine("sortList: ");
+
+            Stack<Word> res_stack = new Stack<Word>();
+            int dist = G.longestPathDAG(sortList, res_stack, head, tail);
+            if (dist < 0) throw new ChainNotFoundException();
+
+            Console.Write("longestPathDAG: ");
+            int i = 0;
+            foreach (Word w in res_stack)
+            {
+                Console.Write(w + " ");
+                result[i] = w.word;
+            }
+            Console.WriteLine("dist = " + dist);
             return 0;
         }
     }

@@ -99,4 +99,48 @@ namespace OriginalCode
             Environment.Exit(0);
         }
     }
+
+    class ChainErrorType : ErrorType
+    {
+        public enum code
+        {
+            head_not_found,
+            tail_not_found,
+            chain_not_found
+        }
+    }
+
+    
+    [Serializable]
+    class ChainNotFoundException : Exception
+    {
+        public ChainNotFoundException()
+            : base($"ChainNotFoundException")
+        {
+            Console.WriteLine($"The word chain that you asked for is not found!");
+            Environment.Exit(0);
+        }
+
+        public ChainNotFoundException(ChainErrorType.code code)
+                : base($"ChainNotFoundException: {code}")
+        {
+            Console.WriteLine($"[ChainNotFoundException code]: {code}");
+            switch (code)
+            {
+                case ChainErrorType.code.head_not_found:
+                    Console.WriteLine($"There's no words start with the head you asked for!");
+                    break;
+                case ChainErrorType.code.tail_not_found:
+                    Console.WriteLine($"There's no words end with the tail you asked for!");
+                    break;
+                case ChainErrorType.code.chain_not_found:
+                    Console.WriteLine($"The word chain that you asked for is not found!");
+                    break;
+                default:
+                    Console.WriteLine($"The word chain that you asked for is not found!");
+                    break;
+            }
+            Environment.Exit(0);
+        }
+    }
 }

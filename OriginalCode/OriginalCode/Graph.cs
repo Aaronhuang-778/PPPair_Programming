@@ -10,8 +10,10 @@ namespace OriginalCode
     public class Graph
     {
         public static ArrayList word_list = new ArrayList();
-        public static Dictionary<char, ArrayList> start_list = new Dictionary<char, ArrayList>();
-        public static Dictionary<char, ArrayList> end_list = new Dictionary<char, ArrayList>();
+        private static Dictionary<char, ArrayList> start_list 
+            = new Dictionary<char, ArrayList>();
+        private static Dictionary<char, ArrayList> end_list 
+            = new Dictionary<char, ArrayList>();
         //权重边
         public static int [,] adj = null;
         public static int original_words_num = 0;
@@ -28,16 +30,20 @@ namespace OriginalCode
         public ArrayList getNextWordList(Word w)
         {
             // Next边：节点n末尾字母e -> 以e开头的字母的集合
+            if (!start_list.ContainsKey(w.word_tail)) return null;
             ArrayList value = new ArrayList();
-            start_list.TryGetValue(w.word_tail, out value);
+            value = (ArrayList) start_list[w.word_tail].Clone();
+            while (value != null && value.Contains(w)) value.Remove(w);
             return value;
         }
 
         public ArrayList getLastNode(Word w)
         {
             // Next边：节点n末尾字母e -> 以e开头的字母的集合
+            if (!end_list.ContainsKey(w.word_head)) return null;
             ArrayList value = new ArrayList();
-            end_list.TryGetValue(w.word_head, out value);
+            value = (ArrayList) end_list[w.word_head].Clone();
+            while (value != null && value.Contains(w)) value.Remove(w);
             return value;
         }
 
@@ -75,22 +81,26 @@ namespace OriginalCode
             
             //构造点
             word_list.Add(word);
-            ArrayList temp = new ArrayList();
 
             if (start_list.ContainsKey(word.word_head))
             {
-                start_list.TryGetValue(word.word_head, out temp);   
+                start_list[word.word_head].Add(word);   
             }
-            temp.Add(word);
-            start_list[word.word_head] = temp;
-
-            ArrayList temp1 = new ArrayList();
-            if (end_list.ContainsKey(word.word_tail))
+            else
             {
-                end_list.TryGetValue(word.word_tail, out temp1);
+                ArrayList temp = new ArrayList();
+                temp.Add(word);
+                start_list[word.word_head] = temp;
             }
-            temp1.Add(word);
-            end_list[word.word_tail] = temp1;
+         
+            if (end_list.ContainsKey(word.word_tail)) 
+                end_list[word.word_tail].Add(word);   
+            else
+            {
+                ArrayList temp = new ArrayList();
+                temp.Add(word);
+                end_list[word.word_tail] = temp;
+            }
         }
 
         private bool isCyclicUtil(int i, bool[] visited, bool[] recStack)
@@ -135,57 +145,108 @@ namespace OriginalCode
             stack.Push((Word) word_list[i]);
         }
 
-        public void TopologicalSort(Stack<Word> stack)
+        public void TopologicalSort(ArrayList sortList)
         {
             bool[] visited = new bool[word_list.Count];
             for (int i = 0; i < word_list.Count; i++) {
                 if (visited[i]) continue;
+                Stack<Word> stack = new Stack<Word>();
+                sortList.Add(stack);
                 TopologicalSortUtil(i, visited, stack);
             }
         }
 
-        public int longestPathDAG(Stack<Word> sortList, string[] result)
+     
+        public int longestPathDAG(ArrayList sortList, Stack<Word> result, char head, char tail)
         {
             Dictionary<Word, int> dist = new Dictionary<Word, int>();
             Dictionary<Word, Word> last_edge = new Dictionary<Word, Word>();
-            Word w = sortList.Pop();
            
             int max_dist = 0;
-            Word max_des = w;
+            Word max_des = null;
+            ArrayList headWords = null;
+            ArrayList tailWords = null;
+            if (Char.IsLetter(head)) 
+            {
+                headWords = start_list[head];
+                if (headWords == null || headWords.Count <= 0)
+                    throw new ChainNotFoundException(ChainErrorType.code.head_not_found);
+            }
+            if (Char.IsLetter(tail)) 
+            {
+                tailWords = start_list[tail];
+                if (tailWords == null || tailWords.Count <= 0)
+                    throw new ChainNotFoundException(ChainErrorType.code.tail_not_found);
+            }
 
-            while (sortList.Count > 0) {
-                if (!dist.ContainsKey(w)) dist[w] = w.weight;
-                ArrayList next_nodes = getNextWordList(w);
 
-                if (next_nodes != null && next_nodes.Count > 0)
+            foreach (Stack<Word> stack in sortList)
+            {
+                Word w_peek = stack.Peek();
+                dist[w_peek] = w_peek.weight;
+                if (max_des == null) max_des = w_peek;
+                bool skip = true;
+                foreach (Word w in stack)
                 {
-                    foreach (Word next_w in next_nodes)
+                    if (!dist.ContainsKey(w)) continue;
+                    if (headWords != null && skip)
                     {
-                        if (!dist.ContainsKey(next_w) || dist[next_w] < dist[w] + next_w.weight)
+                        if (!headWords.Contains(w)) continue;
+                        skip = false;
+                    }
+                    longestPathEach(w, ref max_des, ref max_dist, dist, last_edge);
+                }
+            }
+            
+            if (Char.IsLetter(tail)) 
+            {
+                int tail_dist = -1;
+                foreach (Word tailWord in tailWords)
+                {
+                    if (dist.ContainsKey(tailWord) && dist[tailWord] > tail_dist)
+                    {
+                        dist[tailWord] = tail_dist;
+                        max_des = tailWord;
+                    }
+                }
+                if (tail_dist < 0) return -1;
+            }
+            else if (max_des == null) return -1;
+
+            Word res_word = max_des;
+            result.Clear();
+            result.Push(res_word);
+            while (last_edge.ContainsKey(res_word))
+            {
+                res_word = last_edge[res_word];
+                result.Push(res_word);
+                Console.WriteLine(res_word);
+            }
+            if (Char.IsLetter(head) && res_word.word_head != head) return -1;
+            return max_dist;
+        }
+
+        private void longestPathEach(Word w, ref Word max_des, ref int max_dist,
+            Dictionary<Word, int> dist, Dictionary<Word, Word> last_edge)
+        {
+            ArrayList next_nodes = getNextWordList(w);
+            if (next_nodes != null && next_nodes.Count > 0)
+            {
+                foreach (Word next_w in next_nodes)
+                {
+                    if (!dist.ContainsKey(next_w) || dist[next_w] < dist[w] + next_w.weight)
+                    {
+                        Console.WriteLine("change " + w + "->" + next_w);
+                        dist[next_w] = dist[w] + next_w.weight;
+                        last_edge[next_w] = w;
+                        if (dist[next_w] > max_dist)
                         {
-                            Console.WriteLine("change " + w + "->" + next_w);
-                            dist[next_w] = dist[w] + next_w.weight;
-                            last_edge[next_w] = w;
-                            if (dist[next_w] > max_dist)
-                            {
-                                max_dist = dist[next_w];
-                                max_des = next_w;
-                            }
+                            max_dist = dist[next_w];
+                            max_des = next_w;
                         }
                     }
                 }
-                w = sortList.Pop();
             }
-
-            Word word = max_des;
-            result[0] = word.word;
-            int k = 1;
-            while (last_edge.ContainsKey(word))
-            {
-                result[k++] = word.word;
-                word = last_edge[word];
-            }
-            return max_dist;
         }
     }
 

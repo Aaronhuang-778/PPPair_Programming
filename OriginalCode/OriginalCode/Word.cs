@@ -37,7 +37,7 @@ namespace OriginalCode
         override
         public string ToString()
         {
-            return word;
+            return this.word;
         }
 
     }

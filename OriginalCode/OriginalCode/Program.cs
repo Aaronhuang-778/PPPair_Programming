@@ -62,11 +62,8 @@ namespace OriginalCode
                 Array.Resize(ref words, words.Length - 1);
             }
 
-            for (int i = 0; i < words.Length; i++)
-            {
-                Console.WriteLine(words[i]);
-            }
-            Console.WriteLine(words.Length);
+            //for (int i = 0; i < words.Length; i++)  Console.WriteLine(words[i]); 
+            //Console.WriteLine(words.Length);
         }
 
     }
