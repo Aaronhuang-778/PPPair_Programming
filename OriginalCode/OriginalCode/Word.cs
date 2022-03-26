@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace OriginalCode
 {
@@ -22,5 +23,12 @@ namespace OriginalCode
             word_tail = w[length - 1];
             index = i;
         }
+
+        override
+        public string ToString()
+        {
+            return word;
+        }
+
     }
 }
