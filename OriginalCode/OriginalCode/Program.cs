@@ -19,31 +19,6 @@ namespace OriginalCode
             DealWords dealWords = new DealWords();
             dealWords.dealWords();
             return dealWords.words;
-
-            foreach (Word word in Graph.word_list)
-            {
-                Console.WriteLine(word.word);
-            }
-
-            //分类调用
-            switch (GlobalPara.type)
-            {
-                case 'n':
-                    //统计单词链数量 只传递单词链
-                  
-                    break;
-                case 'm':
-                    //输出首字母不相同的包含单词数量最多的单词链 只传递单词链
-
-                    break;
-                case 'w':
-                    //需要传入Global的参数进行处理
-
-                    break;
-                case 'c':
-                    //需要传入Global的参数进行处理
-                    break;
-            }
         }
 
     }

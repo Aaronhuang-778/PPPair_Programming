@@ -18,7 +18,7 @@ namespace OriginalCode
         {
             Graph G = new Graph();
             G.AddG(words);
-            if (G.isCyclic() && !enable_loop) 
+            if (!enable_loop && G.isCyclic()) 
                 throw new CircleException();
             return 0;
         }
@@ -52,7 +52,7 @@ namespace OriginalCode
         {
             Graph G = new Graph();
             G.AddG(words);
-            if (G.isCyclic() && !enable_loop)
+            if (!enable_loop && G.isCyclic())
                 throw new CircleException();
             return 0;
         }
