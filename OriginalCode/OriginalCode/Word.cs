@@ -10,6 +10,7 @@ namespace OriginalCode
     {
         public string word = null;
         public int length = 0;
+        public int weight = 0;
         public int index = 0;
         public char word_head = ' ';
         public char word_tail = ' ';
@@ -21,6 +22,16 @@ namespace OriginalCode
             word_head = w[0];
             word_tail = w[length - 1];
             index = i;
+            
+            if (GlobalPara.type == 'c')
+            {
+                weight = length;
+            }
+        }
+
+        public override string ToString()
+        {
+            return this.word;
         }
     }
 }

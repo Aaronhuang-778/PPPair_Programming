@@ -20,6 +20,12 @@ namespace OriginalCode
             G.AddG(words);
             if (G.isCyclic() && !enable_loop) 
                 throw new CircleException();
+            Stack<Word> sortList = new Stack<Word>();
+            G.TopologicalSort(sortList);
+            foreach (Word w in sortList)
+            {
+                Console.Write(w + " ");
+            }
             return 0;
         }
 

@@ -87,5 +87,29 @@ namespace OriginalCode
             Console.WriteLine("no circle");
             return false;
         }
+
+        private void TopologicalSortUtil(int i, bool[] visited, Stack<Word> stack)
+        {
+            visited[i] = true;
+            ArrayList next_node = getNextWordList((Word)word_list[i]);
+            if (next_node != null && next_node.Count > 0)
+            {
+                foreach (Word w in next_node)
+                {
+                    if (visited[w.index]) continue;
+                    TopologicalSortUtil(w.index, visited, stack);
+                }
+            }
+            stack.Push((Word) word_list[i]);
+        }
+
+        public void TopologicalSort(Stack<Word> stack)
+        {
+            bool[] visited = new bool[word_list.Count];
+            for (int i = 0; i < word_list.Count; i++) {
+                if (visited[i]) continue;
+                TopologicalSortUtil(i, visited, stack);
+            }
+        }
     }
 }
