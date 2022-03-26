@@ -52,19 +52,21 @@ namespace OriginalCode
             string str = reader.ReadToEnd();
             str = str.ToLower();
             words = Regex.Split(str, "[^(a-zA-Z)]+");
-            words = words.Distinct().ToArray();
 
-            for (int i = 0; i < words.Length - 1; i ++)
+            if (words[0] == "")
             {
-                words[i] = words[i + 1];
+                for (int i = 0; i < words.Length - 1; i++)
+                {
+                    words[i] = words[i + 1];
+                }
+                Array.Resize(ref words, words.Length - 1);
             }
-
-            Array.Resize(ref words, words.Length - 1);
 
             for (int i = 0; i < words.Length; i++)
             {
                 Console.WriteLine(words[i]);
             }
+            Console.WriteLine(words.Length);
         }
 
     }
