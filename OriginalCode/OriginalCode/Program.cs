@@ -32,7 +32,15 @@ namespace OriginalCode
             string str = reader.ReadToEnd();
             str = str.ToLower();
             words = Regex.Split(str, "[^(a-zA-Z)]+");
-            words = words.Distinct().ToArray();
+            //删除words首位可能出现的“”
+            if (words[0] == "")
+            {
+                for (int i = 0; i < words.Length - 1; i ++)
+                {
+                    words[i] = words[i + 1];
+                }
+                Array.Resize(ref words, words.Length - 1);
+            }
         }
     }
     //处理参数

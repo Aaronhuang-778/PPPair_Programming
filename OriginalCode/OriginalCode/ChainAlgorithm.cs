@@ -65,7 +65,7 @@ namespace OriginalCode
                 {
                     for (int j = 0; j < next_list.Count; j++)
                     {
-                        G.setE(((Word)Graph.word_list[i]).index, ((Word)next_list[j]).index, 1);
+                        G.setE(((Word)Graph.word_list[i]).index, ((Word)next_list[j]).index);
                     }
                 }
             }
