@@ -13,30 +13,204 @@ namespace OriginalCode
         public ChainAlgorithm() { }
 
         /* -n */
-        public void get_chains_all(Graph G)
+        public ArrayList get_chains_all(Graph G)
         {
             n_Method n_method = new n_Method();
             n_method.startDFS(G);
-            Console.WriteLine(n_method.link_set.Count);
-
-            for (int i = 0; i < n_method.link_set.Count; i++)
-            {
-                Console.WriteLine(n_method.link_set[i]);
-            }
+            
+            return n_method.link_set;
         }
 
         /* -m */
-        public void get_chain_word_unique(Graph G)
+        public ArrayList get_chain_word_unique(Graph G)
         {
             m_Method m_method = new m_Method();
             m_method.startDFS(G);
-            for (int i = 0; i < m_method.link_set.Count; i++)
-            {
-                Console.WriteLine(m_method.link_set[i]);
-            }
-
+            return m_method.link_set;
         }
 
+        /* -w -r -h -e */
+        public ArrayList get_RW(Graph G, char head, char tail)
+        {
+            rw_Method rw_method = new rw_Method();
+            rw_method.startDFS(G, head, tail);
+            return rw_method.link_set;
+        }
+
+        /* -c -h -t -r */
+        public ArrayList get_RC(Graph G, char head, char tail)
+        {
+            rc_Method rc_method = new rc_Method();
+            rc_method.startDFS(G, head, tail);
+            return rc_method.link_set;
+        }
+    }
+
+    class rc_Method
+    {
+        public ArrayList link_set = new ArrayList();
+        public int max = 0;
+        public char head = '!';
+        public char tail = '!';
+
+
+        public void rc_DFS(Graph G, Word word, bool[] visited, ArrayList live_list, int live_max)
+        {
+            ArrayList next_node = G.getNextWordList(word);
+            if (next_node == null)
+            {
+                return;
+            }
+
+            for (int j = 0; j < next_node.Count; j++)
+            {
+                Word word1 = (Word)next_node[j];
+                if (!visited[word1.index])
+                {
+                    bool[] tmp = new bool[Graph.word_list.Count];
+                    for (int k = 0; k < visited.Length; k++)
+                    {
+                        tmp[k] = visited[k];
+                    }
+                    tmp[word1.index] = true;
+
+                    ArrayList tmp1 = new ArrayList();
+                    for (int k = 0; k < live_list.Count; k++)
+                    {
+                        tmp1.Add(live_list[k]);
+                    }
+                    tmp1.Add(word1.word);
+                    int tmp_max = live_max + word1.length;
+
+                    if ((this.tail != '!' && word1.word_tail == this.tail) || (this.tail == '!'))
+                    {
+                        if (tmp_max > max)
+                        {
+                            link_set.Clear();
+                            for (int k = 0; k < tmp1.Count; k++)
+                            {
+                                link_set.Add(tmp1[k]);
+                            }
+                            max = tmp_max;
+                        }
+                    }
+
+                    rc_DFS(G, word1, tmp, tmp1, tmp_max);
+
+                }
+
+            }
+        }
+
+        public void startDFS(Graph G, char head, char tail)
+        {
+            this.head = head;
+            this.tail = tail;
+            for (int i = 0; i < Graph.word_list.Count; i++)
+            {
+                Word word = (Word)Graph.word_list[i];
+                if (this.head != '!' && word.word_head == this.head)
+                {
+                    bool[] visited = new bool[Graph.word_list.Count];
+                    visited[word.index] = true;
+                    ArrayList live_list = new ArrayList();
+                    live_list.Add(word.word);
+                    int live_max = word.length;
+                    rc_DFS(G, word, visited, live_list, live_max);
+                }
+                else if (this.head == '!')
+                {
+                    bool[] visited = new bool[Graph.word_list.Count];
+                    visited[word.index] = true;
+                    ArrayList live_list = new ArrayList();
+                    live_list.Add(word.word);
+                    int live_max = word.length;
+                    rc_DFS(G, word, visited, live_list, live_max);
+                }
+            }
+        }
+    }
+
+
+    class rw_Method
+    {
+        public ArrayList link_set = new ArrayList();
+        public int max = 0;
+        public char head = '!';
+        public char tail = '!';
+
+
+        public void rw_DFS(Graph G, Word word, bool[] visited, ArrayList live_list)
+        {
+            ArrayList next_node = G.getNextWordList(word);
+            if (next_node == null )
+            {                
+               return;
+            }
+
+            for (int j = 0; j < next_node.Count; j++)
+            {
+                Word word1 = (Word)next_node[j];
+                if (!visited[word1.index])
+                {
+                    bool[] tmp = new bool[Graph.word_list.Count];
+                    for (int k = 0; k < visited.Length; k++)
+                    {
+                        tmp[k] = visited[k];
+                    }
+                    tmp[word1.index] = true;
+
+                    ArrayList tmp1 = new ArrayList();
+                    for (int k = 0; k < live_list.Count; k++)
+                    {
+                        tmp1.Add(live_list[k]);
+                    }
+                    tmp1.Add(word1.word);
+                    if ((this.tail != '!' && word1.word_tail == this.tail) || (this.tail == '!'))
+                    {
+                        if (tmp1.Count > max)
+                        {
+                            link_set.Clear();
+                            for (int k = 0; k < tmp1.Count; k++)
+                            {
+                                link_set.Add(tmp1[k]);
+                            }
+                            max = tmp1.Count;
+                        }
+                    }
+
+                    rw_DFS(G, word1, tmp, tmp1);
+
+                }
+
+            }
+        }
+
+        public void startDFS(Graph G, char head,  char tail)
+        {
+            this.head = head;
+            this.tail = tail;
+            for (int i = 0; i < Graph.word_list.Count; i++)
+            {
+                Word word = (Word)Graph.word_list[i];
+                if (this.head != '!' && word.word_head == this.head)
+                {
+                    bool[] visited = new bool[Graph.word_list.Count];
+                    visited[word.index] = true;
+                    ArrayList live_list = new ArrayList();
+                    live_list.Add(word.word);
+                    rw_DFS(G, word, visited, live_list);
+                }
+                else if (this.head == '!')
+                {
+                    bool[] visited = new bool[Graph.word_list.Count];
+                    visited[word.index] = true;
+                    ArrayList live_list = new ArrayList();
+                    live_list.Add(word.word);
+                    rw_DFS(G, word, visited, live_list);
+                }
+            }
+        }
     }
 
     class m_Method

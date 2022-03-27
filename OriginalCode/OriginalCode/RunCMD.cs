@@ -12,7 +12,7 @@ namespace OriginalCode
         static void Main(string[] args)
         {
             string[] words = Program.input(args);
-            string[] result = new string[words.Length];
+            string[] result = new string[20005];
             Chain chain = new Chain();
 
             switch (GlobalPara.type)

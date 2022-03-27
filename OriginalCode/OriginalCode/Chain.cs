@@ -12,7 +12,12 @@ namespace OriginalCode
 
         public Chain() { }
 
-
+        public void writeFile(string[] result)
+        {
+            string str = System.IO.Directory.GetCurrentDirectory();
+            str = str + "\\solution.txt";
+            System.IO.File.WriteAllLines(str, result);
+        }
         /* -w -h -t -r */
         public int gen_chain_word(string[] words, int len, string[] result, 
             char head, char tail, bool enable_loop)
@@ -22,10 +27,24 @@ namespace OriginalCode
             if (G.isCyclic())
             {
                 if (!enable_loop) throw new CircleException();
-                /* 
-                 * TO-DO:
-                 * -r£ºÑ­»·
-                 */
+
+                ChainAlgorithm ca = new ChainAlgorithm();
+                ArrayList tmp = ca.get_RW(G, head, tail);
+
+                if (tmp == null || tmp.Count == 0)
+                {
+                    throw new ChainNotFoundException();
+                }
+
+                if (tmp != null && tmp.Count > 0)
+                {
+                    for (int j = 0; j < tmp.Count; j++)
+                    {
+                        result[j] = (string)tmp[j];
+                        Console.WriteLine(result[j]);
+                    }
+                }
+
                 return 0;
             }
 
@@ -50,8 +69,11 @@ namespace OriginalCode
             {
                 Console.Write(w + " ");
                 result[i] = w.word;
+                i++;
             }
             Console.WriteLine("dist = " + dist);
+
+            writeFile(result);
             return 0;
         }
 
@@ -65,7 +87,21 @@ namespace OriginalCode
                 throw new CircleException();
 
             ChainAlgorithm ca = new ChainAlgorithm();
-            ca.get_chains_all(G);
+            ArrayList tmp = ca.get_chains_all(G);
+            if (tmp == null || tmp.Count == 0)
+            {
+                throw new ChainNotFoundException();
+            }
+            Console.WriteLine(tmp.Count);
+
+            if (tmp != null && tmp.Count > 0)
+            {
+                for (int i = 0; i < tmp.Count; i++)
+                {
+                    result[i] = (string)tmp[i];
+                    Console.WriteLine(result[i]);
+                }
+            }
             return 0;
         }
 
@@ -78,8 +114,23 @@ namespace OriginalCode
             if (G.isCyclic())
                 throw new CircleException();
 
-            ChainAlgorithm ca = new ChainAlgorithm();
-            ca.get_chain_word_unique(G);
+            ChainAlgorithm ca = new ChainAlgorithm(); 
+            ArrayList tmp = ca.get_chain_word_unique(G);
+            if (tmp == null || tmp.Count == 0)
+            {
+                throw new ChainNotFoundException();
+            }
+
+            if (tmp != null && tmp.Count > 0)
+            {
+                for (int i = 0; i < tmp.Count; i++)
+                {
+                    result[i] = (string)tmp[i];
+                    Console.WriteLine(result[i]);
+                }
+            }
+
+            writeFile(result);
             return 0;
         }
 
@@ -93,10 +144,23 @@ namespace OriginalCode
             if (G.isCyclic())
             {
                 if (!enable_loop) throw new CircleException();
-                /* 
-                 * TO-DO:
-                 * -r£ºÑ­»·
-                 */
+
+                ChainAlgorithm ca = new ChainAlgorithm();
+                ArrayList tmp = ca.get_RC(G, head, tail);
+
+                if (tmp == null || tmp.Count == 0)
+                {
+                    throw new ChainNotFoundException();
+                }
+
+                if (tmp != null && tmp.Count > 0)
+                {
+                    for (int j = 0; j < tmp.Count; j++)
+                    {
+                        result[j] = (string)tmp[j];
+                        Console.WriteLine(result[j]);
+                    }
+                }
                 return 0;
             }
 
@@ -114,8 +178,11 @@ namespace OriginalCode
             {
                 Console.Write(w + " ");
                 result[i] = w.word;
+                i++;
             }
             Console.WriteLine("dist = " + dist);
+
+            writeFile(result);
             return 0;
         }
     }

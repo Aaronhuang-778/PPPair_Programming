@@ -18,27 +18,28 @@ namespace OriginalCode
             //读取单词
             DealWords dealWords = new DealWords();
             dealWords.dealWords();
-            return dealWords.words;
 
+            string str = System.IO.Directory.GetCurrentDirectory();
+            str = str + "\\solution.txt";
+            Console.WriteLine(str);
             //分类调用
-            switch (GlobalPara.type)
+            if (GlobalPara.type == 'c' || GlobalPara.type == 'm' || GlobalPara.type == 'w')
             {
-                case 'n':
-                    //统计单词链数量 只传递单词链
-                  
-                    break;
-                case 'm':
-                    //输出首字母不相同的包含单词数量最多的单词链 只传递单词链
-
-                    break;
-                case 'w':
-                    //需要传入Global的参数进行处理
-
-                    break;
-                case 'c':
-                    //需要传入Global的参数进行处理
-                    break;
+                if (str.IndexOfAny(System.IO.Path.GetInvalidPathChars()) >= 0) // 文件路径字符不合法
+                {
+                    throw new InvalidInputException(InputErrorType.code.illegal_path);
+                }
+                string file_type = str.Substring((str.Length - 4));
+                if (file_type != ".txt")
+                {
+                    throw new InvalidInputException(InputErrorType.code.illegal_file_type);
+                }
+                else if (!System.IO.File.Exists(str))
+                {
+                    throw new InvalidInputException(InputErrorType.code.file_not_found);
+                }
             }
+            return dealWords.words;
         }
 
     }
@@ -95,10 +96,12 @@ namespace OriginalCode
                             {
                                 if (i == args.Length - 1)
                                 {
+ 
                                     throw new InvalidInputException(InputErrorType.code.wrong_head);
                                 }
                                 else if (args[i + 1].Length > 1 || (args[i + 1][0] < 97 || args[i + 1][0] > 122))
                                 {
+                                    
                                     throw new InvalidInputException(InputErrorType.code.wrong_head);
                                 }
                                 else
@@ -185,7 +188,6 @@ namespace OriginalCode
             Console.WriteLine(GlobalPara.head);
             Console.WriteLine(GlobalPara.tail);
             Console.WriteLine(GlobalPara.type);
-            Console.WriteLine(GlobalPara.file_name);
         }
     }
     //全局参数，用于后续调用
