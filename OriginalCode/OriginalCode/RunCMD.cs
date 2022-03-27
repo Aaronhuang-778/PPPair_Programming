@@ -11,7 +11,8 @@ namespace OriginalCode
     {
         static void Main(string[] args)
         {
-            string[] words = Program.input(args);
+            string[] test = { "-m", "G:\\Aaron\\semester_6\\软件工程\\结对编程\\CodeStructure\\OriginalCode\\OriginalCode\\bin\\Debug\\net5.0/aaa.txt" };
+            string[] words = Program.input(test);
             string[] result = new string[20005];
             Chain chain = new Chain();
 
