@@ -5,9 +5,10 @@
 */.vscode/
 */.idea/
 */out/
-*obj/
+*/obj/
 */packages/
 */Properties/
+obj
 *.dll
 *.pdb
 *.json
