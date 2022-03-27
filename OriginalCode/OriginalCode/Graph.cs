@@ -168,13 +168,19 @@ namespace OriginalCode
             ArrayList tailWords = null;
             if (Char.IsLetter(head)) 
             {
+                if (!start_list.ContainsKey(head))
+                    throw new ChainNotFoundException(ChainErrorType.code.head_not_found);
                 headWords = start_list[head];
                 if (headWords == null || headWords.Count <= 0)
                     throw new ChainNotFoundException(ChainErrorType.code.head_not_found);
+                foreach (Word headword in headWords)
+                    dist[headword] = headword.weight;
             }
             if (Char.IsLetter(tail)) 
             {
-                tailWords = start_list[tail];
+                if (!end_list.ContainsKey(tail))
+                    throw new ChainNotFoundException(ChainErrorType.code.tail_not_found);
+                tailWords = end_list[tail];
                 if (tailWords == null || tailWords.Count <= 0)
                     throw new ChainNotFoundException(ChainErrorType.code.tail_not_found);
             }
@@ -182,9 +188,9 @@ namespace OriginalCode
 
             foreach (Stack<Word> stack in sortList)
             {
-                Word w_peek = stack.Peek();
-                dist[w_peek] = w_peek.weight;
-                if (max_des == null) max_des = w_peek;
+                if (headWords == null)
+                    dist[stack.Peek()] = stack.Peek().weight;
+                //if (max_des == null) max_des = w_peek;
                 bool skip = true;
                 foreach (Word w in stack)
                 {
@@ -200,16 +206,16 @@ namespace OriginalCode
             
             if (Char.IsLetter(tail)) 
             {
-                int tail_dist = -1;
+                max_dist = -1;
                 foreach (Word tailWord in tailWords)
                 {
-                    if (dist.ContainsKey(tailWord) && dist[tailWord] > tail_dist)
+                    if (dist.ContainsKey(tailWord) && dist[tailWord] > max_dist)
                     {
-                        dist[tailWord] = tail_dist;
+                        max_dist = dist[tailWord];
                         max_des = tailWord;
                     }
                 }
-                if (tail_dist < 0) return -1;
+                if (max_dist < 0) return -1;
             }
             else if (max_des == null) return -1;
 
@@ -225,6 +231,7 @@ namespace OriginalCode
             if (Char.IsLetter(head) && res_word.word_head != head) return -1;
             return max_dist;
         }
+
 
         private void longestPathEach(Word w, ref Word max_des, ref int max_dist,
             Dictionary<Word, int> dist, Dictionary<Word, Word> last_edge)
