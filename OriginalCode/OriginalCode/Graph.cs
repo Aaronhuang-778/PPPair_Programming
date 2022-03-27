@@ -67,6 +67,7 @@ namespace OriginalCode
             generateE(words);
             for(int i = 0; i < words.Length; i++)
             {
+                if (words[i] == null) break;
                 if (words[i].Length > 1)
                 {
                     Word new_word = new Word(words[i], i);

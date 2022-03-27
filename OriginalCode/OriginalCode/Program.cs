@@ -7,7 +7,7 @@ using OriginalCode;
 
 namespace OriginalCode
 {
-    class Program
+    public class Program
     {
         public static string[] input(string[] args)
         {
@@ -19,13 +19,13 @@ namespace OriginalCode
             DealWords dealWords = new DealWords();
             dealWords.dealWords();
 
-            string str = System.IO.Directory.GetCurrentDirectory();
+            string str = Directory.GetCurrentDirectory();
             str = str + "\\solution.txt";
             Console.WriteLine(str);
             //分类调用
             if (GlobalPara.type == 'c' || GlobalPara.type == 'm' || GlobalPara.type == 'w')
             {
-                if (str.IndexOfAny(System.IO.Path.GetInvalidPathChars()) >= 0) // 文件路径字符不合法
+                if (str.IndexOfAny(Path.GetInvalidPathChars()) >= 0) // 文件路径字符不合法
                 {
                     throw new InvalidInputException(InputErrorType.code.illegal_path);
                 }
@@ -34,7 +34,7 @@ namespace OriginalCode
                 {
                     throw new InvalidInputException(InputErrorType.code.illegal_file_type);
                 }
-                else if (!System.IO.File.Exists(str))
+                else if (File.Exists(str))
                 {
                     throw new InvalidInputException(InputErrorType.code.file_not_found);
                 }
@@ -43,7 +43,7 @@ namespace OriginalCode
         }
 
     }
-    class DealWords
+    public class DealWords
     {
         public string[] words = null;
         public void dealWords()
@@ -69,7 +69,7 @@ namespace OriginalCode
 
     }
     //处理参数
-    class DealParas
+    public class DealParas
     {
         public void dealPara(string[] args)
         {
@@ -143,7 +143,7 @@ namespace OriginalCode
                 //检查读取的文件路径
                 else
                 {
-                    if (args[i].IndexOfAny(System.IO.Path.GetInvalidPathChars()) >= 0) // 文件路径字符不合法
+                    if (args[i].IndexOfAny(Path.GetInvalidPathChars()) >= 0) // 文件路径字符不合法
                     {
                         throw new InvalidInputException(InputErrorType.code.illegal_path);
                     }
@@ -162,7 +162,7 @@ namespace OriginalCode
                         {
                             throw new InvalidInputException(InputErrorType.code.illegal_file_type);
                         }
-                        else if (!System.IO.File.Exists(args[i]))
+                        else if (!File.Exists(args[i]))
                         {
                             throw new InvalidInputException(InputErrorType.code.file_not_found);
                         }
@@ -199,7 +199,7 @@ namespace OriginalCode
         public static string file_name = null;
     }
     //对参数进行检查并且设置
-    class Check
+    public class Check
     {
         public int checkPara(char c)
         {
@@ -215,7 +215,6 @@ namespace OriginalCode
                     {
                         return 0;
                     }
-                    break;
                 case 'm':
                     if (GlobalPara.type == '!')
                     {
@@ -226,7 +225,6 @@ namespace OriginalCode
                     {
                         return 0;
                     }
-                    break;
                 case 'w':
                     if (GlobalPara.type == '!')
                     {
@@ -237,7 +235,6 @@ namespace OriginalCode
                     {
                         return 0;
                     }
-                    break;
                 case 'c':
                     if (GlobalPara.type == '!')
                     {
@@ -248,7 +245,6 @@ namespace OriginalCode
                     {
                         return 0;
                     }
-                    break;
                 case 'r':
                     if (!GlobalPara.is_loop)
                     {
@@ -259,7 +255,6 @@ namespace OriginalCode
                     {
                         return 0;
                     }
-                    break;
                 case 'h':
                     if (GlobalPara.head == '!')
                     {
@@ -269,7 +264,6 @@ namespace OriginalCode
                     {
                         return 0;
                     }
-                    break;
                 case 't':
                     if (GlobalPara.tail == '!')
                     {
@@ -279,15 +273,12 @@ namespace OriginalCode
                     {
                         return 0;
                     }
-                    break;
                 default:
                     throw new InvalidInputException(InputErrorType.code.not_support);
-                    Environment.Exit(0);
-                    break;
+                    //Environment.Exit(0);
 
             }
 
-            return 0;
         }
     }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OriginalCode
 {
-    class ErrorType
+    public class ErrorType
     {
         public enum code
         {
@@ -14,7 +14,7 @@ namespace OriginalCode
         }
     }
 
-    class InputErrorType : ErrorType
+    public class InputErrorType : ErrorType
     {
         public new enum code
         {
@@ -35,7 +35,7 @@ namespace OriginalCode
 
 
     [Serializable]
-    class InvalidInputException : Exception
+    public class InvalidInputException : Exception
     {
         public InvalidInputException() { }
 
@@ -89,7 +89,7 @@ namespace OriginalCode
 
 
     [Serializable]
-    class CircleException : Exception
+    public class CircleException : Exception
     {
 
         public CircleException()
@@ -100,7 +100,7 @@ namespace OriginalCode
         }
     }
 
-    class ChainErrorType : ErrorType
+    public class ChainErrorType : ErrorType
     {
         public new enum code
         {
@@ -112,7 +112,7 @@ namespace OriginalCode
 
     
     [Serializable]
-    class ChainNotFoundException : Exception
+    public class ChainNotFoundException : Exception
     {
         public ChainNotFoundException()
             : base($"ChainNotFoundException")

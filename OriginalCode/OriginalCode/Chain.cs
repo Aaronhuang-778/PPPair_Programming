@@ -7,10 +7,27 @@ using System.Threading.Tasks;
 
 namespace OriginalCode
 {
-    class Chain
+    public static class Chain
     {
 
-        public Chain() { }
+        //public Chain() { }
+
+        
+        /*static void Main(string[] args)
+        {
+            Console.WriteLine("Hello World!");
+            char[,] words =
+            {
+                {'a', 'b'},
+                {'b', 'c'}
+            };
+            Console.WriteLine(words[1, 1]);
+            char[,] result = new char[100, 100];
+
+            Chain.gen_chain_word(ref words, 4, ref result, '!', '!', false);
+            Console.WriteLine("[get result from dll:]");
+            Console.WriteLine(result[0, 0] + "" + result[0, 1] + " " + result[1, 0] + "" + result[1, 1]);
+        }*/
 
         private static IEnumerable<T> GetRow<T>(T[,] array, int index)
         {
@@ -20,7 +37,7 @@ namespace OriginalCode
             }
         }
 
-        private string[] char2D_To_StringArray(in char[,] words)
+        private static string[] char2D_To_StringArray(in char[,] words)
         {
             string[] s = new string[20005];
             for (int i = 0; i < words.GetLength(0); i++)
@@ -30,20 +47,21 @@ namespace OriginalCode
             return s;
         }
 
-        private void stringArray_To_char2D(in string[] ss, ref char[,] result)
+        private static void stringArray_To_char2D(in string[] ss, ref char[,] result)
         {
             int i = 0;
-            foreach (string s in ss)
+            while (i < ss.Length && ss[i] != null && ss[i].Length > 0)
             {
-                char[] cs = s.ToCharArray();
+                char[] cs = ss[i].ToCharArray();
                 int j = 0;
                 foreach (char c in cs)
-                    result[i, j] = c;
+                    result[i, j++] = c;
+                i++;
             }
         }
 
 
-        public void writeFile(string[] result)
+        public static void writeFile(string[] result)
         {
             string str = System.IO.Directory.GetCurrentDirectory();
             str = str + "\\solution.txt";
@@ -51,7 +69,7 @@ namespace OriginalCode
         }
 
 
-        public int gen_chain_word(ref char[,] words, int len, ref char[,] result, 
+        public static int gen_chain_word(ref char[,] words, int len, ref char[,] result, 
             char head, char tail, bool enable_loop)
         {
             string[] ss = new string[20005];
@@ -60,7 +78,7 @@ namespace OriginalCode
             return hint;
         }
 
-        public int gen_chains_all(ref char[,] words, int len, ref char[,] result)
+        public static int gen_chains_all(ref char[,] words, int len, ref char[,] result)
         {
             string[] ss = new string[20005];
             int hint = gen_chains_all(char2D_To_StringArray(words), len, ss);
@@ -68,7 +86,7 @@ namespace OriginalCode
             return hint;
         }
 
-        public int gen_chain_word_unique(ref char[,] words, int len, ref char[,] result)
+        public static int gen_chain_word_unique(ref char[,] words, int len, ref char[,] result)
         {
             string[] ss = new string[20005];
             int hint = gen_chain_word_unique(char2D_To_StringArray(words), len, ss);
@@ -76,7 +94,7 @@ namespace OriginalCode
             return hint;
         }
         
-        public int gen_chain_char(ref char[,] words, int len, ref char[,] result, 
+        public static int gen_chain_char(ref char[,] words, int len, ref char[,] result, 
             char head, char tail, bool enable_loop)
         {
             string[] ss = new string[20005];
@@ -87,10 +105,12 @@ namespace OriginalCode
 
 
         /* -w -h -t -r */
-        public int gen_chain_word(string[] words, int len, string[] result, 
+        public static int gen_chain_word(string[] words, int len, string[] result, 
             char head, char tail, bool enable_loop)
         {
             Graph G = new Graph();
+            Console.WriteLine(words.Length);
+            Console.WriteLine(words[0]);
             G.AddG(words);
             if (G.isCyclic())
             {
@@ -147,7 +167,7 @@ namespace OriginalCode
 
 
         /* -n */
-        public int gen_chains_all(string[] words, int len, string[] result)
+        public static int gen_chains_all(string[] words, int len, string[] result)
         {
             Graph G = new Graph();
             G.AddG(words);
@@ -175,7 +195,7 @@ namespace OriginalCode
 
 
         /* -m */
-        public int gen_chain_word_unique(string[] words, int len, string[] result)
+        public static int gen_chain_word_unique(string[] words, int len, string[] result)
         {
             Graph G = new Graph();
             G.AddG(words);
@@ -204,7 +224,7 @@ namespace OriginalCode
 
 
         /* -c -h -t -r */
-        public int gen_chain_char(string[] words, int len, string[] result, 
+        public static int gen_chain_char(string[] words, int len, string[] result, 
             char head, char tail, bool enable_loop)
         {
             Graph G = new Graph();
