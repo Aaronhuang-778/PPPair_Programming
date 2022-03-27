@@ -12,12 +12,80 @@ namespace OriginalCode
 
         public Chain() { }
 
+        private static IEnumerable<T> GetRow<T>(T[,] array, int index)
+        {
+            for (int i = 0; i < array.GetLength(1); i++)
+            {
+                yield return array[index, i];
+            }
+        }
+
+        private string[] char2D_To_StringArray(in char[,] words)
+        {
+            string[] s = new string[20005];
+            for (int i = 0; i < words.GetLength(0); i++)
+            {
+                s[i] = new string(GetRow(words, i).ToArray());
+            }
+            return s;
+        }
+
+        private void stringArray_To_char2D(in string[] ss, ref char[,] result)
+        {
+            int i = 0;
+            foreach (string s in ss)
+            {
+                char[] cs = s.ToCharArray();
+                int j = 0;
+                foreach (char c in cs)
+                    result[i, j] = c;
+            }
+        }
+
+
         public void writeFile(string[] result)
         {
             string str = System.IO.Directory.GetCurrentDirectory();
             str = str + "\\solution.txt";
             System.IO.File.WriteAllLines(str, result);
         }
+
+
+        public int gen_chain_word(ref char[,] words, int len, ref char[,] result, 
+            char head, char tail, bool enable_loop)
+        {
+            string[] ss = new string[20005];
+            int hint = gen_chain_word(char2D_To_StringArray(words), len, ss, head, tail, enable_loop);
+            stringArray_To_char2D(in ss, ref result);
+            return hint;
+        }
+
+        public int gen_chains_all(ref char[,] words, int len, ref char[,] result)
+        {
+            string[] ss = new string[20005];
+            int hint = gen_chains_all(char2D_To_StringArray(words), len, ss);
+            stringArray_To_char2D(in ss, ref result);
+            return hint;
+        }
+
+        public int gen_chain_word_unique(ref char[,] words, int len, ref char[,] result)
+        {
+            string[] ss = new string[20005];
+            int hint = gen_chain_word_unique(char2D_To_StringArray(words), len, ss);
+            stringArray_To_char2D(in ss, ref result);
+            return hint;
+        }
+        
+        public int gen_chain_char(ref char[,] words, int len, ref char[,] result, 
+            char head, char tail, bool enable_loop)
+        {
+            string[] ss = new string[20005];
+            int hint = gen_chain_char(char2D_To_StringArray(words), len, ss, head, tail, enable_loop);
+            stringArray_To_char2D(in ss, ref result);
+            return hint;
+        }
+
+
         /* -w -h -t -r */
         public int gen_chain_word(string[] words, int len, string[] result, 
             char head, char tail, bool enable_loop)
