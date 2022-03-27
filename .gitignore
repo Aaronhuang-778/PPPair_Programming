@@ -5,7 +5,7 @@
 */.vscode/
 */.idea/
 */out/
-*/obj/
+*obj/
 */packages/
 */Properties/
 *.dll
