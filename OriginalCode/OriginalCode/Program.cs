@@ -215,7 +215,6 @@ namespace OriginalCode
                     {
                         return 0;
                     }
-                    break;
                 case 'm':
                     if (GlobalPara.type == '!')
                     {
@@ -226,7 +225,6 @@ namespace OriginalCode
                     {
                         return 0;
                     }
-                    break;
                 case 'w':
                     if (GlobalPara.type == '!')
                     {
@@ -237,7 +235,6 @@ namespace OriginalCode
                     {
                         return 0;
                     }
-                    break;
                 case 'c':
                     if (GlobalPara.type == '!')
                     {
@@ -248,7 +245,6 @@ namespace OriginalCode
                     {
                         return 0;
                     }
-                    break;
                 case 'r':
                     if (!GlobalPara.is_loop)
                     {
@@ -259,7 +255,6 @@ namespace OriginalCode
                     {
                         return 0;
                     }
-                    break;
                 case 'h':
                     if (GlobalPara.head == '!')
                     {
@@ -269,7 +264,6 @@ namespace OriginalCode
                     {
                         return 0;
                     }
-                    break;
                 case 't':
                     if (GlobalPara.tail == '!')
                     {
@@ -279,15 +273,11 @@ namespace OriginalCode
                     {
                         return 0;
                     }
-                    break;
                 default:
                     throw new InvalidInputException(InputErrorType.code.not_support);
-                    Environment.Exit(0);
-                    break;
 
             }
 
-            return 0;
         }
     }
 
