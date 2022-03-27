@@ -10,5 +10,5 @@
 */Properties/
 *.dll
 *.pdb
-*/*.dll
-*/*.pdb
+*.json
+*.o
