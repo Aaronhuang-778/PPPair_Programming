@@ -132,7 +132,6 @@ namespace OriginalCode
                         {
                             Console.WriteLine("{0}:", args[i][1]);
                             throw new InvalidInputException(InputErrorType.code.dupli_para);
-                            break;
                         }
                     }
                     //长度不为2，命令格式错误, 这里可以再细分提示类型

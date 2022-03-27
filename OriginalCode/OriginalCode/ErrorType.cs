@@ -16,7 +16,7 @@ namespace OriginalCode
 
     class InputErrorType : ErrorType
     {
-        public enum code
+        public new enum code
         {
             dupli_para,
             not_support, //default
@@ -102,7 +102,7 @@ namespace OriginalCode
 
     class ChainErrorType : ErrorType
     {
-        public enum code
+        public new enum code
         {
             head_not_found,
             tail_not_found,
