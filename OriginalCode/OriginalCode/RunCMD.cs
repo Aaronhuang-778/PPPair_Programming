@@ -11,8 +11,9 @@ namespace OriginalCode
     {
         public static void Main(string[] args)
         {
-            string[] test = { "-m", "./aaa.txt" };
-            string[] words = Program.input(test);
+            //string[] test = { "-m", "./aaa.txt" };
+            //string[] words = Program.input(test);
+            string[] words = Program.input(args);
             string[] result = new string[20005];
             //Chain chain = new Chain();
 
