@@ -28,9 +28,85 @@ namespace OriginalCode
         /* -m */
         public void get_chain_word_unique(Graph G)
         {
+            m_Method m_method = new m_Method();
+            m_method.startDFS(G);
+            for (int i = 0; i < m_method.link_set.Count; i++)
+            {
+                Console.WriteLine(m_method.link_set[i]);
+            }
 
         }
 
+    }
+
+    class m_Method
+    {
+        public ArrayList link_set = new ArrayList();
+        public int max = 0;
+
+        public void m_DFS(Graph G, Word word, bool[] addAlpha, ArrayList live_list)
+        {
+            ArrayList next_node = G.getNextWordList(word);
+
+            if (next_node == null)
+            {
+                if (live_list.Count > max)
+                {
+                    link_set.Clear();
+                    for (int k = 0; k < live_list.Count; k++)
+                    {
+                        link_set.Add(live_list[k]);
+                    }
+                    max = live_list.Count;
+                }
+                return;
+            }
+
+            for (int j = 0; j < next_node.Count; j++)
+            {
+                Word word1 = (Word)next_node[j];
+                bool[] tmp = new bool[26];
+                for (int k = 0; k < 26; k++)
+                {
+                    tmp[k] = addAlpha[k];
+                }
+                if (tmp[word1.word_head - 'a'])
+                {
+                    if (live_list.Count > max)
+                    {
+                        link_set.Clear();
+                        for (int k = 0; k < live_list.Count; k++)
+                        {
+                            link_set.Add(live_list[k]);
+                        }
+                        max = live_list.Count;
+                    }
+                }
+                else
+                {
+                    tmp[word1.word_head - 'a'] = true;
+                    ArrayList tmp1 = new ArrayList();
+                    for (int k = 0; k < live_list.Count; k++)
+                    {
+                        tmp1.Add(live_list[k]);                       
+                    }
+                    tmp1.Add(word1.word);
+                    m_DFS(G, word1, tmp, tmp1);
+                }
+            }
+        }
+        public void startDFS(Graph G)
+        {
+            for (int i = 0; i < Graph.word_list.Count; i++)
+            {
+                Word word = (Word)Graph.word_list[i];
+                bool[] addAlpha = new bool[26];
+                addAlpha[word.word_head - 'a'] = true;
+                ArrayList live_list = new ArrayList();
+                live_list.Add(word.word);
+                m_DFS(G, word, addAlpha, live_list);
+            }
+        }
     }
 
     class n_Method
