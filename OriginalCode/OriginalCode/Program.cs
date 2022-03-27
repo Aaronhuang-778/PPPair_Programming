@@ -89,50 +89,7 @@ namespace OriginalCode
                     //长度为2：-x
                     if (len == 2)
                     {
-                        int flag = c.checkPara(args[i][1]);
-                        if (flag == 1)  //当前指令获取成功
-                        {
-                            if (args[i][1] == 'h')
-                            {
-                                if (i == args.Length - 1)
-                                {
- 
-                                    throw new InvalidInputException(InputErrorType.code.wrong_head);
-                                }
-                                else if (args[i + 1].Length > 1 || (args[i + 1][0] < 97 || args[i + 1][0] > 122))
-                                {
-                                    
-                                    throw new InvalidInputException(InputErrorType.code.wrong_head);
-                                }
-                                else
-                                {
-                                    GlobalPara.head = args[i + 1][0];
-                                    i += 1;
-
-                                }
-                            }
-                            else if (args[i][1] == 't')
-                            {
-                                if (i == args.Length - 1)
-                                {
-                                    throw new InvalidInputException(InputErrorType.code.wrong_tail);
-                                }
-                                else if (args[i + 1].Length > 1 || (args[i + 1][0] < 97 || args[i + 1][0] > 122))
-                                {
-                                    throw new InvalidInputException(InputErrorType.code.wrong_tail);
-                                }
-                                else
-                                {
-                                    GlobalPara.tail = args[i + 1][0];
-                                    i += 1;
-                                }
-                            }
-                        }
-                        else if (flag == 0) //指令重复
-                        {
-                            Console.WriteLine("{0}:", args[i][1]);
-                            throw new InvalidInputException(InputErrorType.code.dupli_para);
-                        }
+                        i = analysePara(c, args, i);
                     }
                     //长度不为2，命令格式错误, 这里可以再细分提示类型
                     else
@@ -143,34 +100,7 @@ namespace OriginalCode
                 //检查读取的文件路径
                 else
                 {
-                    if (args[i].IndexOfAny(System.IO.Path.GetInvalidPathChars()) >= 0) // 文件路径字符不合法
-                    {
-                        throw new InvalidInputException(InputErrorType.code.illegal_path);
-                    }
-                    else if (GlobalPara.file_name != null)  //已经保存文件路径，那么此条字符就是错误的内容，格式错误！
-                    {
-                        throw new InvalidInputException(InputErrorType.code.wrong_format);
-                    }
-                    else //尚未保存文件路径
-                    {
-                        if (len < 5)
-                        {
-                            throw new InvalidInputException(InputErrorType.code.wrong_format);
-                        }
-                        string file_type = args[i].Substring((len - 4));
-                        if (file_type != ".txt")
-                        {
-                            throw new InvalidInputException(InputErrorType.code.illegal_file_type);
-                        }
-                        else if (!System.IO.File.Exists(args[i]))
-                        {
-                            throw new InvalidInputException(InputErrorType.code.file_not_found);
-                        }
-                        else
-                        {
-                            GlobalPara.file_name = args[i];
-                        }
-                    }
+                    checkInputFile(args[i]);
                 }
             }
             //没有单词文件
@@ -183,12 +113,90 @@ namespace OriginalCode
             {
                 throw new InvalidInputException(InputErrorType.code.illegal_para_combination);
             }
-            Console.WriteLine(GlobalPara.is_loop);
-            Console.WriteLine(GlobalPara.head);
-            Console.WriteLine(GlobalPara.tail);
-            Console.WriteLine(GlobalPara.type);
+        }
+
+        public int analysePara(Check c, string[] args, int i)
+        {
+            int flag = c.checkPara(args[i][1]);
+            if (flag == 1)  //当前指令获取成功
+            {
+                if (args[i][1] == 'h')
+                {
+                    if (i == args.Length - 1)
+                    {
+
+                        throw new InvalidInputException(InputErrorType.code.wrong_head);
+                    }
+                    else if (args[i + 1].Length > 1 || (args[i + 1][0] < 97 || args[i + 1][0] > 122))
+                    {
+
+                        throw new InvalidInputException(InputErrorType.code.wrong_head);
+                    }
+                    else
+                    {
+                        GlobalPara.head = args[i + 1][0];
+                        i += 1;
+
+                    }
+                }
+                else if (args[i][1] == 't')
+                {
+                    if (i == args.Length - 1)
+                    {
+                        throw new InvalidInputException(InputErrorType.code.wrong_tail);
+                    }
+                    else if (args[i + 1].Length > 1 || (args[i + 1][0] < 97 || args[i + 1][0] > 122))
+                    {
+                        throw new InvalidInputException(InputErrorType.code.wrong_tail);
+                    }
+                    else
+                    {
+                        GlobalPara.tail = args[i + 1][0];
+                        i += 1;
+                    }
+                }
+            }
+            else if (flag == 0) //指令重复
+            {
+                Console.WriteLine("{0}:", args[i][1]);
+                throw new InvalidInputException(InputErrorType.code.dupli_para);
+            }
+            return i;
+        }
+
+        public void checkInputFile(string s)
+        {
+            if (s.IndexOfAny(System.IO.Path.GetInvalidPathChars()) >= 0) // 文件路径字符不合法
+            {
+                throw new InvalidInputException(InputErrorType.code.illegal_path);
+            }
+            else if (GlobalPara.file_name != null)  //已经保存文件路径，那么此条字符就是错误的内容，格式错误！
+            {
+                throw new InvalidInputException(InputErrorType.code.wrong_format);
+            }
+            else //尚未保存文件路径
+            {
+                if (s.Length < 5)
+                {
+                    throw new InvalidInputException(InputErrorType.code.wrong_format);
+                }
+                string file_type = s.Substring((s.Length - 4));
+                if (file_type != ".txt")
+                {
+                    throw new InvalidInputException(InputErrorType.code.illegal_file_type);
+                }
+                else if (!System.IO.File.Exists(s))
+                {
+                    throw new InvalidInputException(InputErrorType.code.file_not_found);
+                }
+                else
+                {
+                    GlobalPara.file_name = s;
+                }
+            }
         }
     }
+   
     //全局参数，用于后续调用
     public static class GlobalPara
     {
