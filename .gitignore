@@ -8,5 +8,5 @@
 */obj/
 */packages/
 */Properties/
-*/.dll
-*/.pdb
+*/*.dll
+*/*.pdb
