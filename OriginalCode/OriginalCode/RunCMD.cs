@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace OriginalCode
+namespace Core
 {
     public class RunCMD
     {

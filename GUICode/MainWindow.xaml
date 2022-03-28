@@ -22,10 +22,15 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ToggleButton.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBox.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.RadioButton.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.CheckBox.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Label.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
+        
     </Window.Resources>
-    
+
 
     <materialDesign:DialogHost
         Identifier="RootDialog"
@@ -185,25 +190,127 @@
                     </DockPanel>
                 </materialDesign:ColorZone>
 
-                <Grid>
+                <Grid x:Name="Grid1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
+                    <Grid Grid.Row="1" VerticalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0" >
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+
+                            <RadioButton x:Name="radioButtonText" 
+                                         Grid.Row="0"
+                                         Content="通过文本框输入：" 
+                                         GroupName="radioInputType"
+                                         FontFamily="宋体" FontSize="25" 
+                                         HorizontalAlignment="Center" 
+                                         VerticalAlignment="Center" 
+                                         Margin="0,0,250,0" />
+
+                            <TextBox x:Name="textBoxInput" Grid.Row="1"
+                                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center" 
+                                    Margin="0,0,0,0" 
+                                    AcceptsReturn="True"
+                                    TextWrapping="Wrap"
+                                    VerticalScrollBarVisibility="Auto"
+                                    materialDesign:HintAssist.Hint="This is a text area" 
+                                     MinWidth="350" MinHeight="200" 
+                                   FontFamily="宋体" FontSize="20" 
+                                     IsEnabled="True"/>
+                        </Grid>
+
+                        <materialDesign:Badged Grid.Column="1"
+                                    x:Name="CountingBadge"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Margin="0,0,0,0"
+                                    BadgeColorZoneMode="PrimaryDark">
+                            <Button
+                                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Margin="0,0,0,0"
+                                Click="CountingButton_OnClick"
+                                Content="生成单词链"
+                                IsEnabled="{Binding DataContext.ControlsEnabled, 
+                                RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" 
+                                FontFamily="宋体" FontSize="20" FontWeight="Bold" />
+                        </materialDesign:Badged>
+
+                    </Grid>
+
+
                     <ScrollViewer
-                        x:Name="MainScrollViewer"
-                        Grid.Row="1"
-                        materialDesign:ScrollViewerAssist.IsAutoHideEnabled="True"
-                        HorizontalScrollBarVisibility="{Binding SelectedItem.HorizontalScrollBarVisibilityRequirement, FallbackValue=Disabled}"
-                        VerticalScrollBarVisibility="{Binding SelectedItem.VerticalScrollBarVisibilityRequirement, FallbackValue=Disabled}" >
-                        <ContentControl
-                            DataContext="{Binding SelectedItem}"
-                            Margin="{Binding MarginRequirement, FallbackValue=16}">
-                            <materialDesign:DialogHost>
-                                <TextBlock x:Name="tryTextBlock" HorizontalAlignment="Left" Margin="462,278,0,0" TextWrapping="Wrap" Text="tryTextBlock" VerticalAlignment="Center"/>
-                            </materialDesign:DialogHost>
-                        </ContentControl>
+                    x:Name="MainScrollViewer2"
+                    Grid.Row="2"
+                    materialDesign:ScrollViewerAssist.IsAutoHideEnabled="True"
+                    HorizontalScrollBarVisibility="{Binding SelectedItem.HorizontalScrollBarVisibilityRequirement, FallbackValue=Disabled}"
+                    VerticalScrollBarVisibility="{Binding SelectedItem.VerticalScrollBarVisibilityRequirement, FallbackValue=Disabled}" >
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <RadioButton x:Name="radioButton_paraN" 
+                                         Grid.Row="1"
+                                         Content="查找所有单词链" 
+                                         GroupName="radioCalType"
+                                         FontFamily="宋体" FontSize="25" 
+                                         HorizontalAlignment="Left" 
+                                         VerticalAlignment="Center" 
+                                         Margin="100,0,0,0" />
+                            <RadioButton x:Name="radioButton_paraW"  
+                                         Grid.Row="2"
+                                         Content="单词数目最多的单词链" 
+                                         GroupName="radioCalType"
+                                         FontFamily="宋体" FontSize="25" 
+                                         HorizontalAlignment="Left" 
+                                         VerticalAlignment="Center" 
+                                         Margin="100,0,0,0"/>
+                            <CheckBox x:Name="radioButton_paraWR"  
+                                         Grid.Row="2"
+                                         Content="允许单词环" 
+                                         FontFamily="宋体" FontSize="25" 
+                                         HorizontalAlignment="Center" 
+                                         VerticalAlignment="Center" 
+                                         IsEnabled="{Binding Path=IsChecked, ElementName=radioButton_paraW}"
+                                         Margin="100,0,0,0" />
+                            <RadioButton x:Name="radioButton_paraC" 
+                                         Grid.Row="3"
+                                         Content="字母数目最多的单词链" 
+                                         GroupName="radioCalType" 
+                                         FontFamily="宋体" FontSize="25" 
+                                         HorizontalAlignment="Left" 
+                                         VerticalAlignment="Center" 
+                                         Margin="100,0,0,0"/>
+                            <CheckBox x:Name="radioButton_paraCR"  
+                                         Grid.Row="3"
+                                         Content="允许单词环" 
+                                         FontFamily="宋体" FontSize="25" 
+                                         HorizontalAlignment="Center" 
+                                         VerticalAlignment="Center" 
+                                         IsEnabled="{Binding Path=IsChecked, ElementName=radioButton_paraC}"
+                                         Margin="100,0,0,0" />
+                        </Grid>
+
                     </ScrollViewer>
 
                     <materialDesign:Snackbar

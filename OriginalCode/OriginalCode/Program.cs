@@ -3,9 +3,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using OriginalCode;
 
-namespace OriginalCode
+namespace Core
 {
     public class Program
     {
@@ -313,10 +312,6 @@ namespace OriginalCode
                     }
                 default:
                     throw new InvalidInputException(InputErrorType.code.not_support);
-<<<<<<< HEAD
-                    //Environment.Exit(0);
-=======
->>>>>>> 276cf6fbf7ffd488f1f098ab71e3959f2ad195e4
 
             }
 
