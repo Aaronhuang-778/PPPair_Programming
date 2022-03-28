@@ -4,12 +4,7 @@
 */.vs/
 */.vscode/
 */.idea/
-*/out/
 */obj/
-*/packages/
 
 obj
-*.dll
-*.pdb
-*.json
 *.o
