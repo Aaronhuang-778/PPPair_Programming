@@ -207,50 +207,120 @@
 
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
 
 
+                            <Grid Grid.Row="0" HorizontalAlignment="Left">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <RadioButton x:Name="radioButtonFile" 
+                                             Grid.Column="0"
+                                             Content="通过文件输入" 
+                                             GroupName="radioInputType"
+                                             FontFamily="宋体" FontSize="25" 
+                                             HorizontalAlignment="Left" 
+                                             VerticalAlignment="Center" 
+                                             Margin="100,0,0,0" MinHeight="70" />
+                                <materialDesign:Badged Grid.Column="1"
+                                    x:Name="CountingBadge1"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Margin="0,0,0,0"
+                                    BadgeColorZoneMode="PrimaryDark">
+                                    <Button x:Name="buttonBrowse"
+                                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Left"
+                                            Margin="60,0,0,0"
+                                            Content="浏览..."
+                                            Click="getInputFile"
+                                            IsEnabled="{Binding Path=IsChecked, ElementName=radioButtonFile}"
+                                            FontFamily="宋体" FontSize="20" FontWeight="Medium" Foreground="White"/>
+                                </materialDesign:Badged>
+
+                            </Grid>
+
+                            
+
                             <RadioButton x:Name="radioButtonText" 
-                                         Grid.Row="0"
+                                         Grid.Row="1"
                                          Content="通过文本框输入：" 
                                          GroupName="radioInputType"
                                          FontFamily="宋体" FontSize="25" 
-                                         HorizontalAlignment="Center" 
+                                         HorizontalAlignment="Left" 
                                          VerticalAlignment="Center" 
-                                         Margin="0,0,250,0" />
+                                         Margin="100,0,0,0" />
 
-                            <TextBox x:Name="textBoxInput" Grid.Row="1"
+                            <TextBox x:Name="textBoxInput" Grid.Row="2"
                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                    VerticalAlignment="Center"
+                                    VerticalAlignment="Top"
                                     HorizontalAlignment="Center" 
-                                    Margin="0,0,0,0" 
+                                    Margin="0,10,0,0" 
                                     AcceptsReturn="True"
                                     TextWrapping="Wrap"
                                     VerticalScrollBarVisibility="Auto"
                                     materialDesign:HintAssist.Hint="This is a text area" 
                                      MinWidth="350" MinHeight="200" 
                                    FontFamily="宋体" FontSize="20" 
-                                     IsEnabled="True"/>
+                                     IsEnabled="{Binding Path=IsChecked, ElementName=radioButtonText}"/>
                         </Grid>
 
-                        <materialDesign:Badged Grid.Column="1"
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <!--Label x:Name="labelResult"
+                                   Grid.Row="1"
+                                   Content="计算结果："
+                                   VerticalAlignment="Top"
+                                    HorizontalAlignment="Left"
+                                    Margin="40,10,0,0"
+                                   FontFamily="宋体" FontSize="24" MinWidth="300" /-->
+
+                            <TextBox x:Name="textBoxResult" Grid.Row="2"
+                                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Center" 
+                                    Margin="0,20,40,0" 
+                                    AcceptsReturn="True"
+                                    TextWrapping="Wrap"
+                                    VerticalScrollBarVisibility="Auto"
+                                     Text="待输入"
+                                     Foreground="Purple"
+                                    materialDesign:HintAssist.Hint="计算结果"
+                                     materialDesign:HintAssist.FontFamily="宋体"
+                                     materialDesign:HintAssist.HelperTextFontSize="18"
+                                     MinWidth="350" MinHeight="180" 
+                                   FontFamily="宋体" FontSize="20" 
+                                     IsEnabled="False"/>
+
+                            <materialDesign:Badged Grid.Row="0"
                                     x:Name="CountingBadge"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
                                     Margin="0,0,0,0"
                                     BadgeColorZoneMode="PrimaryDark">
-                            <Button
+                            <Button x:Name="buttonCal"
+                                Click="startCal"
                                 Style="{StaticResource MaterialDesignRaisedLightButton}"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
-                                Margin="0,0,0,0"
-                                Click="CountingButton_OnClick"
+                                Margin="0,30,0,0"
                                 Content="生成单词链"
                                 IsEnabled="{Binding DataContext.ControlsEnabled, 
                                 RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" 
-                                FontFamily="宋体" FontSize="20" FontWeight="Bold" />
-                        </materialDesign:Badged>
+                                FontFamily="宋体" FontSize="20" FontWeight="SemiBold" Foreground="White"/>
+                            </materialDesign:Badged>
+                        </Grid>
+                        
 
                     </Grid>
 
@@ -268,6 +338,7 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <RadioButton x:Name="radioButton_paraN" 
                                          Grid.Row="1"
@@ -277,37 +348,135 @@
                                          HorizontalAlignment="Left" 
                                          VerticalAlignment="Center" 
                                          Margin="100,0,0,0" />
-                            <RadioButton x:Name="radioButton_paraW"  
-                                         Grid.Row="2"
+
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <RadioButton x:Name="radioButton_paraW"  
+                                         Grid.Column="0"
                                          Content="单词数目最多的单词链" 
                                          GroupName="radioCalType"
                                          FontFamily="宋体" FontSize="25" 
                                          HorizontalAlignment="Left" 
                                          VerticalAlignment="Center" 
                                          Margin="100,0,0,0"/>
-                            <CheckBox x:Name="radioButton_paraWR"  
-                                         Grid.Row="2"
+                                <Grid Grid.Column="1"
+                                      Margin="0,0,0,0"  
+                                      VerticalAlignment="Center" 
+                                      HorizontalAlignment="Center" 
+                                      IsEnabled="{Binding Path=IsChecked, ElementName=radioButton_paraW}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" MinWidth="160"/>
+                                        <ColumnDefinition Width="*" MinWidth="220"/>
+                                        <ColumnDefinition Width="*" MinWidth="220"/>
+                                    </Grid.ColumnDefinitions>
+                                    <CheckBox x:Name="radioButton_paraWR"  
+                                         Grid.Column="0"
                                          Content="允许单词环" 
                                          FontFamily="宋体" FontSize="25" 
                                          HorizontalAlignment="Center" 
                                          VerticalAlignment="Center" 
-                                         IsEnabled="{Binding Path=IsChecked, ElementName=radioButton_paraW}"
-                                         Margin="100,0,0,0" />
-                            <RadioButton x:Name="radioButton_paraC" 
-                                         Grid.Row="3"
+                                         Margin="0" />
+                                    <StackPanel Orientation="Horizontal" 
+                                                Grid.Column="1"
+                                                HorizontalAlignment="Center" 
+                                                VerticalAlignment="Center"
+                                                Margin="0"  >
+                                        <CheckBox x:Name="radioButton_paraWH" 
+                                                     FontFamily="宋体" FontSize="25" 
+                                                     Content="词首:"/>
+                                        <TextBox x:Name="textBoxWH"
+                                                materialDesign:HintAssist.Hint="英文单词"
+                                                FontFamily="宋体" FontSize="25" 
+                                                IsEnabled="{Binding Path=IsChecked, ElementName=radioButton_paraWH}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" 
+                                                Grid.Column="2"
+                                                HorizontalAlignment="Center" 
+                                                VerticalAlignment="Center"
+                                                Margin="0" >
+                                        <CheckBox x:Name="radioButton_paraWT" 
+                                                     FontFamily="宋体" FontSize="25" 
+                                                     Content="词尾:"/>
+                                        <TextBox x:Name="textBoxWT"
+                                                materialDesign:HintAssist.Hint="英文单词"
+                                                FontFamily="宋体" FontSize="25" 
+                                                IsEnabled="{Binding Path=IsChecked, ElementName=radioButton_paraWT}" />
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+
+                            <Grid Grid.Row="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <RadioButton x:Name="radioButton_paraC"  
+                                         Grid.Column="0"
                                          Content="字母数目最多的单词链" 
-                                         GroupName="radioCalType" 
+                                         GroupName="radioCalType"
                                          FontFamily="宋体" FontSize="25" 
                                          HorizontalAlignment="Left" 
                                          VerticalAlignment="Center" 
                                          Margin="100,0,0,0"/>
-                            <CheckBox x:Name="radioButton_paraCR"  
-                                         Grid.Row="3"
+                                <Grid Grid.Column="1"
+                                      Margin="0,0,0,0"  
+                                      VerticalAlignment="Center" 
+                                      HorizontalAlignment="Center" 
+                                      IsEnabled="{Binding Path=IsChecked, ElementName=radioButton_paraC}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" MinWidth="160"/>
+                                        <ColumnDefinition Width="*" MinWidth="220"/>
+                                        <ColumnDefinition Width="*" MinWidth="220"/>
+                                    </Grid.ColumnDefinitions>
+                                    <CheckBox x:Name="radioButton_paraCR"  
+                                         Grid.Column="0"
                                          Content="允许单词环" 
                                          FontFamily="宋体" FontSize="25" 
                                          HorizontalAlignment="Center" 
                                          VerticalAlignment="Center" 
-                                         IsEnabled="{Binding Path=IsChecked, ElementName=radioButton_paraC}"
+                                         Margin="0" />
+                                    <StackPanel Orientation="Horizontal" 
+                                                Grid.Column="1"
+                                                HorizontalAlignment="Center" 
+                                                VerticalAlignment="Center"
+                                                Margin="0"  >
+                                        <CheckBox x:Name="radioButton_paraCH" 
+                                                     FontFamily="宋体" FontSize="25" 
+                                                     Content="词首:"/>
+                                        <TextBox x:Name="textBoxCH"
+                                                materialDesign:HintAssist.Hint="英文单词"
+                                                FontFamily="宋体" FontSize="25" 
+                                                IsEnabled="{Binding Path=IsChecked, ElementName=radioButton_paraCH}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" 
+                                                Grid.Column="2"
+                                                HorizontalAlignment="Center" 
+                                                VerticalAlignment="Center"
+                                                Margin="0" >
+                                        <CheckBox x:Name="radioButton_paraCT" 
+                                                     FontFamily="宋体" FontSize="25" 
+                                                     Content="词尾:"/>
+                                        <TextBox x:Name="textBoxCT"
+                                                materialDesign:HintAssist.Hint="英文单词"
+                                                FontFamily="宋体" FontSize="25" 
+                                                IsEnabled="{Binding Path=IsChecked, ElementName=radioButton_paraCT}" />
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+
+
+                            <RadioButton x:Name="radioButton_paraM" 
+                                         Grid.Row="4"
+                                         Content="首字母不相同的最长单词链" 
+                                         GroupName="radioCalType"
+                                         FontFamily="宋体" FontSize="25" 
+                                         HorizontalAlignment="Left" 
+                                         VerticalAlignment="Center" 
                                          Margin="100,0,0,0" />
                         </Grid>
 

@@ -8,6 +8,10 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>GUICode</RootNamespace>
     <AssemblyName>GUICode</AssemblyName>
+    <!-- <TargetFrameworkVersion>v5.0.15</TargetFrameworkVersion> -->
+    <!-- <TargetFramework>net5.0-windows</TargetFramework> -->
+	  <!-- <TargetFramework>net5.0</TargetFramework> -->
+    <UseWPF>true</UseWPF>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -38,8 +42,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Core">
-      <HintPath>..\OriginalCode\OriginalCode\bin\Debug\net5.0\Core.dll</HintPath>
+    <Reference Include="ClassLibrary">
+      <HintPath>..\ClassLibrary\bin\Debug\net5.0\ClassLibrary.dll</HintPath>
     </Reference>
     <Reference Include="MaterialDesignColors, Version=2.0.5.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>packages\MaterialDesignColors.2.0.5\lib\net452\MaterialDesignColors.dll</HintPath>
@@ -56,6 +60,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -68,6 +73,7 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

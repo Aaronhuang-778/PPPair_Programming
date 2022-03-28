@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core
+namespace ClassLibrary
 {
     public static class Chain
     {
