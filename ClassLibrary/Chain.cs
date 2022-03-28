@@ -12,7 +12,7 @@ namespace ClassLibrary
 
         //public Chain() { }
 
-        
+
         /*static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
@@ -28,6 +28,63 @@ namespace ClassLibrary
             Console.WriteLine("[get result from dll:]");
             Console.WriteLine(result[0, 0] + "" + result[0, 1] + " " + result[1, 0] + "" + result[1, 1]);
         }*/
+
+
+
+        public static int gen_for_gui_para(bool useFileInput, string inputSource,
+            char calType, bool isR, char charH, char charT, ref string[] result)
+        {
+            string[] words = null;
+
+            Console.WriteLine("[Core] gen_for_gui_para");
+            Console.WriteLine("useFileInput=" + useFileInput);
+            Console.WriteLine("inputSource=" + inputSource);
+            Console.WriteLine("calType=" + calType);
+            Console.WriteLine("isR=" + isR);
+            Console.WriteLine("charH=" + charH);
+            Console.WriteLine("charT=" + charT);
+            Console.WriteLine("result.length=" + result.Length);
+
+
+            if (useFileInput)
+            {
+                string[] test = { "-" + calType, inputSource };
+                words = Program.input(test);
+            }
+            else
+            {
+                string raw_words = new string(inputSource);
+                /*
+                 * TODO: raw_words -> words
+                 * raw_words：用户gui输入字符串，还没split，包含非英文字符
+                 * words：小写的、处理过的string数组
+                 */
+            }
+            switch (GlobalPara.type)
+            {
+                case 'n':
+                    //统计单词链数量 只传递单词链
+                    gen_chains_all_str(words, words.Length, result);
+                    break;
+                case 'm':
+                    //输出首字母不相同的包含单词数量最多的单词链 只传递单词链
+                    gen_chain_word_unique_str(words, words.Length, result);
+                    break;
+                case 'w':
+                    //需要传入Global的参数进行处理
+                    gen_chain_word_str(words, words.Length, result, charH, charT, isR);
+                    break;
+                case 'c':
+                    //需要传入Global的参数进行处理
+                    gen_chain_char_str(words, words.Length, result, charH, charT, isR);
+                    break;
+            }
+            return 0;
+        }
+
+
+
+
 
         private static IEnumerable<T> GetRow<T>(T[,] array, int index)
         {
@@ -70,57 +127,6 @@ namespace ClassLibrary
         public static int test(bool useFileInput, string inputSource,
           char calType, bool isR, char charH, char charT, ref string[] result)
         {
-            return 0;
-        }
-
-        public static int gen_for_gui_para(bool useFileInput, string inputSource,
-            char calType, bool isR, char charH, char charT, ref string[] result)
-        {
-            string[] words = null;
-
-            Console.WriteLine("[Core] gen_for_gui_para");
-            Console.WriteLine("useFileInput=" + useFileInput);
-            Console.WriteLine("inputSource=" + inputSource);
-            Console.WriteLine("calType=" + calType);
-            Console.WriteLine("isR=" + isR);
-            Console.WriteLine("charH=" + charH);
-            Console.WriteLine("charT=" + charT);
-            Console.WriteLine("result.length=" + result.Length);
-
-
-            if (useFileInput)
-            {
-                string[] test = { "-" + calType, inputSource};
-                //words = Program.input(test);
-            } 
-            else
-            {
-                string raw_words = new string(inputSource);
-                /*
-                 * TODO: raw_words -> words
-                 * raw_words：用户gui输入字符串，还没split，包含非英文字符
-                 * words：小写的、处理过的string数组
-                 */
-            }
-            /*switch (GlobalPara.type)
-            {
-                case 'n':
-                    //统计单词链数量 只传递单词链
-                    gen_chains_all_str(words, words.Length, result);
-                    break;
-                case 'm':
-                    //输出首字母不相同的包含单词数量最多的单词链 只传递单词链
-                    gen_chain_word_unique_str(words, words.Length, result);
-                    break;
-                case 'w':
-                    //需要传入Global的参数进行处理
-                    gen_chain_word_str(words, words.Length, result, charH, charT, isR);
-                    break;
-                case 'c':
-                    //需要传入Global的参数进行处理
-                    gen_chain_char_str(words, words.Length, result, charH, charT, isR);
-                    break;
-            }*/
             return 0;
         }
 
