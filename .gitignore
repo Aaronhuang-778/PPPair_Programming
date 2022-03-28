@@ -7,7 +7,7 @@
 */out/
 */obj/
 */packages/
-*/Properties/
+
 obj
 *.dll
 *.pdb
