@@ -18,7 +18,6 @@ namespace Core
 
             string str = Directory.GetCurrentDirectory();
             str = str + "\\solution.txt";
-            Console.WriteLine(str);
             //分类调用
             if (GlobalPara.type == 'c' || GlobalPara.type == 'm' || GlobalPara.type == 'w')
             {
@@ -31,7 +30,7 @@ namespace Core
                 {
                     throw new InvalidInputException(InputErrorType.code.illegal_file_type);
                 }
-                else if (File.Exists(str))
+                else if (!File.Exists(str))
                 {
                     throw new InvalidInputException(InputErrorType.code.file_not_found);
                 }

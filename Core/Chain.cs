@@ -4,6 +4,7 @@ using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace Core
 {
@@ -53,11 +54,19 @@ namespace Core
             }
             else
             {
-                /*
-                 * TODO: inputSource -> words
-                 * inputSource：用户gui输入字符串，还没split，包含非英文字符
-                 * words：小写的、处理过的string数组
-                 */
+                Console.WriteLine(inputSource);
+                string str = inputSource;
+                str = str.ToLower();
+                words = Regex.Split(str, "[^(a-zA-Z)]+");
+
+                if (words[0] == "")
+                {
+                    for (int i = 0; i < words.Length - 1; i++)
+                    {
+                        words[i] = words[i + 1];
+                    }
+                    Array.Resize(ref words, words.Length - 1);
+                }
             }
             switch (GlobalPara.type)
             {
