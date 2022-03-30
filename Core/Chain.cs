@@ -36,7 +36,6 @@ namespace Core
             char calType, bool isR, char charH, char charT, ref string[] result)
         {
             string[] words = null;
-            Console.WriteLine("hello!!!!");
 
             Console.WriteLine("[Core] gen_for_gui_para");
             Console.WriteLine("useFileInput=" + useFileInput);
