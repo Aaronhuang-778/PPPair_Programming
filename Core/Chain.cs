@@ -55,10 +55,13 @@ namespace Core
             }
             else
             {
-                Console.WriteLine(inputSource);
-                string str = inputSource;
-                str = str.ToLower();
-                words = Regex.Split(str, "[^(a-zA-Z)]+");
+
+                GlobalPara.head = charH;
+                GlobalPara.tail = charT;
+                GlobalPara.is_loop = isR;
+                GlobalPara.type = calType;
+                inputSource = inputSource.ToLower();
+                words = Regex.Split(inputSource, "[^(a-zA-Z)]+");
 
                 if (words[0] == "")
                 {
