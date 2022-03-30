@@ -8,14 +8,11 @@ D:\GitWareHouse\PPPair_Programming\Core\obj\Debug\Core.csproj.AssemblyReference.
 D:\GitWareHouse\PPPair_Programming\Core\obj\Debug\Core.csproj.CoreCompileInputs.cache
 D:\GitWareHouse\PPPair_Programming\Core\obj\Debug\Core.pdb
 D:\GitWareHouse\PPPair_Programming\Core\bin\Debug\Core.pdb
-<<<<<<< HEAD
 D:\GitWareHouse\PPPair_Programming\Core\bin\Debug\Core.dll
 D:\GitWareHouse\PPPair_Programming\Core\obj\Debug\Core.dll
-=======
 D:\GitWareHouse\PPPair_Programming\Core\obj\Debug\Core.exe
 G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\Core\bin\Debug\Core.dll
 G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\Core\bin\Debug\Core.pdb
 G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\Core\obj\Debug\Core.csproj.CoreCompileInputs.cache
 G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\Core\obj\Debug\Core.dll
 G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\Core\obj\Debug\Core.pdb
->>>>>>> f51a374fbbd7f2e4585798abd631577af2082fc2
