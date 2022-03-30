@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Forms;
-using ClassLibrary;
+using Core;
 
 
 namespace PPPair_Programming
@@ -128,10 +128,16 @@ namespace PPPair_Programming
             Console.WriteLine("isR=" + isR);
             Console.WriteLine("charH=" + charH);
             Console.WriteLine("charT=" + charT);
-            Console.WriteLine("result.length=" + result.Length);
 
-            Chain.test(useFileInput, inputSource, calType, isR, charH, charT, ref result);
-            //Chain.gen_for_gui_para(useFileInput, inputSource, calType, isR, charH, charT, ref result);
+            //Chain.test(useFileInput, inputSource, calType, isR, charH, charT, ref result);
+            Chain.gen_for_gui_para(useFileInput, inputSource, calType, isR, charH, charT, ref result);
+
+            string resultText = "";
+            for (int i = 0; i < result.Length && result[i] != null && result[i].Length > 0; i++)
+                resultText += result[i] + "\n";
+
+            textBoxResult.Text = resultText;
+            Console.WriteLine("result=" + resultText);
         }
     }
 }

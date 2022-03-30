@@ -6,5 +6,7 @@
 */.idea/
 */obj/
 
+packages/
+*/packages/
 obj
 *.o

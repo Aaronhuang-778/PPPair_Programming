@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Collections;
 
 
-namespace ClassLibrary
+namespace Core
 {
     class ChainAlgorithm
     {

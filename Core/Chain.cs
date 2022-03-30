@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassLibrary
+namespace Core
 {
     public static class Chain
     {
@@ -53,10 +53,9 @@ namespace ClassLibrary
             }
             else
             {
-                string raw_words = new string(inputSource);
                 /*
-                 * TODO: raw_words -> words
-                 * raw_words：用户gui输入字符串，还没split，包含非英文字符
+                 * TODO: inputSource -> words
+                 * inputSource：用户gui输入字符串，还没split，包含非英文字符
                  * words：小写的、处理过的string数组
                  */
             }
