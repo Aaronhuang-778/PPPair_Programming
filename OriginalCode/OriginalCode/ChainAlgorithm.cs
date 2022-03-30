@@ -357,7 +357,8 @@ namespace Core
                 Word word = (Word)Graph.word_list[i];
                 ArrayList live_list = new ArrayList();
                 live_list.Add(word.word);
-                if (G.getLastNode(word) == null)
+                ArrayList last_list = G.getLastNode(word)；
+                if (last_list == null || last_list.Count == 0)
                 {
                     DFS(G, word, live_list, visited);
                 }
