@@ -120,6 +120,9 @@ namespace PPPair_Programming
                 }
             }
 
+            if ((bool)radioButtonText.IsChecked)
+                inputSource = textBoxInput.Text;
+
 
             Console.WriteLine("[gui] before skip");
             Console.WriteLine("useFileInput=" + useFileInput);
