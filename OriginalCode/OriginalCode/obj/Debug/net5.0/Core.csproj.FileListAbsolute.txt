@@ -1,0 +1,15 @@
+D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\bin\Debug\net5.0\Core.exe
+D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\bin\Debug\net5.0\Core.deps.json
+D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\bin\Debug\net5.0\Core.runtimeconfig.json
+D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\bin\Debug\net5.0\Core.runtimeconfig.dev.json
+D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\bin\Debug\net5.0\Core.dll
+D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\bin\Debug\net5.0\ref\Core.dll
+D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\bin\Debug\net5.0\Core.pdb
+D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\obj\Debug\net5.0\Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\obj\Debug\net5.0\Core.AssemblyInfoInputs.cache
+D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\obj\Debug\net5.0\Core.AssemblyInfo.cs
+D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\obj\Debug\net5.0\Core.csproj.CoreCompileInputs.cache
+D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\obj\Debug\net5.0\Core.dll
+D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\obj\Debug\net5.0\ref\Core.dll
+D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\obj\Debug\net5.0\Core.pdb
+D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\obj\Debug\net5.0\Core.genruntimeconfig.cache
