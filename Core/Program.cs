@@ -35,6 +35,10 @@ namespace Core
                     throw new InvalidInputException(InputErrorType.code.file_not_found);
                 }
             }
+
+            if (DealWords.words == null || DealWords.words.Length == 0 || DealWords.words[0].Length == 0)
+                throw new InvalidInputException(InputErrorType.code.empty_string);
+
             return DealWords.words;
         }
 

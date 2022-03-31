@@ -46,7 +46,6 @@ namespace Core
             Console.WriteLine("charT=" + charT);
             Console.WriteLine("result.length=" + result.Length);
 
-
             if (useFileInput)
             {
                 string[] test = { "-" + calType, inputSource };
@@ -59,9 +58,10 @@ namespace Core
                 GlobalPara.tail = charT;
                 GlobalPara.is_loop = isR;
                 GlobalPara.type = calType;
+                if (inputSource == null || inputSource.Length == 0)
+                    throw new InvalidInputException(InputErrorType.code.no_input_text);
                 inputSource = inputSource.ToLower();
                 words = Regex.Split(inputSource, "[^(a-zA-Z)]+");
-
                 if (words[0] == "")
                 {
                     for (int i = 0; i < words.Length - 1; i++)
@@ -71,6 +71,7 @@ namespace Core
                     Array.Resize(ref words, words.Length - 1);
                 }
             }
+
             switch (GlobalPara.type)
             {
                 case 'n':

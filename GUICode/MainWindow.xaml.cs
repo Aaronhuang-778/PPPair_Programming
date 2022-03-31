@@ -123,24 +123,54 @@ namespace PPPair_Programming
             if ((bool)radioButtonText.IsChecked)
                 inputSource = textBoxInput.Text;
 
-
             Console.WriteLine("[gui] before skip");
             Console.WriteLine("useFileInput=" + useFileInput);
-            Console.WriteLine("inputSource=" + inputSource);
+            //Console.WriteLine("inputSource=" + inputSource);
             Console.WriteLine("calType=" + calType);
             Console.WriteLine("isR=" + isR);
             Console.WriteLine("charH=" + charH);
             Console.WriteLine("charT=" + charT);
 
-            //Chain.test(useFileInput, inputSource, calType, isR, charH, charT, ref result);
-            Chain.gen_for_gui_para(useFileInput, inputSource, calType, isR, charH, charT, ref result);
+            try
+            {
+                //Chain.test(useFileInput, inputSource, calType, isR, charH, charT, ref result);
+                Chain.gen_for_gui_para(useFileInput, inputSource, calType, isR, charH, charT, ref result);
 
-            string resultText = "";
-            for (int i = 0; i < result.Length && result[i] != null && result[i].Length > 0; i++)
-                resultText += result[i] + "\n";
 
-            textBoxResult.Text = resultText;
-            Console.WriteLine("result=" + resultText);
+                string resultText = "";
+                for (int i = 0; i < result.Length && result[i] != null && result[i].Length > 0; i++)
+                    resultText += result[i] + "\n";
+
+                textBoxResult.Text = resultText;
+                Console.WriteLine("result=" + resultText);
+            }
+            catch (InvalidInputException ex)
+            {
+                Console.WriteLine("[get in gui]");
+                Console.WriteLine(ex.Message);
+                textBoxResult.Text = "错误提示：\n" + ex.Message;
+            }
+            catch (CircleException ex)
+            {
+                Console.WriteLine("[get in gui]");
+                Console.WriteLine(ex.Message);
+                textBoxResult.Text = "错误提示：\n" + ex.Message;
+            }
+            catch (ChainNotFoundException ex)
+            {
+                Console.WriteLine("[get in gui]");
+                Console.WriteLine(ex.Message);
+                textBoxResult.Text = "错误提示：\n" + ex.Message;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("[get in gui]");
+                Console.WriteLine(ex.Message);
+                textBoxResult.Text = "错误提示：\n" + ex.Message;
+            }
         }
+
     }
+
+    
 }
