@@ -11,21 +11,21 @@ namespace Core
     {
         public static void Main(string[] args)
         {
-            string[] test = { "-m", "./aaab.txt" };
+            string[] test = { "-m", "aaa.txt" };
             try
             {
                 //string[] words = Program.input(test);
                 string[] words = Program.input(args);
                 string[] result = new string[20005];
                 //Chain chain = new Chain();
-                foreach (string word in words) Console.WriteLine(word);
-                Console.WriteLine(GlobalPara.type);
+                //foreach (string word in words) Console.WriteLine(word);
 
                 switch (GlobalPara.type)
                 {
                     case 'n':
                         //统计单词链数量 只传递单词链
                         Chain.gen_chains_all_str(words, words.Length, result);
+                        Console.WriteLine(result.Length);
                         break;
                     case 'm':
                         //输出首字母不相同的包含单词数量最多的单词链 只传递单词链

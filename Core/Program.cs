@@ -234,6 +234,14 @@ namespace Core
         public static char tail = '!';
         public static char type = '!';
         public static string file_name = null;
+        public static void clearGlobal()
+        {
+            is_loop = false;
+         head = '!';
+         tail = '!';
+         type = '!';
+         file_name = null;
+    }
     }
     //对参数进行检查并且设置
     public static class Check

@@ -37,14 +37,14 @@ namespace Core
         {
             string[] words = null;
 
-            Console.WriteLine("[Core] gen_for_gui_para");
+            /*Console.WriteLine("[Core] gen_for_gui_para");
             Console.WriteLine("useFileInput=" + useFileInput);
             Console.WriteLine("inputSource=" + inputSource);
             Console.WriteLine("calType=" + calType);
             Console.WriteLine("isR=" + isR);
             Console.WriteLine("charH=" + charH);
             Console.WriteLine("charT=" + charT);
-            Console.WriteLine("result.length=" + result.Length);
+            Console.WriteLine("result.length=" + result.Length);*/
 
             if (useFileInput)
             {
@@ -182,8 +182,6 @@ namespace Core
             char head, char tail, bool enable_loop)
         {
             Graph G = new Graph();
-            Console.WriteLine(words.Length);
-            Console.WriteLine(words[0]);
             G.AddG(words);
             if (G.isCyclic())
             {
@@ -202,7 +200,6 @@ namespace Core
                     for (int j = 0; j < tmp.Count; j++)
                     {
                         result[j] = (string)tmp[j];
-                        Console.WriteLine(result[j]);
                     }
                 }
 
@@ -211,28 +208,17 @@ namespace Core
 
             ArrayList sortList = new ArrayList();
             G.TopologicalSort(sortList);
-            Console.WriteLine("sortList: ");
-            foreach (Stack<Word> s in sortList)
-            {
-                foreach (Word sw in s)
-                    Console.Write(sw + " ");
-                Console.WriteLine();
-            }
 
-            Console.WriteLine("longestPathDAG: ");
             Stack<Word> res_stack = new Stack<Word>();
             int dist = G.longestPathDAG(sortList, res_stack, head, tail);
             if (dist < 0) throw new ChainNotFoundException();
 
-            Console.Write("result: ");
             int i = 0;
             foreach (Word w in res_stack)
             {
-                Console.Write(w + " ");
                 result[i] = w.word;
                 i++;
             }
-            Console.WriteLine("dist = " + dist);
 
             writeFile(result);
             return 0;
@@ -253,7 +239,6 @@ namespace Core
             {
                 throw new ChainNotFoundException();
             }
-            Console.WriteLine(tmp.Count);
 
             if (tmp != null && tmp.Count > 0)
             {
@@ -287,7 +272,6 @@ namespace Core
                 for (int i = 0; i < tmp.Count; i++)
                 {
                     result[i] = (string)tmp[i];
-                    Console.WriteLine(result[i]);
                 }
             }
 
@@ -327,13 +311,11 @@ namespace Core
 
             ArrayList sortList = new ArrayList();
             G.TopologicalSort(sortList);
-            Console.WriteLine("sortList: ");
 
             Stack<Word> res_stack = new Stack<Word>();
             int dist = G.longestPathDAG(sortList, res_stack, head, tail);
             if (dist < 0) throw new ChainNotFoundException();
 
-            Console.Write("longestPathDAG: ");
             int i = 0;
             foreach (Word w in res_stack)
             {
@@ -341,7 +323,6 @@ namespace Core
                 result[i] = w.word;
                 i++;
             }
-            Console.WriteLine("dist = " + dist);
 
             writeFile(result);
             return 0;

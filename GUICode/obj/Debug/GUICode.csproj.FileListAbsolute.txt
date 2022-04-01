@@ -26,7 +26,6 @@ D:\GitWareHouse\PPPair_Programming\GUICode\bin\Debug\Core.pdb
 G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\GUICode\bin\Debug\GUICode.exe.config
 G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\GUICode\bin\Debug\GUICode.exe
 G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\GUICode\bin\Debug\GUICode.pdb
-G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\GUICode\bin\Debug\Core.dll
 G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\GUICode\bin\Debug\MaterialDesignColors.dll
 G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\GUICode\bin\Debug\MaterialDesignThemes.Wpf.dll
 G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\GUICode\bin\Debug\ShowMeTheXAML.dll
@@ -34,7 +33,6 @@ G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\GUICode\bin\Debug\Co
 G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\GUICode\bin\Debug\MaterialDesignColors.pdb
 G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\GUICode\bin\Debug\MaterialDesignThemes.Wpf.pdb
 G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\GUICode\bin\Debug\MaterialDesignThemes.Wpf.xml
-G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\GUICode\obj\Debug\GUICode.csproj.AssemblyReference.cache
 G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\GUICode\obj\Debug\MainWindow.g.cs
 G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\GUICode\obj\Debug\App.g.cs
 G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\GUICode\obj\Debug\GUICode_MarkupCompile.cache
@@ -48,3 +46,4 @@ G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\GUICode\obj\Debug\GU
 G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\GUICode\obj\Debug\GUICode.csproj.CopyComplete
 G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\GUICode\obj\Debug\GUICode.exe
 G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\GUICode\obj\Debug\GUICode.pdb
+G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\GUICode\obj\Debug\GUICode.csproj.AssemblyReference.cache

@@ -81,6 +81,10 @@ namespace Core
         {
             
             //构造点
+            if (word_list.Contains(word))
+            {
+                return;
+            }
             word_list.Add(word);
 
             if (start_list.ContainsKey(word.word_head))
@@ -127,7 +131,6 @@ namespace Core
             for (int i = 0; i < word_list.Count; i++)
                 if (isCyclicUtil(i, visited, recStack))
                     return true;
-            Console.WriteLine("no circle");
             return false;
         }
 
@@ -244,7 +247,6 @@ namespace Core
                 {
                     if (!dist.ContainsKey(next_w) || dist[next_w] < dist[w] + next_w.weight)
                     {
-                        Console.WriteLine("change " + w + "->" + next_w);
                         dist[next_w] = dist[w] + next_w.weight;
                         last_edge[next_w] = w;
                         if (dist[next_w] > max_dist)

@@ -186,7 +186,7 @@
                             FontSize="22"
                             Margin="-152,0,0,0"
                             AutomationProperties.Name="Material Design In XAML Toolkit"
-                            Text="Material Design In XAML Toolkit"/>
+                            Text="结对编程：最长单词链"/>
                     </DockPanel>
                 </materialDesign:ColorZone>
 
