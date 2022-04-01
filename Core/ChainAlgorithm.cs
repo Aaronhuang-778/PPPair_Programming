@@ -364,7 +364,7 @@ namespace Core
                     DFS(G, word, live_list, visited);
                 }
             }
-            Console.WriteLine("no circle");
+            //Console.WriteLine("no circle");
             return false;
         }
     }

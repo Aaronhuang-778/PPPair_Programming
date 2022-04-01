@@ -29,6 +29,7 @@ namespace Core
             illegal_para_combination,
             no_filename,
             no_input_text,
+            no_check_mode,
             empty_string,
             unallowed_circle
         }
@@ -94,6 +95,9 @@ namespace Core
                     break;
                 case InputErrorType.code.no_input_text:
                     message = "Please input your words in the text box!";
+                    break;
+                case InputErrorType.code.no_check_mode:
+                    message = "Please check your calculating mode!";
                     break;
                 case InputErrorType.code.unallowed_circle:
                     message = "Your words-file has illegal circle!";

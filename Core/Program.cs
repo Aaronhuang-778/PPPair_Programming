@@ -36,6 +36,9 @@ namespace Core
                 }
             }
 
+            if (GlobalPara.type == '\0' || GlobalPara.type == '!')
+                throw new InvalidInputException(InputErrorType.code.no_check_mode);
+
             if (DealWords.words == null || DealWords.words.Length == 0 || DealWords.words[0].Length == 0)
                 throw new InvalidInputException(InputErrorType.code.empty_string);
 

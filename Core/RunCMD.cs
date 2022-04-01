@@ -11,15 +11,15 @@ namespace Core
     {
         public static void Main(string[] args)
         {
-            string[] test = { "-m", "./aaab.txt" };
+            string[] test = { "-m", "./aaa.txt" };
             try
             {
                 //string[] words = Program.input(test);
                 string[] words = Program.input(args);
                 string[] result = new string[20005];
                 //Chain chain = new Chain();
-                foreach (string word in words) Console.WriteLine(word);
-                Console.WriteLine(GlobalPara.type);
+                //foreach (string word in words) Console.WriteLine(word);
+                //Console.WriteLine(GlobalPara.type);
 
                 switch (GlobalPara.type)
                 {

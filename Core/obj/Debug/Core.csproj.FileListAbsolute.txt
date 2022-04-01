@@ -13,5 +13,6 @@ G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\Core\obj\Debug\Core.
 G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\Core\obj\Debug\Core.dll
 G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\Core\obj\Debug\Core.pdb
 D:\GitWareHouse\PPPair_Programming\Core\obj\Debug\Core.csproj.AssemblyReference.cache
-D:\GitWareHouse\PPPair_Programming\Core\bin\Debug\Core.dll
-D:\GitWareHouse\PPPair_Programming\Core\obj\Debug\Core.dll
+D:\GitWareHouse\PPPair_Programming\Core\bin\Debug\Core.exe
+D:\GitWareHouse\PPPair_Programming\Core\obj\Debug\Core.csproj.SuggestedBindingRedirects.cache
+D:\GitWareHouse\PPPair_Programming\Core\obj\Debug\Core.exe

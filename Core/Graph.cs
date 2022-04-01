@@ -127,7 +127,7 @@ namespace Core
             for (int i = 0; i < word_list.Count; i++)
                 if (isCyclicUtil(i, visited, recStack))
                     return true;
-            Console.WriteLine("no circle");
+            //Console.WriteLine("no circle");
             return false;
         }
 
@@ -227,7 +227,7 @@ namespace Core
             {
                 res_word = last_edge[res_word];
                 result.Push(res_word);
-                Console.WriteLine(res_word);
+                //Console.WriteLine(res_word);
             }
             if (Char.IsLetter(head) && res_word.word_head != head) return -1;
             return max_dist;
@@ -244,7 +244,7 @@ namespace Core
                 {
                     if (!dist.ContainsKey(next_w) || dist[next_w] < dist[w] + next_w.weight)
                     {
-                        Console.WriteLine("change " + w + "->" + next_w);
+                        //Console.WriteLine("change " + w + "->" + next_w);
                         dist[next_w] = dist[w] + next_w.weight;
                         last_edge[next_w] = w;
                         if (dist[next_w] > max_dist)
