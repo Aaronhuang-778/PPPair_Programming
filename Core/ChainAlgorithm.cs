@@ -291,7 +291,7 @@ namespace Core
 
         public void startDFS(Graph G)
         {
-            graphInitialize(G);
+            //graphInitialize(G);
             startTopo(G);
 
         }

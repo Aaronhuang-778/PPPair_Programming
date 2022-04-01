@@ -15,3 +15,4 @@ D:\GitWareHouse\PPPair_Programming\Core\bin\Debug\Core.dll
 D:\GitWareHouse\PPPair_Programming\Core\obj\Debug\Core.dll
 G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\Core\bin\Debug\Core.exe
 G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\Core\obj\Debug\Core.exe
+G:\Aaron\semester_6\软件工程\结对编程\CodeStructure\Core\obj\Debug\Core.csproj.AssemblyReference.cache

@@ -11,7 +11,7 @@ namespace Core
     {
         public static void Main(string[] args)
         {
-            string[] test = { "-m", "aaa.txt" };
+            string[] test = { "-n", "aaa.txt" };
             try
             {
                 //string[] words = Program.input(test);
@@ -25,7 +25,6 @@ namespace Core
                     case 'n':
                         //统计单词链数量 只传递单词链
                         Chain.gen_chains_all_str(words, words.Length, result);
-                        Console.WriteLine(result.Length);
                         break;
                     case 'm':
                         //输出首字母不相同的包含单词数量最多的单词链 只传递单词链

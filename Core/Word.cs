@@ -40,6 +40,10 @@ namespace Core
             return this.word;
         }
 
-
+        public override bool Equals(Object other)
+        {
+            // Would still want to check for null etc. first.
+            return this.word == ((Word)other).word;
+        }
     }
 }

@@ -21,7 +21,14 @@ namespace Core
         public Graph() {
         }
 
-
+        public static void clearGraph()
+        {
+            word_list.Clear();
+            adj = null;
+            word_list.Clear();
+            start_list.Clear();
+            end_list.Clear();
+        }
         public ArrayList getWordList()
         {
             return word_list;
@@ -230,7 +237,6 @@ namespace Core
             {
                 res_word = last_edge[res_word];
                 result.Push(res_word);
-                Console.WriteLine(res_word);
             }
             if (Char.IsLetter(head) && res_word.word_head != head) return -1;
             return max_dist;

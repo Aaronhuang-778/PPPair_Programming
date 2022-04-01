@@ -230,6 +230,7 @@ namespace Core
         {
             Graph G = new Graph();
             G.AddG(words);
+      
             if (G.isCyclic())
                 throw new CircleException();
 
@@ -239,13 +240,13 @@ namespace Core
             {
                 throw new ChainNotFoundException();
             }
+            Console.WriteLine(tmp.Count);
 
             if (tmp != null && tmp.Count > 0)
             {
                 for (int i = 0; i < tmp.Count; i++)
                 {
                     result[i] = (string)tmp[i];
-                    Console.WriteLine(result[i]);
                 }
             }
             return 0;
@@ -286,6 +287,7 @@ namespace Core
         {
             Graph G = new Graph();
             G.AddG(words);
+   
             if (G.isCyclic())
             {
                 if (!enable_loop) throw new CircleException();
@@ -303,7 +305,6 @@ namespace Core
                     for (int j = 0; j < tmp.Count; j++)
                     {
                         result[j] = (string)tmp[j];
-                        Console.WriteLine(result[j]);
                     }
                 }
                 return 0;
@@ -319,7 +320,6 @@ namespace Core
             int i = 0;
             foreach (Word w in res_stack)
             {
-                Console.Write(w + " ");
                 result[i] = w.word;
                 i++;
             }

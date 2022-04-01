@@ -12,7 +12,9 @@ namespace UnitTestProject1
         {
             string[] test = { "-m", "aaa.txt" };
             Core.RunCMD.Main(test);
+
             Core.GlobalPara.clearGlobal();
+            Core.Graph.clearGraph();
         }
         [TestMethod]
         public void TestMethod2()
@@ -21,21 +23,26 @@ namespace UnitTestProject1
             Core.RunCMD.Main(test);
             Core.GlobalPara.clearGlobal();
 
+            Core.Graph.clearGraph();
+
         }
         [TestMethod]
         public void TestMethod3()
         {
-            string[] test = { "-w", "aaa.txt", "-r" };
+            string[] test = { "-w", "aaa.txt"};
+
             Core.RunCMD.Main(test);
             Core.GlobalPara.clearGlobal();
+            Core.Graph.clearGraph();
 
         }
         [TestMethod]
         public void TestMethod4()
         {
-            string[] test = { "-c", "aaa.txt", "-r" };
+            string[] test = { "-c", "aaa.txt"};
             Core.RunCMD.Main(test);
             Core.GlobalPara.clearGlobal();
+            Core.Graph.clearGraph();
 
         }
     }
