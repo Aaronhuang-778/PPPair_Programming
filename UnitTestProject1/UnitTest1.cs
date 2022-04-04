@@ -2,6 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Core;
 using System.IO;
+using System.Collections;
 
 namespace UnitTestProject1
 {
@@ -20,10 +21,11 @@ namespace UnitTestProject1
 
             try
             {
-                string[] words = Program.input(test);
-                string[] result = new string[20005];
+                InputPara ip = new InputPara();
+                string[] words = Program.input(test, out ip);
+                ArrayList result = new ArrayList();
 
-                switch (GlobalPara.type)
+                switch (ip.type)
                 {
                     case 'n':
                         Chain.gen_chains_all_str(words, words.Length, result);
@@ -33,17 +35,19 @@ namespace UnitTestProject1
                         break;
                     case 'w':
                         Chain.gen_chain_word_str(words, words.Length, result,
-                            GlobalPara.head, GlobalPara.tail, GlobalPara.is_loop);
+                            ip.head, ip.tail, ip.is_loop);
                         break;
                     case 'c':
                         Chain.gen_chain_char_str(words, words.Length, result,
-                            GlobalPara.head, GlobalPara.tail, GlobalPara.is_loop);
+                            ip.head, ip.tail, ip.is_loop);
                         break;
                 }
-                for (int i = 0; i < result.Length && result[i] != null && result.Length != 0; i++)
+                int i = 0;
+                foreach (string res in result)
                 {
                     if (i != 0) result_str += ' ';
-                    result_str += result[i];
+                    result_str += res;
+                    i++;
                 }
             }
             catch (Exception ex)

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Windows;
+using System.Collections;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -30,7 +31,6 @@ namespace PPPair_Programming
         static bool isR = false;
         static char charH = '!';
         static char charT = '!';
-        static string[] result = new string[20005];
 
 
         public MainWindow()
@@ -131,43 +131,59 @@ namespace PPPair_Programming
             Console.WriteLine("charH=" + charH);
             Console.WriteLine("charT=" + charT);
 
-            try
+            if (inputSource == null || inputSource.Length == 0)
+                textBoxResult.Text = "错误提示：\n未输入字符串或选择输入文件";
+            else if (calType == '!' || calType == '\0')
+                textBoxResult.Text = "错误提示：\n未选择计算方式";
+            else if (((bool)radioButton_paraWH.IsChecked || (bool)radioButton_paraCH.IsChecked)
+                && (charH == '!' || charH == '\0'))
+                textBoxResult.Text = "错误提示：\n未输入开头字符";
+            else if (((bool)radioButton_paraWT.IsChecked || (bool)radioButton_paraCT.IsChecked)
+                && (charT == '!' || charT == '\0'))
+                textBoxResult.Text = "错误提示：\n未输入结尾字符";
+            else
             {
-                //Chain.test(useFileInput, inputSource, calType, isR, charH, charT, ref result);
-                Chain.gen_for_gui_para(useFileInput, inputSource, calType, isR, charH, charT, ref result);
+                ArrayList result = new ArrayList();
+                try
+                {
+                    //Chain.test(useFileInput, inputSource, calType, isR, charH, charT, ref result);
+                    Chain.gen_for_gui_para(useFileInput, inputSource, calType, isR, charH, charT, result);
 
+                    string resultText = "";
+                    if (result != null && result.Count > 0)
+                        foreach (string res in result)
+                            resultText += res + "\n";
+                    else resultText = "未获得结果，请重新输入";
 
-                string resultText = "";
-                for (int i = 0; i < result.Length && result[i] != null && result[i].Length > 0; i++)
-                    resultText += result[i] + "\n";
+                    textBoxResult.Text = resultText;
+                    Console.WriteLine("result=" + resultText);
+                }
+                catch (InvalidInputException ex)
+                {
+                    Console.WriteLine("[get in gui]");
+                    Console.WriteLine(ex.Message);
+                    textBoxResult.Text = "错误提示：\n" + ex.Message;
+                }
+                catch (CircleException ex)
+                {
+                    Console.WriteLine("[get in gui]");
+                    Console.WriteLine(ex.Message);
+                    textBoxResult.Text = "错误提示：\n" + ex.Message;
+                }
+                catch (ChainNotFoundException ex)
+                {
+                    Console.WriteLine("[get in gui]");
+                    Console.WriteLine(ex.Message);
+                    textBoxResult.Text = "错误提示：\n" + ex.Message;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("[get in gui]");
+                    Console.WriteLine(ex.Message);
+                    textBoxResult.Text = "错误提示：\n" + ex.Message;
+                }
+            }
 
-                textBoxResult.Text = resultText;
-                Console.WriteLine("result=" + resultText);
-            }
-            catch (InvalidInputException ex)
-            {
-                Console.WriteLine("[get in gui]");
-                Console.WriteLine(ex.Message);
-                textBoxResult.Text = "错误提示：\n" + ex.Message;
-            }
-            catch (CircleException ex)
-            {
-                Console.WriteLine("[get in gui]");
-                Console.WriteLine(ex.Message);
-                textBoxResult.Text = "错误提示：\n" + ex.Message;
-            }
-            catch (ChainNotFoundException ex)
-            {
-                Console.WriteLine("[get in gui]");
-                Console.WriteLine(ex.Message);
-                textBoxResult.Text = "错误提示：\n" + ex.Message;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("[get in gui]");
-                Console.WriteLine(ex.Message);
-                textBoxResult.Text = "错误提示：\n" + ex.Message;
-            }
         }
 
     }

@@ -3,7 +3,6 @@ D:\GitWareHouse\PPPair_Programming\UnitTestProject1\bin\Debug\Microsoft.VisualSt
 D:\GitWareHouse\PPPair_Programming\UnitTestProject1\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
 D:\GitWareHouse\PPPair_Programming\UnitTestProject1\bin\Debug\UnitTestProject1.dll
 D:\GitWareHouse\PPPair_Programming\UnitTestProject1\bin\Debug\UnitTestProject1.pdb
-D:\GitWareHouse\PPPair_Programming\UnitTestProject1\bin\Debug\Core.exe
 D:\GitWareHouse\PPPair_Programming\UnitTestProject1\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
 D:\GitWareHouse\PPPair_Programming\UnitTestProject1\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
 D:\GitWareHouse\PPPair_Programming\UnitTestProject1\bin\Debug\Core.pdb
@@ -17,3 +16,4 @@ D:\GitWareHouse\PPPair_Programming\UnitTestProject1\obj\Debug\UnitTestProject1.p
 D:\GitWareHouse\PPPair_Programming\UnitTestProject1\bin\Debug\zh-Hans\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.resources.dll
 D:\GitWareHouse\PPPair_Programming\UnitTestProject1\bin\Debug\zh-Hans\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.resources.dll
 D:\GitWareHouse\PPPair_Programming\UnitTestProject1\bin\Debug\zh-Hans\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
+D:\GitWareHouse\PPPair_Programming\UnitTestProject1\bin\Debug\Core.dll
