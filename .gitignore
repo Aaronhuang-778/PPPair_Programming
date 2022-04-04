@@ -5,16 +5,9 @@
 */.vscode/
 */.idea/
 
-obj
-Properties
-*/obj/
-*/Properties/
-
 *.dll
 */*.dll
 *.pdb
 */*.pdb
-*.json
-*/*.json
-*.xml
-*/*.xml
+*.cache
+*/*.cache

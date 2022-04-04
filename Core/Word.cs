@@ -32,7 +32,7 @@ namespace Core
             {
                 weight = 1;
             }
-            Console.WriteLine(w + " " + weight.ToString());
+            //Console.WriteLine(w + " " + weight.ToString());
         }
 
 

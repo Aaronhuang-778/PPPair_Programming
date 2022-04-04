@@ -151,7 +151,7 @@ namespace Core
             }
             else if (flag == 0) //指令重复
             {
-                Console.WriteLine("{0}:", args[i][1]);
+                //Console.WriteLine("{0}:", args[i][1]);
                 throw new InvalidInputException(InputErrorType.code.dupli_para);
             }
             return i;
