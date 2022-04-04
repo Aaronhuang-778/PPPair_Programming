@@ -3,10 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWindowsForms>False</UseWindowsForms>
-    <OutputType>Exe</OutputType>
-    <StartupObject>HYCore.RunCMD</StartupObject>
+    <OutputType>Library</OutputType>
     <DebugType>embedded</DebugType>
-    <NoWin32Manifest>true</NoWin32Manifest>
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
     <GenerateDocumentationFile>False</GenerateDocumentationFile>
   </PropertyGroup>

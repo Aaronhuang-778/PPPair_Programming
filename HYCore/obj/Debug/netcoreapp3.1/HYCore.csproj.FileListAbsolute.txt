@@ -6,7 +6,3 @@ D:\GitWareHouse\PPPair_Programming\HYCore\obj\Debug\netcoreapp3.1\HYCore.Assembl
 D:\GitWareHouse\PPPair_Programming\HYCore\obj\Debug\netcoreapp3.1\HYCore.AssemblyInfo.cs
 D:\GitWareHouse\PPPair_Programming\HYCore\obj\Debug\netcoreapp3.1\HYCore.csproj.CoreCompileInputs.cache
 D:\GitWareHouse\PPPair_Programming\HYCore\obj\Debug\netcoreapp3.1\HYCore.dll
-D:\GitWareHouse\PPPair_Programming\HYCore\bin\Debug\netcoreapp3.1\HYCore.exe
-D:\GitWareHouse\PPPair_Programming\HYCore\bin\Debug\netcoreapp3.1\HYCore.runtimeconfig.json
-D:\GitWareHouse\PPPair_Programming\HYCore\bin\Debug\netcoreapp3.1\HYCore.runtimeconfig.dev.json
-D:\GitWareHouse\PPPair_Programming\HYCore\obj\Debug\netcoreapp3.1\HYCore.genruntimeconfig.cache

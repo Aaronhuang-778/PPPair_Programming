@@ -36,8 +36,6 @@ namespace Core
                 if (words[0] == "") words.RemoveAt(0);
             }
 
-            Word.type = ip.type;
-
             switch (ip.type)
             {
                 case 'n':
@@ -75,6 +73,7 @@ namespace Core
         {
             //if (result == null) result = new List<string>();
             //else result.Clear();
+            Word.type = 'w';
 
             Graph G = new Graph();
             G.AddG(words);
@@ -117,6 +116,8 @@ namespace Core
             //if (result == null) result = new List<string>();
             //else result.Clear();
 
+            Word.type = 'n';
+
             Graph G = new Graph();
             G.AddG(words);
             if (G.isCyclic())
@@ -140,6 +141,7 @@ namespace Core
         {
             //if (result == null) result = new List<string>();
             //else result.Clear();
+            Word.type = 'm';
 
             Graph G = new Graph();
             G.AddG(words);
@@ -166,6 +168,7 @@ namespace Core
         {
             //if (result == null) result = new List<string>();
             //else result.Clear();
+            Word.type = 'c';
 
             Graph G = new Graph();
             G.AddG(words);

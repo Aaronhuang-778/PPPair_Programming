@@ -36,8 +36,6 @@ namespace OriginCode
                 if (words[0] == "") words.RemoveAt(0);
             }
 
-            Word.type = ip.type;
-
             switch (ip.type)
             {
                 case 'n':
@@ -63,18 +61,19 @@ namespace OriginCode
         public static void writeFile(List<string> result)
         {
             string str = System.IO.Directory.GetCurrentDirectory();
-            str = str + "\\solution.txt"; 
+            str = str + "\\solution.txt";
             string[] resArray = result.ToArray();
             System.IO.File.WriteAllLines(str, resArray);
         }
 
 
         /* -w -h -t -r */
-        public static int gen_chain_word(List<string> words, int len, List<string> result, 
+        public static int gen_chain_word(List<string> words, int len, List<string> result,
             char head, char tail, bool enable_loop)
         {
             //if (result == null) result = new List<string>();
             //else result.Clear();
+            Word.type = 'w';
 
             Graph G = new Graph();
             G.AddG(words);
@@ -117,6 +116,8 @@ namespace OriginCode
             //if (result == null) result = new List<string>();
             //else result.Clear();
 
+            Word.type = 'n';
+
             Graph G = new Graph();
             G.AddG(words);
             if (G.isCyclic())
@@ -140,6 +141,7 @@ namespace OriginCode
         {
             //if (result == null) result = new List<string>();
             //else result.Clear();
+            Word.type = 'm';
 
             Graph G = new Graph();
             G.AddG(words);
@@ -147,7 +149,7 @@ namespace OriginCode
                 throw new CircleException();
             else Console.WriteLine("no circle");
 
-            ChainAlgorithm ca = new ChainAlgorithm(); 
+            ChainAlgorithm ca = new ChainAlgorithm();
             ArrayList tmp = ca.get_chain_word_unique(G);
             if (tmp == null || tmp.Count == 0)
                 throw new ChainNotFoundException();
@@ -161,11 +163,12 @@ namespace OriginCode
 
 
         /* -c -h -t -r */
-        public static int gen_chain_char(List<string> words, int len, List<string> result, 
+        public static int gen_chain_char(List<string> words, int len, List<string> result,
             char head, char tail, bool enable_loop)
         {
             //if (result == null) result = new List<string>();
             //else result.Clear();
+            Word.type = 'c';
 
             Graph G = new Graph();
             G.AddG(words);

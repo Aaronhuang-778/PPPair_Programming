@@ -1,9 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 
 namespace Core
 {
@@ -11,7 +7,8 @@ namespace Core
     {
         public static void Main(string[] args)
         {
-            try
+
+            /*try
             {
                 InputPara ip = new InputPara();
                 List<string> words = Program.input(args, out ip);
@@ -42,20 +39,20 @@ namespace Core
             }
             catch (InvalidInputException ex)
             {
-                Console.WriteLine("[Exception in main]\n" + ex.Message);
+                Console.WriteLine("[Exception in main] " + ex.Message);
             }
             catch (CircleException ex)
             {
-                Console.WriteLine("[Exception in main]\n" + ex.Message);
+                Console.WriteLine("[Exception in main] " + ex.Message);
             }
             catch (ChainNotFoundException ex)
             {
-                Console.WriteLine("[Exception in main]\n" + ex.Message);
+                Console.WriteLine("[Exception in main] " + ex.Message);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("[Exception in main]\n" + ex.Message);
-            }
+                Console.WriteLine("[Exception in main] " + ex.Message);
+            }*/
         }
     }
 }

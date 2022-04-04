@@ -185,6 +185,37 @@ namespace UnitTestProject
             Assert.IsTrue(result[0][0] == 'c' && last[last.Length - 1] == 'd');
         }
 
+
+        [TestMethod]
+        public void testCRHT()
+        {
+            string testPath = "./c_circle/test0.txt";
+            List<string> result = new List<string>();
+            string last;
+
+            Chain.gen_for_gui_para(true, testPath, 'c', true, 'p', '0', result);
+            Console.WriteLine("[1] -c -r -h p");
+            foreach (string s in result) Console.WriteLine(s);
+            Assert.IsTrue(result.Count == 6 && result[0][0] == 'p');
+
+            result.Clear();
+            Chain.gen_for_gui_para(true, testPath, 'c', true, '0', 's', result);
+            Console.WriteLine("[2] -c -r -t s");
+            foreach (string s in result) Console.WriteLine(s);
+            Assert.IsTrue(result.Count == 5);
+            last = result[result.Count - 1];
+            Assert.AreEqual('s', last[last.Length - 1]);
+
+            result.Clear();
+            Chain.gen_for_gui_para(true, testPath, 'c', true, 'p', 's', result);
+            Console.WriteLine("[3] -c -r -h p -t s");
+            foreach (string s in result) Console.WriteLine(s);
+            Assert.IsTrue(result.Count == 5);
+            last = result[result.Count - 1];
+            Assert.IsTrue(result[0][0] == 'p' && last[last.Length - 1] == 's');
+        }
+
+
         [TestMethod]
         public void testN()
         {
