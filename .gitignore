@@ -5,9 +5,6 @@
 */.vscode/
 */.idea/
 
-*.dll
-*/*.dll
-*.pdb
-*/*.pdb
+
 *.cache
 */*.cache

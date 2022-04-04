@@ -1,0 +1,14 @@
+D:\GitWareHouse\PPPair_Programming\HYCore\bin\Debug\net5.0-windows8.0\HYCore.exe
+D:\GitWareHouse\PPPair_Programming\HYCore\bin\Debug\net5.0-windows8.0\HYCore.deps.json
+D:\GitWareHouse\PPPair_Programming\HYCore\bin\Debug\net5.0-windows8.0\HYCore.runtimeconfig.json
+D:\GitWareHouse\PPPair_Programming\HYCore\bin\Debug\net5.0-windows8.0\HYCore.runtimeconfig.dev.json
+D:\GitWareHouse\PPPair_Programming\HYCore\bin\Debug\net5.0-windows8.0\HYCore.dll
+D:\GitWareHouse\PPPair_Programming\HYCore\obj\Debug\net5.0-windows8.0\HYCore.csproj.AssemblyReference.cache
+D:\GitWareHouse\PPPair_Programming\HYCore\obj\Debug\net5.0-windows8.0\HYCore.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitWareHouse\PPPair_Programming\HYCore\obj\Debug\net5.0-windows8.0\HYCore.AssemblyInfoInputs.cache
+D:\GitWareHouse\PPPair_Programming\HYCore\obj\Debug\net5.0-windows8.0\HYCore.AssemblyInfo.cs
+D:\GitWareHouse\PPPair_Programming\HYCore\obj\Debug\net5.0-windows8.0\HYCore.csproj.CoreCompileInputs.cache
+D:\GitWareHouse\PPPair_Programming\HYCore\obj\Debug\net5.0-windows8.0\HYCore.dll
+D:\GitWareHouse\PPPair_Programming\HYCore\obj\Debug\net5.0-windows8.0\refint\HYCore.dll
+D:\GitWareHouse\PPPair_Programming\HYCore\obj\Debug\net5.0-windows8.0\HYCore.genruntimeconfig.cache
+D:\GitWareHouse\PPPair_Programming\HYCore\obj\Debug\net5.0-windows8.0\ref\HYCore.dll
