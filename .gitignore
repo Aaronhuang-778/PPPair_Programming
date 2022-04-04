@@ -5,9 +5,16 @@
 */.vscode/
 */.idea/
 
-bin
 obj
 Properties
-*/bin/
 */obj/
 */Properties/
+
+*.dll
+*/*.dll
+*.pdb
+*/*.pdb
+*.json
+*/*.json
+*.xml
+*/*.xml

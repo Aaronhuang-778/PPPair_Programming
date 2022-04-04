@@ -189,7 +189,10 @@ namespace Core
             foreach (Stack<Word> stack in sortList)
             {
                 if (headWords == null)
+                {
                     dist[stack.Peek()] = stack.Peek().weight;
+                    Console.WriteLine("Peek: " + stack.Peek().word + " " + stack.Peek().weight.ToString());
+                }
                 //if (max_des == null) max_des = w_peek;
                 bool skip = true;
                 foreach (Word w in stack)
@@ -243,8 +246,8 @@ namespace Core
                 {
                     if (!dist.ContainsKey(next_w) || dist[next_w] < dist[w] + next_w.weight)
                     {
-                        //Console.WriteLine("change " + w + "->" + next_w);
                         dist[next_w] = dist[w] + next_w.weight;
+                        Console.WriteLine("change " + w + "->" + next_w + " " + dist[next_w].ToString());
                         last_edge[next_w] = w;
                         if (dist[next_w] > max_dist)
                         {

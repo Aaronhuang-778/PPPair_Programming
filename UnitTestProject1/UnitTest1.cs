@@ -3,6 +3,7 @@ using System;
 using Core;
 using System.IO;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace UnitTestProject1
 {
@@ -10,52 +11,79 @@ namespace UnitTestProject1
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod1()
+        public void testCR()
         {
-            StreamReader reader = new StreamReader("./c_circle/result0.txt");
-            string answer = reader.ReadToEnd();
-            answer = answer.ToLower().Replace("\r\n", " ").Replace('\n', ' ');
-
-            string[] test = { "-c", "-r", "./c_circle/test0.txt" };
-            string result_str = "";
-
-            try
+            for (int i = 0; i < 10; i++)
             {
-                InputPara ip = new InputPara();
-                string[] words = Program.input(test, out ip);
-                ArrayList result = new ArrayList();
+                string answerPath = "./c_circle/result" + i.ToString() + ".txt";
+                string testPath = "./c_circle/test" + i.ToString() + ".txt";
+                if (!File.Exists(answerPath)) break;
+                StreamReader reader = new StreamReader(answerPath);
+                string answer = reader.ReadToEnd();
+                answer = answer.ToLower().Replace("\r\n", " ").Replace('\n', ' ');
+                string result_str = "";
 
-                switch (ip.type)
+                try
                 {
-                    case 'n':
-                        Chain.gen_chains_all_str(words, words.Length, result);
-                        break;
-                    case 'm':
-                        Chain.gen_chain_word_unique_str(words, words.Length, result);
-                        break;
-                    case 'w':
-                        Chain.gen_chain_word_str(words, words.Length, result,
-                            ip.head, ip.tail, ip.is_loop);
-                        break;
-                    case 'c':
-                        Chain.gen_chain_char_str(words, words.Length, result,
-                            ip.head, ip.tail, ip.is_loop);
-                        break;
+                    List<string> result = new List<string>();
+                    Chain.gen_for_gui_para(true, testPath, 'c', true, '0', '0', result);
+                    foreach (string res in result)
+                    {
+                        if (result_str.Length > 0) result_str += ' ';
+                        result_str += res;
+                    }
                 }
-                int i = 0;
-                foreach (string res in result)
+                catch (Exception ex)
                 {
-                    if (i != 0) result_str += ' ';
-                    result_str += res;
-                    i++;
+                    Console.WriteLine("[Exception]");
+                    Console.WriteLine(ex.Message);
                 }
+                Console.WriteLine("[" + i.ToString() + "] result=" +
+                    result_str.Replace(" ", string.Empty).Length +
+                    " answer=" + answer.Replace(" ", string.Empty).Length);
+                Console.WriteLine("[" + i.ToString() + "] result = " + result_str);
+                Console.WriteLine("[" + i.ToString() + "] answer = " + answer);
+                Assert.IsTrue(result_str.Replace(" ", string.Empty).Length
+                    >= answer.Replace(" ", string.Empty).Length);
             }
-            catch (Exception ex)
+        }
+
+        [TestMethod]
+        public void testC()
+        {
+            for (int i = 0; i < 10; i++)
             {
-                Console.WriteLine("[Exception]");
-                Console.WriteLine(ex.Message);
+                string answerPath = "./c_no_circle/result" + i.ToString() + ".txt";
+                string testPath = "./c_no_circle/test" + i.ToString() + ".txt";
+                if (!File.Exists(answerPath)) break;
+                StreamReader reader = new StreamReader(answerPath);
+                string answer = reader.ReadToEnd();
+                answer = answer.ToLower().Replace("\r\n", " ").Replace('\n', ' ');
+                string result_str = "";
+
+                try
+                {
+                    List<string> result = new List<string>();
+                    Chain.gen_for_gui_para(true, testPath, 'c', true, '0', '0', result);
+                    foreach (string res in result)
+                    {
+                        if (result_str.Length > 0) result_str += ' ';
+                        result_str += res;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("[Exception]");
+                    Console.WriteLine(ex.Message);
+                }
+                Console.WriteLine("[" + i.ToString() + "] result=" +
+                    result_str.Replace(" ", string.Empty).Length + 
+                    " answer=" + answer.Replace(" ", string.Empty).Length);
+                Console.WriteLine("[" + i.ToString() + "] result = " + result_str);
+                Console.WriteLine("[" + i.ToString() + "] answer = " + answer);
+                Assert.IsTrue(result_str.Replace(" ", string.Empty).Length 
+                    >= answer.Replace(" ", string.Empty).Length);
             }
-            Assert.AreEqual(result_str, answer);
         }
     }
 }

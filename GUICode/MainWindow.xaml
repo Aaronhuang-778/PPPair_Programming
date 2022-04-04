@@ -332,7 +332,7 @@
                                      materialDesign:HintAssist.HelperTextFontSize="18"
                                      Width="420" Height="200" 
                                    FontFamily="宋体" FontSize="20" 
-                                     IsEnabled="False"/>
+                                     IsEnabled="False" Cursor="Arrow"/>
                         </Grid>
                         
 
