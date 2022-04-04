@@ -9,6 +9,7 @@ namespace Core
 {
     public class Word
     {
+        public static char type = '!';
         public string word = null;
         public int length = 0;
         public int weight = 0;
@@ -24,7 +25,7 @@ namespace Core
             word_tail = w[length - 1];
             index = i;
             
-            if (GlobalPara.type == 'c')
+            if (type == 'c')
             {
                 weight = length;
             } else

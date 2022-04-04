@@ -10,54 +10,24 @@ namespace Core
 {
     public static class Chain
     {
-
-        //public Chain() { }
-
-
-        /*static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-            char[,] words =
-            {
-                {'a', 'b'},
-                {'b', 'c'}
-            };
-            Console.WriteLine(words[1, 1]);
-            char[,] result = new char[100, 100];
-
-            Chain.gen_chain_word(ref words, 4, ref result, '!', '!', false);
-            Console.WriteLine("[get result from dll:]");
-            Console.WriteLine(result[0, 0] + "" + result[0, 1] + " " + result[1, 0] + "" + result[1, 1]);
-        }*/
-
-
-
         public static int gen_for_gui_para(bool useFileInput, string inputSource,
             char calType, bool isR, char charH, char charT, ref string[] result)
         {
             string[] words = null;
 
-            /*Console.WriteLine("[Core] gen_for_gui_para");
-            Console.WriteLine("useFileInput=" + useFileInput);
-            Console.WriteLine("inputSource=" + inputSource);
-            Console.WriteLine("calType=" + calType);
-            Console.WriteLine("isR=" + isR);
-            Console.WriteLine("charH=" + charH);
-            Console.WriteLine("charT=" + charT);
-            Console.WriteLine("result.length=" + result.Length);*/
+            InputPara ip = new InputPara();
 
             if (useFileInput)
             {
                 string[] test = { "-" + calType, inputSource };
-                words = Program.input(test);
+                words = Program.input(test, out ip);
             }
             else
             {
-
-                GlobalPara.head = charH;
-                GlobalPara.tail = charT;
-                GlobalPara.is_loop = isR;
-                GlobalPara.type = calType;
+                ip.head = charH;
+                ip.tail = charT;
+                ip.is_loop = isR;
+                ip.type = calType;
                 if (inputSource == null || inputSource.Length == 0)
                     throw new InvalidInputException(InputErrorType.code.no_input_text);
                 inputSource = inputSource.ToLower();
@@ -72,7 +42,9 @@ namespace Core
                 }
             }
 
-            switch (GlobalPara.type)
+            Word.type = ip.type;
+
+            switch (ip.type)
             {
                 case 'n':
                     //统计单词链数量 只传递单词链
@@ -94,86 +66,11 @@ namespace Core
             return 0;
         }
 
-
-
-
-
-        private static IEnumerable<T> GetRow<T>(T[,] array, int index)
-        {
-            for (int i = 0; i < array.GetLength(1); i++)
-            {
-                yield return array[index, i];
-            }
-        }
-
-        private static string[] char2D_To_StringArray(in char[,] words)
-        {
-            string[] s = new string[20005];
-            for (int i = 0; i < words.GetLength(0); i++)
-            {
-                s[i] = new string(GetRow(words, i).ToArray());
-            }
-            return s;
-        }
-
-        private static void stringArray_To_char2D(in string[] ss, ref char[,] result)
-        {
-            int i = 0;
-            while (i < ss.Length && ss[i] != null && ss[i].Length > 0)
-            {
-                char[] cs = ss[i].ToCharArray();
-                int j = 0;
-                foreach (char c in cs)
-                    result[i, j++] = c;
-                i++;
-            }
-        }
-
-
         public static void writeFile(string[] result)
         {
             string str = System.IO.Directory.GetCurrentDirectory();
             str = str + "\\solution.txt";
             System.IO.File.WriteAllLines(str, result);
-        }
-        public static int test(bool useFileInput, string inputSource,
-          char calType, bool isR, char charH, char charT, ref string[] result)
-        {
-            return 0;
-        }
-
-        public static int gen_chain_word(ref char[,] words, int len, ref char[,] result, 
-            char head, char tail, bool enable_loop)
-        {
-            string[] ss = new string[20005];
-            int hint = gen_chain_word_str(char2D_To_StringArray(words), len, ss, head, tail, enable_loop);
-            stringArray_To_char2D(in ss, ref result);
-            return hint;
-        }
-
-        public static int gen_chains_all(ref char[,] words, int len, ref char[,] result)
-        {
-            string[] ss = new string[20005];
-            int hint = gen_chains_all_str(char2D_To_StringArray(words), len, ss);
-            stringArray_To_char2D(in ss, ref result);
-            return hint;
-        }
-
-        public static int gen_chain_word_unique(ref char[,] words, int len, ref char[,] result)
-        {
-            string[] ss = new string[20005];
-            int hint = gen_chain_word_unique_str(char2D_To_StringArray(words), len, ss);
-            stringArray_To_char2D(in ss, ref result);
-            return hint;
-        }
-        
-        public static int gen_chain_char(ref char[,] words, int len, ref char[,] result, 
-            char head, char tail, bool enable_loop)
-        {
-            string[] ss = new string[20005];
-            int hint = gen_chain_char_str(char2D_To_StringArray(words), len, ss, head, tail, enable_loop);
-            stringArray_To_char2D(in ss, ref result);
-            return hint;
         }
 
 

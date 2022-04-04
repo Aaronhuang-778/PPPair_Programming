@@ -4,3 +4,10 @@
 */.vs/
 */.vscode/
 */.idea/
+
+bin
+lib
+Properties
+*/bin/
+*/lib/
+*/Properties/

@@ -9,14 +9,14 @@ namespace Core
 {
     public class Graph
     {
-        public static ArrayList word_list = new ArrayList();
-        private static Dictionary<char, ArrayList> start_list 
+        private ArrayList word_list = new ArrayList();
+        private Dictionary<char, ArrayList> start_list 
             = new Dictionary<char, ArrayList>();
-        private static Dictionary<char, ArrayList> end_list 
+        private Dictionary<char, ArrayList> end_list 
             = new Dictionary<char, ArrayList>();
         //权重边
-        public static int [,] adj = null;
-        public static int original_words_num = 0;
+        public int [,] adj = null;
+        public int original_words_num = 0;
 
         public Graph() {
         }
@@ -37,7 +37,7 @@ namespace Core
             return value;
         }
 
-        public ArrayList getLastNode(Word w)
+        public ArrayList getLastNodeList(Word w)
         {
             // Next边：节点n末尾字母e -> 以e开头的字母的集合
             if (!end_list.ContainsKey(w.word_head)) return null;

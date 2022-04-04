@@ -8,18 +8,19 @@ namespace Core
 {
     public class Program
     {
-        public static string[] input(string[] args)
+        public static string[] input(string[] args, out InputPara ip)
         {
             //处理参数,更新Global当中的参数
-            DealParas.dealPara(args);
+            ip = new InputPara();
+            DealParas.dealPara(args, ip);
 
             //读取单词
-            DealWords.dealWords();
+            DealWords.dealWords(ip.file_name);
 
             string str = Directory.GetCurrentDirectory();
             str = str + "\\solution.txt";
             //分类调用
-            if (GlobalPara.type == 'c' || GlobalPara.type == 'm' || GlobalPara.type == 'w')
+            if (ip.type == 'c' || ip.type == 'm' || ip.type == 'w')
             {
                 if (str.IndexOfAny(Path.GetInvalidPathChars()) >= 0) // 文件路径字符不合法
                 {
@@ -36,7 +37,7 @@ namespace Core
                 }
             }
 
-            if (GlobalPara.type == '\0' || GlobalPara.type == '!')
+            if (ip.type == '\0' || ip.type == '!')
                 throw new InvalidInputException(InputErrorType.code.no_check_mode);
 
             if (DealWords.words == null || DealWords.words.Length == 0 || DealWords.words[0].Length == 0)
@@ -49,10 +50,9 @@ namespace Core
     public static class DealWords
     {
         public static string[] words = null;
-        public static void dealWords()
+        public static void dealWords(String file_name)
         {
-            //Console.WriteLine(Path.GetFullPath(GlobalPara.file_name));
-            StreamReader reader = new StreamReader(GlobalPara.file_name);
+            StreamReader reader = new StreamReader(file_name);
             string str = reader.ReadToEnd();
             str = str.ToLower();
             words = Regex.Split(str, "[^(a-zA-Z)]+");
@@ -66,15 +66,13 @@ namespace Core
                 Array.Resize(ref words, words.Length - 1);
             }
 
-            //for (int i = 0; i < words.Length; i++)  Console.WriteLine(words[i]); 
-            //Console.WriteLine(words.Length);
         }
 
     }
     //处理参数
     public static class DealParas
     {
-        public static void dealPara(string[] args)
+        public static void dealPara(string[] args, InputPara ip)
         {
             //开始解析命令
             //全部转换为小写
@@ -91,7 +89,7 @@ namespace Core
                     //长度为2：-x
                     if (len == 2)
                     {
-                        i = analysePara(args, i);
+                        i = analysePara(args, i, ip);
                     }
                     //长度不为2，命令格式错误, 这里可以再细分提示类型
                     else
@@ -102,54 +100,24 @@ namespace Core
                 //检查读取的文件路径
                 else
                 {
-                    checkInputFile(args[i]);
-                    /*
-                    if (args[i].IndexOfAny(Path.GetInvalidPathChars()) >= 0) // 文件路径字符不合法
-                    {
-                        throw new InvalidInputException(InputErrorType.code.illegal_path);
-                    }
-                    else if (GlobalPara.file_name != null)  //已经保存文件路径，那么此条字符就是错误的内容，格式错误！
-                    {
-                        throw new InvalidInputException(InputErrorType.code.wrong_format);
-                    }
-                    else //尚未保存文件路径
-                    {
-                        if (len < 5)
-                        {
-                            throw new InvalidInputException(InputErrorType.code.wrong_format);
-                        }
-                        string file_type = args[i].Substring((len - 4));
-                        if (file_type != ".txt")
-                        {
-                            throw new InvalidInputException(InputErrorType.code.illegal_file_type);
-                        }
-                        else if (!File.Exists(args[i]))
-                        {
-                            throw new InvalidInputException(InputErrorType.code.file_not_found);
-                        }
-                        else
-                        {
-                            GlobalPara.file_name = args[i];
-                        }
-                    }
-                    */
+                    checkInputFile(args[i], ip);
                 }
             }
             //没有单词文件
-            if (GlobalPara.file_name == null)
+            if (ip.file_name == null)
             {
                 throw new InvalidInputException(InputErrorType.code.no_filename);
             }
             //全部合法，但是-m和-n不能和其他的进行组合
-            if ((GlobalPara.type == 'n' || GlobalPara.type == 'm') && (GlobalPara.is_loop == true || GlobalPara.head != '!' || GlobalPara.tail != '!'))
+            if ((ip.type == 'n' || ip.type == 'm') && (ip.is_loop == true || ip.head != '!' || ip.tail != '!'))
             {
                 throw new InvalidInputException(InputErrorType.code.illegal_para_combination);
             }
         }
 
-        public static int analysePara(string[] args, int i)
+        public static int analysePara(string[] args, int i, InputPara ip)
         {
-            int flag = Check.checkPara(args[i][1]);
+            int flag = Check.checkPara(args[i][1], ip);
             if (flag == 1)  //当前指令获取成功
             {
                 if (args[i][1] == 'h')
@@ -166,7 +134,7 @@ namespace Core
                     }
                     else
                     {
-                        GlobalPara.head = args[i + 1][0];
+                        ip.head = args[i + 1][0];
                         i += 1;
 
                     }
@@ -183,7 +151,7 @@ namespace Core
                     }
                     else
                     {
-                        GlobalPara.tail = args[i + 1][0];
+                        ip.tail = args[i + 1][0];
                         i += 1;
                     }
                 }
@@ -196,13 +164,13 @@ namespace Core
             return i;
         }
 
-        public static void checkInputFile(string s)
+        public static void checkInputFile(string s, InputPara ip)
         {
             if (s.IndexOfAny(System.IO.Path.GetInvalidPathChars()) >= 0) // 文件路径字符不合法
             {
                 throw new InvalidInputException(InputErrorType.code.illegal_path);
             }
-            else if (GlobalPara.file_name != null)  //已经保存文件路径，那么此条字符就是错误的内容，格式错误！
+            else if (ip.file_name != null)  //已经保存文件路径，那么此条字符就是错误的内容，格式错误！
             {
                 throw new InvalidInputException(InputErrorType.code.wrong_format);
             }
@@ -223,32 +191,36 @@ namespace Core
                 }
                 else
                 {
-                    GlobalPara.file_name = s;
+                    ip.file_name = s;
                 }
             }
         }
     }
    
     //全局参数，用于后续调用
-    public static class GlobalPara
+    public class InputPara
     {
-        public static bool is_loop = false;
-        public static char head = '!';
-        public static char tail = '!';
-        public static char type = '!';
-        public static string file_name = null;
+        public bool is_loop = false;
+        public char head = '!';
+        public char tail = '!';
+        public char type = '!';
+        public string file_name = null;
+
+        public InputPara() { }
     }
+
+
     //对参数进行检查并且设置
     public static class Check
     {
-        public static int checkPara(char c)
+        public static int checkPara(char c, InputPara ip)
         {
             switch (c)
             {
                 case 'n':
-                    if (GlobalPara.type == '!')
+                    if (ip.type == '!')
                     {
-                        GlobalPara.type = 'n';
+                        ip.type = 'n';
                         return 1;
                     }
                     else
@@ -256,9 +228,9 @@ namespace Core
                         return 0;
                     }
                 case 'm':
-                    if (GlobalPara.type == '!')
+                    if (ip.type == '!')
                     {
-                        GlobalPara.type = 'm';
+                        ip.type = 'm';
                         return 1;
                     }
                     else
@@ -266,9 +238,9 @@ namespace Core
                         return 0;
                     }
                 case 'w':
-                    if (GlobalPara.type == '!')
+                    if (ip.type == '!')
                     {
-                        GlobalPara.type = 'w';
+                        ip.type = 'w';
                         return 1;
                     }
                     else
@@ -276,9 +248,9 @@ namespace Core
                         return 0;
                     }
                 case 'c':
-                    if (GlobalPara.type == '!')
+                    if (ip.type == '!')
                     {
-                        GlobalPara.type = 'c';
+                        ip.type = 'c';
                         return 1;
                     }
                     else
@@ -286,9 +258,9 @@ namespace Core
                         return 0;
                     }
                 case 'r':
-                    if (!GlobalPara.is_loop)
+                    if (!ip.is_loop)
                     {
-                        GlobalPara.is_loop = true;
+                        ip.is_loop = true;
                         return 1;
                     }
                     else
@@ -296,7 +268,7 @@ namespace Core
                         return 0;
                     }
                 case 'h':
-                    if (GlobalPara.head == '!')
+                    if (ip.head == '!')
                     {
                         return 1;
                     }
@@ -305,7 +277,7 @@ namespace Core
                         return 0;
                     }
                 case 't':
-                    if (GlobalPara.tail == '!')
+                    if (ip.tail == '!')
                     {
                         return 1;
                     }
