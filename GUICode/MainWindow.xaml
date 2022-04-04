@@ -274,16 +274,48 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
-                            <!--Label x:Name="labelResult"
-                                   Grid.Row="1"
-                                   Content="计算结果："
-                                   VerticalAlignment="Top"
-                                    HorizontalAlignment="Left"
-                                    Margin="40,10,0,0"
-                                   FontFamily="宋体" FontSize="24" MinWidth="300" /-->
+                            <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,15,2,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <RadioButton x:Name="useOurCoreButton" 
+                                             GroupName="useCoreType" 
+                                             Grid.Column="0"
+                                             HorizontalAlignment="Center" 
+                                             VerticalAlignment="Center"
+                                             FontFamily="宋体" FontSize="20"  
+                                             Content="使用我们的Core"
+                                             IsChecked="True" Margin="-9,0,0,0"/>
+                                <RadioButton x:Name="useOurZFButton" 
+                                             GroupName="useCoreType" 
+                                             Grid.Column="1"
+                                             HorizontalAlignment="Center" 
+                                             VerticalAlignment="Center"
+                                             FontFamily="宋体" FontSize="20"  
+                                             Content="使用结对小组的Core" Margin="20,0,0,0"/>
+                            </Grid>
+
+                            <materialDesign:Badged Grid.Row="1"
+                                    x:Name="CountingBadge"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Margin="0,0,0,0"
+                                    BadgeColorZoneMode="PrimaryDark">
+                                <Button x:Name="buttonCal"
+                                Click="startCal"
+                                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Margin="0,30,0,0"
+                                Content="生成单词链"
+                                IsEnabled="{Binding DataContext.ControlsEnabled, 
+                                RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" 
+                                FontFamily="宋体" FontSize="20" FontWeight="SemiBold" Foreground="White"/>
+                            </materialDesign:Badged>
 
                             <TextBox x:Name="textBoxResult" Grid.Row="2"
                                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -298,27 +330,9 @@
                                     materialDesign:HintAssist.Hint="计算结果"
                                      materialDesign:HintAssist.FontFamily="宋体"
                                      materialDesign:HintAssist.HelperTextFontSize="18"
-                                     MinWidth="350" MinHeight="180" 
+                                     Width="420" Height="200" 
                                    FontFamily="宋体" FontSize="20" 
                                      IsEnabled="False"/>
-
-                            <materialDesign:Badged Grid.Row="0"
-                                    x:Name="CountingBadge"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Center"
-                                    Margin="0,0,0,0"
-                                    BadgeColorZoneMode="PrimaryDark">
-                            <Button x:Name="buttonCal"
-                                Click="startCal"
-                                Style="{StaticResource MaterialDesignRaisedLightButton}"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                Margin="0,30,0,0"
-                                Content="生成单词链"
-                                IsEnabled="{Binding DataContext.ControlsEnabled, 
-                                RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" 
-                                FontFamily="宋体" FontSize="20" FontWeight="SemiBold" Foreground="White"/>
-                            </materialDesign:Badged>
                         </Grid>
                         
 

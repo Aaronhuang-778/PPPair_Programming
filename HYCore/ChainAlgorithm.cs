@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Collections;
 
 
-namespace Core
+namespace HYCore
 {
     class ChainAlgorithm
     {

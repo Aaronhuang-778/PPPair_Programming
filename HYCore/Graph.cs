@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 
-namespace Core
+namespace HYCore
 {
     public class Graph
     {

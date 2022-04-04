@@ -6,8 +6,8 @@
 */.idea/
 
 bin
-lib
+obj
 Properties
 */bin/
-*/lib/
+*/obj/
 */Properties/
