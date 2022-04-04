@@ -36,11 +36,7 @@ namespace Core
         }
 
 
-        override
-        public string ToString()
-        {
-            return this.word;
-        }
+ 
 
     }
 }

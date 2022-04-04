@@ -12,9 +12,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUICode", "GUICode\GUICode.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{E0069B1F-7FB9-49E2-80CD-50181661F580}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{8B587424-E55C-453D-B291-15363BA3ECE6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "UnitTestProject1\UnitTestProject.csproj", "{8B587424-E55C-453D-B291-15363BA3ECE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HYCore", "HYCore\HYCore.csproj", "{C34E868F-F78F-4DEA-8EB6-9E61256FB293}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HYCore", "HYCore\HYCore.csproj", "{C34E868F-F78F-4DEA-8EB6-9E61256FB293}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OriginCode", "OriginalCode\OriginalCode\OriginCode.csproj", "{5137E5CA-C8DC-4E03-9728-44C62CB6F6B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +40,10 @@ Global
 		{C34E868F-F78F-4DEA-8EB6-9E61256FB293}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C34E868F-F78F-4DEA-8EB6-9E61256FB293}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C34E868F-F78F-4DEA-8EB6-9E61256FB293}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5137E5CA-C8DC-4E03-9728-44C62CB6F6B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5137E5CA-C8DC-4E03-9728-44C62CB6F6B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5137E5CA-C8DC-4E03-9728-44C62CB6F6B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5137E5CA-C8DC-4E03-9728-44C62CB6F6B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,18 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 
-namespace Core
+namespace OriginCode
 {
     public class Graph
     {
-        public static ArrayList word_list = new ArrayList();
-        private static Dictionary<char, ArrayList> start_list 
+        private ArrayList word_list = new ArrayList();
+        private Dictionary<char, ArrayList> start_list 
             = new Dictionary<char, ArrayList>();
-        private static Dictionary<char, ArrayList> end_list 
+        private Dictionary<char, ArrayList> end_list 
             = new Dictionary<char, ArrayList>();
         //权重边
-        public static int [,] adj = null;
-        public static int original_words_num = 0;
+        public int [,] adj = null;
+        public int original_words_num = 0;
 
         public Graph() {
         }
@@ -31,13 +31,18 @@ namespace Core
         {
             // Next边：节点n末尾字母e -> 以e开头的字母的集合
             if (!start_list.ContainsKey(w.word_tail)) return null;
-            ArrayList value = new ArrayList();
-            value = (ArrayList) start_list[w.word_tail].Clone();
+            if (start_list[w.word_tail] == null || start_list[w.word_tail].Count == 0)
+            {
+                start_list.Remove(w.word_tail);
+                return null;
+            }
+
+            ArrayList value = (ArrayList) start_list[w.word_tail].Clone();
             while (value != null && value.Contains(w)) value.Remove(w);
             return value;
         }
 
-        public ArrayList getLastNode(Word w)
+        public ArrayList getLastNodeList(Word w)
         {
             // Next边：节点n末尾字母e -> 以e开头的字母的集合
             if (!end_list.ContainsKey(w.word_head)) return null;
@@ -47,9 +52,9 @@ namespace Core
             return value;
         }
 
-        public void generateE(string[] words)
+        public void generateE(List<string> words)
         {
-            adj = new int[words.Length, words.Length];
+            adj = new int[words.Count, words.Count];
         }
 
         public void setE(int i, int j, int weight)
@@ -62,19 +67,18 @@ namespace Core
             adj[i, j] = 0;
         }
 
-        public void AddG(string[] words)
+        public void AddG(List<string> words)
         {
             generateE(words);
-            for(int i = 0; i < words.Length; i++)
+            int i = 0;
+            foreach (string word in words)
             {
-                if (words[i] == null) break;
-                if (words[i].Length > 1)
-                {
-                    Word new_word = new Word(words[i], i);
-                    AddG(new_word);
-                }
+                if (word.Length < 2) continue;
+                Word new_word = new Word(word, i);
+                AddG(new_word);
+                i++;
             }
-            original_words_num = words.Length;
+            original_words_num = words.Count;
         }
 
         public void AddG(Word word)
@@ -127,7 +131,7 @@ namespace Core
             for (int i = 0; i < word_list.Count; i++)
                 if (isCyclicUtil(i, visited, recStack))
                     return true;
-            Console.WriteLine("no circle");
+            //Console.WriteLine("no circle");
             return false;
         }
 
@@ -146,19 +150,20 @@ namespace Core
             stack.Push((Word) word_list[i]);
         }
 
-        public void TopologicalSort(ArrayList sortList)
+        public void TopologicalSort(Stack<Stack<Word>> sortList)
         {
             bool[] visited = new bool[word_list.Count];
             for (int i = 0; i < word_list.Count; i++) {
                 if (visited[i]) continue;
                 Stack<Word> stack = new Stack<Word>();
-                sortList.Add(stack);
+                sortList.Push(stack);
                 TopologicalSortUtil(i, visited, stack);
             }
         }
 
      
-        public int longestPathDAG(ArrayList sortList, Stack<Word> result, char head, char tail)
+        public int longestPathDAG(Stack<Stack<Word>> sortList, 
+            Stack<Word> result, char head, char tail)
         {
             Dictionary<Word, int> dist = new Dictionary<Word, int>();
             Dictionary<Word, Word> last_edge = new Dictionary<Word, Word>();
@@ -190,11 +195,17 @@ namespace Core
             foreach (Stack<Word> stack in sortList)
             {
                 if (headWords == null)
-                    dist[stack.Peek()] = stack.Peek().weight;
+                {
+                    Word peek = stack.Peek();
+                    if (!dist.ContainsKey(peek)) 
+                        dist[peek] = peek.weight;
+                    //Console.WriteLine("Peek: " + peek.word + " " + peek.weight.ToString());
+                }
                 //if (max_des == null) max_des = w_peek;
                 bool skip = true;
                 foreach (Word w in stack)
                 {
+                    //Console.WriteLine("node: " + w.word);
                     if (!dist.ContainsKey(w)) continue;
                     if (headWords != null && skip)
                     {
@@ -227,7 +238,7 @@ namespace Core
             {
                 res_word = last_edge[res_word];
                 result.Push(res_word);
-                Console.WriteLine(res_word);
+                //Console.WriteLine(res_word);
             }
             if (Char.IsLetter(head) && res_word.word_head != head) return -1;
             return max_dist;
@@ -244,8 +255,9 @@ namespace Core
                 {
                     if (!dist.ContainsKey(next_w) || dist[next_w] < dist[w] + next_w.weight)
                     {
-                        Console.WriteLine("change " + w + "->" + next_w);
                         dist[next_w] = dist[w] + next_w.weight;
+                        //Console.WriteLine("change " + w + "->" +
+                        //next_w + " " + dist[next_w].ToString());
                         last_edge[next_w] = w;
                         if (dist[next_w] > max_dist)
                         {

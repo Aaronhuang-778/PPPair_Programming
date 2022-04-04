@@ -1,0 +1,14 @@
+D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\obj\Debug\netcoreapp3.1\OriginCode.csproj.AssemblyReference.cache
+D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\obj\Debug\netcoreapp3.1\OriginCode.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\obj\Debug\netcoreapp3.1\OriginCode.AssemblyInfoInputs.cache
+D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\obj\Debug\netcoreapp3.1\OriginCode.AssemblyInfo.cs
+D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\obj\Debug\netcoreapp3.1\OriginCode.csproj.CoreCompileInputs.cache
+D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\bin\Debug\netcoreapp3.1\OriginCode.exe
+D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\bin\Debug\netcoreapp3.1\OriginCode.deps.json
+D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\bin\Debug\netcoreapp3.1\OriginCode.runtimeconfig.json
+D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\bin\Debug\netcoreapp3.1\OriginCode.runtimeconfig.dev.json
+D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\bin\Debug\netcoreapp3.1\OriginCode.dll
+D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\bin\Debug\netcoreapp3.1\OriginCode.pdb
+D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\obj\Debug\netcoreapp3.1\OriginCode.dll
+D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\obj\Debug\netcoreapp3.1\OriginCode.pdb
+D:\GitWareHouse\PPPair_Programming\OriginalCode\OriginalCode\obj\Debug\netcoreapp3.1\OriginCode.genruntimeconfig.cache

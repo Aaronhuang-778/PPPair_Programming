@@ -5,10 +5,10 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace UnitTestProject1
+namespace UnitTestProject
 {
     [TestClass]
-    public class UnitTest1
+    public class CalTest
     {
         public string getResult(int i, string testPath, string answer,
             char type, bool isR, char head, char tail)
@@ -124,6 +124,66 @@ namespace UnitTestProject1
             }
         }
 
+        [TestMethod]
+        public void testWHT()
+        {
+            string testPath = "./w_no_circle/test0.txt";
+            List<string> result = new List<string>();
+            List<string> answer = new List<string>();
+            string last;
+            answer.Add("outsmarts");
+            answer.Add("stampage");
+            
+            Chain.gen_for_gui_para(true, testPath, 'w', false, 'o', '0', result);
+            Console.WriteLine("[1] -w -h o");
+            foreach (string s in result) Console.WriteLine(s);
+            Assert.IsTrue(answer.Count == result.Count && result[0][0] == 'o');
+            
+            result.Clear();
+            Chain.gen_for_gui_para(true, testPath, 'w', false, '0', 'e', result);
+            Console.WriteLine("[2] -w -t e");
+            foreach (string s in result) Console.WriteLine(s);
+            Assert.IsTrue(answer.Count == result.Count);
+            last = result[result.Count - 1];
+            Assert.AreEqual('e', last[last.Length - 1]);
+
+            result.Clear();
+            Chain.gen_for_gui_para(true, testPath, 'w', false, 'o', 'e', result);
+            Console.WriteLine("[3] -w -h o -t e");
+            foreach (string s in result) Console.WriteLine(s);
+            Assert.IsTrue(answer.Count == result.Count);
+            last = result[result.Count - 1];
+            Assert.IsTrue(result[0][0] == 'o' && last[last.Length - 1] == 'e');
+        }
+
+        [TestMethod]
+        public void testWRHT()
+        {
+            string testPath = "./w_circle/test0.txt";
+            List<string> result = new List<string>();
+            string last;
+
+            Chain.gen_for_gui_para(true, testPath, 'w', true, 'c', '0', result);
+            Console.WriteLine("[1] -w -r -h c");
+            foreach (string s in result) Console.WriteLine(s);
+            Assert.IsTrue(result.Count == 7 && result[0][0] == 'c');
+
+            result.Clear();
+            Chain.gen_for_gui_para(true, testPath, 'w', true, '0', 'd', result);
+            Console.WriteLine("[2] -w -r -t d");
+            foreach (string s in result) Console.WriteLine(s);
+            Assert.IsTrue(result.Count == 6);
+            last = result[result.Count - 1];
+            Assert.AreEqual('d', last[last.Length - 1]);
+
+            result.Clear();
+            Chain.gen_for_gui_para(true, testPath, 'w', true, 'c', 'd', result);
+            Console.WriteLine("[3] -w -r -h c -t d");
+            foreach (string s in result) Console.WriteLine(s);
+            Assert.IsTrue(result.Count == 6);
+            last = result[result.Count - 1];
+            Assert.IsTrue(result[0][0] == 'c' && last[last.Length - 1] == 'd');
+        }
 
         [TestMethod]
         public void testN()
@@ -142,7 +202,7 @@ namespace UnitTestProject1
                 string[] resArr = result.Split('\n');
                 string[] ansArr = answer.Split('\n');
 
-                if (ansArr != null && ansArr.Length >= 1)
+                if (ansArr != null && ansArr.Length >= 1 && ansArr[0].Length != 0)
                 {
                     Console.WriteLine("[" + i.ToString() + "] res=" +
                         (resArr.Length - 1).ToString() + " ans=" + ansArr.Length.ToString());

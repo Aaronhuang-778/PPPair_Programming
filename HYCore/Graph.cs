@@ -31,8 +31,13 @@ namespace HYCore
         {
             // Next边：节点n末尾字母e -> 以e开头的字母的集合
             if (!start_list.ContainsKey(w.word_tail)) return null;
-            ArrayList value = new ArrayList();
-            value = (ArrayList) start_list[w.word_tail].Clone();
+            if (start_list[w.word_tail] == null || start_list[w.word_tail].Count == 0)
+            {
+                start_list.Remove(w.word_tail);
+                return null;
+            }
+
+            ArrayList value = (ArrayList) start_list[w.word_tail].Clone();
             while (value != null && value.Contains(w)) value.Remove(w);
             return value;
         }
@@ -145,19 +150,20 @@ namespace HYCore
             stack.Push((Word) word_list[i]);
         }
 
-        public void TopologicalSort(ArrayList sortList)
+        public void TopologicalSort(Stack<Stack<Word>> sortList)
         {
             bool[] visited = new bool[word_list.Count];
             for (int i = 0; i < word_list.Count; i++) {
                 if (visited[i]) continue;
                 Stack<Word> stack = new Stack<Word>();
-                sortList.Add(stack);
+                sortList.Push(stack);
                 TopologicalSortUtil(i, visited, stack);
             }
         }
 
      
-        public int longestPathDAG(ArrayList sortList, Stack<Word> result, char head, char tail)
+        public int longestPathDAG(Stack<Stack<Word>> sortList, 
+            Stack<Word> result, char head, char tail)
         {
             Dictionary<Word, int> dist = new Dictionary<Word, int>();
             Dictionary<Word, Word> last_edge = new Dictionary<Word, Word>();
@@ -189,11 +195,17 @@ namespace HYCore
             foreach (Stack<Word> stack in sortList)
             {
                 if (headWords == null)
-                    dist[stack.Peek()] = stack.Peek().weight;
+                {
+                    Word peek = stack.Peek();
+                    if (!dist.ContainsKey(peek)) 
+                        dist[peek] = peek.weight;
+                    //Console.WriteLine("Peek: " + peek.word + " " + peek.weight.ToString());
+                }
                 //if (max_des == null) max_des = w_peek;
                 bool skip = true;
                 foreach (Word w in stack)
                 {
+                    //Console.WriteLine("node: " + w.word);
                     if (!dist.ContainsKey(w)) continue;
                     if (headWords != null && skip)
                     {
@@ -243,8 +255,9 @@ namespace HYCore
                 {
                     if (!dist.ContainsKey(next_w) || dist[next_w] < dist[w] + next_w.weight)
                     {
-                        //Console.WriteLine("change " + w + "->" + next_w);
                         dist[next_w] = dist[w] + next_w.weight;
+                        //Console.WriteLine("change " + w + "->" +
+                        //next_w + " " + dist[next_w].ToString());
                         last_edge[next_w] = w;
                         if (dist[next_w] > max_dist)
                         {

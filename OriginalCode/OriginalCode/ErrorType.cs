@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core
+namespace OriginCode
 {
     public class ErrorType
     {
@@ -28,6 +28,9 @@ namespace Core
             file_not_found,
             illegal_para_combination,
             no_filename,
+            no_input_text,
+            no_check_mode,
+            empty_string,
             unallowed_circle
         }
     }
@@ -37,53 +40,78 @@ namespace Core
     [Serializable]
     public class InvalidInputException : Exception
     {
-        public InvalidInputException() { }
+        override public string Message { get; }
+
+        public InvalidInputException() : base() { }
+
+
+        public InvalidInputException(string message)
+            : base(message)
+        {
+            Message = message;
+            Console.WriteLine(message);
+            Console.WriteLine($"[InvalidInputException message]: {message}");
+        }
+
+        
 
         public InvalidInputException(InputErrorType.code code)
-            : base($"Invalid Input code: {code}")
+            : base()
         {
             Console.WriteLine($"[InvalidInputException code]: {code}");
+            string message = "";
             switch (code)
             {
                 case InputErrorType.code.dupli_para:
-                    Console.WriteLine("The parameter has already appeared or you have chosen output type!");
+                    message = "The parameter has already appeared or you have chosen output type!";
                     break;
                 case InputErrorType.code.not_support:
-                    Console.WriteLine("This command is not supported!");
+                    message = "This command is not supported!";
                     break;
                 case InputErrorType.code.wrong_format:
-                    Console.WriteLine("Please check your command's format!");
+                    message = "Please check your command's format!";
                     break;
                 case InputErrorType.code.wrong_head:
-                    Console.WriteLine("Please check your -h's character!");
+                    message = "Please check your -h's character!";
                     break;
                 case InputErrorType.code.wrong_tail:
-                    Console.WriteLine("Please check your -t's character!");
+                    message = "Please check your -t's character!";
                     break;
                 case InputErrorType.code.illegal_path:
-                    Console.WriteLine("Your file path is illegal!");
+                    message = "Your file path is illegal!";
                     break;
                 case InputErrorType.code.illegal_file_type:
-                    Console.WriteLine("Your file type is not .txt!");
+                    message = "Your file type is not .txt!";
                     break;
                 case InputErrorType.code.file_not_found:
-                    Console.WriteLine("Can't find your file!");
+                    message = "Can't find your file!";
                     break;
                 case InputErrorType.code.illegal_para_combination:
-                    Console.WriteLine("Please check your parameters combination, " +
-                        "we don't support your combination!");
+                    message = "Please check your parameters combination, " +
+                        "we don't support your combination!";
                     break;
                 case InputErrorType.code.no_filename:
-                    Console.WriteLine("Please input your words file!");
+                    message = "Please input your words file!";
+                    break;
+                case InputErrorType.code.no_input_text:
+                    message = "Please input your words in the text box!";
+                    break;
+                case InputErrorType.code.no_check_mode:
+                    message = "Please check your calculating mode!";
                     break;
                 case InputErrorType.code.unallowed_circle:
-                    Console.WriteLine("Your words-file has illegal circle!");
+                    message = "Your words-file has illegal circle!";
+                    break;
+                case InputErrorType.code.empty_string:
+                    message = "Your input words string to be calculated is empty!";
                     break;
                 default:
-                    Console.WriteLine("This command is not supported!");
+                    message = "This command is not supported!";
                     break;
             }
-            Environment.Exit(0);
+            //Environment.Exit(0);
+            Message = message;
+            Console.WriteLine(message);
         }
     }
 
@@ -93,10 +121,10 @@ namespace Core
     {
 
         public CircleException()
-            : base($"CircleException")
+            : base("Words list has circle without -r!")
         {
-            Console.WriteLine($"Words list has circle without -r!");
-            Environment.Exit(0);
+            Console.WriteLine("CircleException: Words list has circle without -r!");
+            //Environment.Exit(0);
         }
     }
 
@@ -114,33 +142,39 @@ namespace Core
     [Serializable]
     public class ChainNotFoundException : Exception
     {
+        override public string Message { get; }
+
         public ChainNotFoundException()
             : base($"ChainNotFoundException")
         {
+            Message = "The word chain that you asked for is not found!";
             Console.WriteLine($"The word chain that you asked for is not found!");
-            Environment.Exit(0);
+            //Environment.Exit(0);
         }
 
         public ChainNotFoundException(ChainErrorType.code code)
-                : base($"ChainNotFoundException: {code}")
+                : base()
         {
             Console.WriteLine($"[ChainNotFoundException code]: {code}");
+            String message = "";
             switch (code)
             {
                 case ChainErrorType.code.head_not_found:
-                    Console.WriteLine($"There's no words start with the head you asked for!");
+                    message = "There's no words start with the head you asked for!";
                     break;
                 case ChainErrorType.code.tail_not_found:
-                    Console.WriteLine($"There's no words end with the tail you asked for!");
+                    message = "There's no words end with the tail you asked for!";
                     break;
                 case ChainErrorType.code.chain_not_found:
-                    Console.WriteLine($"The word chain that you asked for is not found!");
+                    message = "The word chain that you asked for is not found!";
                     break;
                 default:
-                    Console.WriteLine($"The word chain that you asked for is not found!");
+                    message = "The word chain that you asked for is not found!";
                     break;
             }
-            Environment.Exit(0);
+            //Environment.Exit(0);
+            Message = message;
+            Console.WriteLine(message);
         }
     }
 }

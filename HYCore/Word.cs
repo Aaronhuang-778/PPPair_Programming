@@ -32,14 +32,11 @@ namespace HYCore
             {
                 weight = 1;
             }
+            //Console.WriteLine(w + " " + weight.ToString());
         }
 
 
-        override
-        public string ToString()
-        {
-            return this.word;
-        }
+ 
 
     }
 }

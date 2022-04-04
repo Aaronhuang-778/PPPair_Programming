@@ -57,7 +57,7 @@ namespace Core
         public void rc_DFS(Graph G, Word word, bool[] visited, ArrayList live_list, int live_max)
         {
             ArrayList next_node = G.getNextWordList(word);
-            if (next_node == null)
+            if (next_node == null || next_node.Count == 0)
             {
                 return;
             }
@@ -217,7 +217,7 @@ namespace Core
         {
             ArrayList next_node = G.getNextWordList(word);
 
-            if (next_node == null)
+            if (next_node == null || next_node.Count == 0)
             {
                 if (live_list.Count > max)
                 {
@@ -319,7 +319,7 @@ namespace Core
         public void DFS( Graph G, Word word, ArrayList live_list, bool[] visited)
         {
             ArrayList next_node = G.getNextWordList(word);
-            if(next_node == null)
+            if(next_node == null || next_node.Count == 0)
             {
                 return;
             }
@@ -329,10 +329,10 @@ namespace Core
             {
                 Word word1 = (Word)next_node[j];
                 ArrayList tmp = new ArrayList();
-                for (int k = 0; k < live_list.Count; k++)
+                foreach (string s in live_list)
                 {
-                    tmp.Add(live_list[k] + " " + word1.word);
-                    link_set.Add(live_list[k] + " " + word1.word);
+                    tmp.Add(s + " " + word1.word);
+                    link_set.Add(s + " " + word1.word);
                 }
                 if (!visited[word1.index])
                 {

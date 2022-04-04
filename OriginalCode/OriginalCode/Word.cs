@@ -5,16 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 
-namespace Core
+namespace OriginCode
 {
     public class Word
     {
+        public static char type = '0';
         public string word = null;
         public int length = 0;
         public int weight = 0;
         public int index = 0;
-        public char word_head = ' ';
-        public char word_tail = ' ';
+        public char word_head = '0';
+        public char word_tail = '0';
 
         public Word(string w, int i)
         {
@@ -24,21 +25,18 @@ namespace Core
             word_tail = w[length - 1];
             index = i;
             
-            if (GlobalPara.type == 'c')
+            if (type == 'c')
             {
                 weight = length;
             } else
             {
                 weight = 1;
             }
+            //Console.WriteLine(w + " " + weight.ToString());
         }
 
 
-        override
-        public string ToString()
-        {
-            return this.word;
-        }
+ 
 
     }
 }

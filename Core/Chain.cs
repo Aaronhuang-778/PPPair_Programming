@@ -73,8 +73,8 @@ namespace Core
         public static int gen_chain_word(List<string> words, int len, List<string> result, 
             char head, char tail, bool enable_loop)
         {
-            if (result == null) result = new List<string>();
-            else result.Clear();
+            //if (result == null) result = new List<string>();
+            //else result.Clear();
 
             Graph G = new Graph();
             G.AddG(words);
@@ -114,8 +114,8 @@ namespace Core
         /* -n */
         public static int gen_chains_all(List<string> words, int len, List<string> result)
         {
-            if (result == null) result = new List<string>();
-            else result.Clear();
+            //if (result == null) result = new List<string>();
+            //else result.Clear();
 
             Graph G = new Graph();
             G.AddG(words);
@@ -138,8 +138,8 @@ namespace Core
         /* -m */
         public static int gen_chain_word_unique(List<string> words, int len, List<string> result)
         {
-            if (result == null) result = new List<string>();
-            else result.Clear();
+            //if (result == null) result = new List<string>();
+            //else result.Clear();
 
             Graph G = new Graph();
             G.AddG(words);
@@ -164,8 +164,8 @@ namespace Core
         public static int gen_chain_char(List<string> words, int len, List<string> result, 
             char head, char tail, bool enable_loop)
         {
-            if (result == null) result = new List<string>();
-            else result.Clear();
+            //if (result == null) result = new List<string>();
+            //else result.Clear();
 
             Graph G = new Graph();
             G.AddG(words);

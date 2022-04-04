@@ -21,7 +21,7 @@ namespace Core
             string str = Directory.GetCurrentDirectory();
             str = str + "\\solution.txt";
             //分类调用
-            if (ip.type == 'c' || ip.type == 'm' || ip.type == 'w')
+            /*if (ip.type == 'c' || ip.type == 'm' || ip.type == 'w')
             {
                 if (str.IndexOfAny(Path.GetInvalidPathChars()) >= 0) // 文件路径字符不合法
                 {
@@ -36,7 +36,7 @@ namespace Core
                 {
                     throw new InvalidInputException(InputErrorType.code.file_not_found);
                 }
-            }
+            }*/
 
             if (ip.type == '\0' || ip.type == '0')
                 throw new InvalidInputException(InputErrorType.code.no_check_mode);
@@ -216,73 +216,51 @@ namespace Core
                         ip.type = 'n';
                         return 1;
                     }
-                    else
-                    {
-                        return 0;
-                    }
+                    break;
                 case 'm':
                     if (ip.type == '0')
                     {
                         ip.type = 'm';
                         return 1;
                     }
-                    else
-                    {
-                        return 0;
-                    }
+                    break;
                 case 'w':
                     if (ip.type == '0')
                     {
                         ip.type = 'w';
                         return 1;
                     }
-                    else
-                    {
-                        return 0;
-                    }
+                    break;
                 case 'c':
                     if (ip.type == '0')
                     {
                         ip.type = 'c';
                         return 1;
                     }
-                    else
-                    {
-                        return 0;
-                    }
+                    break;
                 case 'r':
                     if (!ip.is_loop)
                     {
                         ip.is_loop = true;
                         return 1;
                     }
-                    else
-                    {
-                        return 0;
-                    }
+                    break;
                 case 'h':
                     if (ip.head == '0')
                     {
                         return 1;
                     }
-                    else
-                    {
-                        return 0;
-                    }
+                    break;
                 case 't':
                     if (ip.tail == '0')
                     {
                         return 1;
                     }
-                    else
-                    {
-                        return 0;
-                    }
+                    break;
                 default:
                     throw new InvalidInputException(InputErrorType.code.not_support);
-
             }
-
+            return 0;
         }
     }
 

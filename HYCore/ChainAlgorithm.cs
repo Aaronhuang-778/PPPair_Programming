@@ -57,7 +57,7 @@ namespace HYCore
         public void rc_DFS(Graph G, Word word, bool[] visited, ArrayList live_list, int live_max)
         {
             ArrayList next_node = G.getNextWordList(word);
-            if (next_node == null)
+            if (next_node == null || next_node.Count == 0)
             {
                 return;
             }
@@ -106,9 +106,8 @@ namespace HYCore
         {
             this.head = head;
             this.tail = tail;
-            for (int i = 0; i < G.getWordList().Count; i++)
+            foreach (Word word in G.getWordList())
             {
-                Word word = (Word)G.getWordList()[i];
                 if (this.head != '0' && word.word_head == this.head)
                 {
                     bool[] visited = new bool[G.getWordList().Count];
@@ -143,14 +142,12 @@ namespace HYCore
         public void rw_DFS(Graph G, Word word, bool[] visited, ArrayList live_list)
         {
             ArrayList next_node = G.getNextWordList(word);
-            if (next_node == null )
+            if (next_node == null || next_node.Count == 0)
             {                
                return;
             }
-
-            for (int j = 0; j < next_node.Count; j++)
+            foreach (Word word1 in next_node)
             {
-                Word word1 = (Word)next_node[j];
                 if (!visited[word1.index])
                 {
                     bool[] tmp = new bool[G.getWordList().Count];
@@ -180,7 +177,6 @@ namespace HYCore
                     }
 
                     rw_DFS(G, word1, tmp, tmp1);
-
                 }
 
             }
@@ -190,9 +186,8 @@ namespace HYCore
         {
             this.head = head;
             this.tail = tail;
-            for (int i = 0; i < G.getWordList().Count; i++)
+            foreach (Word word in G.getWordList())
             {
-                Word word = (Word)G.getWordList()[i];
                 if (this.head != '0' && word.word_head == this.head)
                 {
                     bool[] visited = new bool[G.getWordList().Count];
@@ -222,7 +217,7 @@ namespace HYCore
         {
             ArrayList next_node = G.getNextWordList(word);
 
-            if (next_node == null)
+            if (next_node == null || next_node.Count == 0)
             {
                 if (live_list.Count > max)
                 {
@@ -324,7 +319,7 @@ namespace HYCore
         public void DFS( Graph G, Word word, ArrayList live_list, bool[] visited)
         {
             ArrayList next_node = G.getNextWordList(word);
-            if(next_node == null)
+            if(next_node == null || next_node.Count == 0)
             {
                 return;
             }
@@ -334,10 +329,10 @@ namespace HYCore
             {
                 Word word1 = (Word)next_node[j];
                 ArrayList tmp = new ArrayList();
-                for (int k = 0; k < live_list.Count; k++)
+                foreach (string s in live_list)
                 {
-                    tmp.Add(live_list[k] + " " + word1.word);
-                    link_set.Add(live_list[k] + " " + word1.word);
+                    tmp.Add(s + " " + word1.word);
+                    link_set.Add(s + " " + word1.word);
                 }
                 if (!visited[word1.index])
                 {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Collections;
 
 
-namespace Core
+namespace OriginCode
 {
     class ChainAlgorithm
     {
@@ -50,14 +50,14 @@ namespace Core
     {
         public ArrayList link_set = new ArrayList();
         public int max = 0;
-        public char head = '!';
-        public char tail = '!';
+        public char head = '0';
+        public char tail = '0';
 
 
         public void rc_DFS(Graph G, Word word, bool[] visited, ArrayList live_list, int live_max)
         {
             ArrayList next_node = G.getNextWordList(word);
-            if (next_node == null)
+            if (next_node == null || next_node.Count == 0)
             {
                 return;
             }
@@ -67,7 +67,7 @@ namespace Core
                 Word word1 = (Word)next_node[j];
                 if (!visited[word1.index])
                 {
-                    bool[] tmp = new bool[Graph.word_list.Count];
+                    bool[] tmp = new bool[G.getWordList().Count];
                     for (int k = 0; k < visited.Length; k++)
                     {
                         tmp[k] = visited[k];
@@ -82,7 +82,7 @@ namespace Core
                     tmp1.Add(word1.word);
                     int tmp_max = live_max + word1.length;
 
-                    if ((this.tail != '!' && word1.word_tail == this.tail) || (this.tail == '!'))
+                    if ((this.tail != '0' && word1.word_tail == this.tail) || (this.tail == '0'))
                     {
                         if (tmp_max > max)
                         {
@@ -106,21 +106,20 @@ namespace Core
         {
             this.head = head;
             this.tail = tail;
-            for (int i = 0; i < Graph.word_list.Count; i++)
+            foreach (Word word in G.getWordList())
             {
-                Word word = (Word)Graph.word_list[i];
-                if (this.head != '!' && word.word_head == this.head)
+                if (this.head != '0' && word.word_head == this.head)
                 {
-                    bool[] visited = new bool[Graph.word_list.Count];
+                    bool[] visited = new bool[G.getWordList().Count];
                     visited[word.index] = true;
                     ArrayList live_list = new ArrayList();
                     live_list.Add(word.word);
                     int live_max = word.length;
                     rc_DFS(G, word, visited, live_list, live_max);
                 }
-                else if (this.head == '!')
+                else if (this.head == '0')
                 {
-                    bool[] visited = new bool[Graph.word_list.Count];
+                    bool[] visited = new bool[G.getWordList().Count];
                     visited[word.index] = true;
                     ArrayList live_list = new ArrayList();
                     live_list.Add(word.word);
@@ -136,24 +135,22 @@ namespace Core
     {
         public ArrayList link_set = new ArrayList();
         public int max = 0;
-        public char head = '!';
-        public char tail = '!';
+        public char head = '0';
+        public char tail = '0';
 
 
         public void rw_DFS(Graph G, Word word, bool[] visited, ArrayList live_list)
         {
             ArrayList next_node = G.getNextWordList(word);
-            if (next_node == null )
+            if (next_node == null || next_node.Count == 0)
             {                
                return;
             }
-
-            for (int j = 0; j < next_node.Count; j++)
+            foreach (Word word1 in next_node)
             {
-                Word word1 = (Word)next_node[j];
                 if (!visited[word1.index])
                 {
-                    bool[] tmp = new bool[Graph.word_list.Count];
+                    bool[] tmp = new bool[G.getWordList().Count];
                     for (int k = 0; k < visited.Length; k++)
                     {
                         tmp[k] = visited[k];
@@ -166,7 +163,7 @@ namespace Core
                         tmp1.Add(live_list[k]);
                     }
                     tmp1.Add(word1.word);
-                    if ((this.tail != '!' && word1.word_tail == this.tail) || (this.tail == '!'))
+                    if ((this.tail != '0' && word1.word_tail == this.tail) || (this.tail == '0'))
                     {
                         if (tmp1.Count > max)
                         {
@@ -180,7 +177,6 @@ namespace Core
                     }
 
                     rw_DFS(G, word1, tmp, tmp1);
-
                 }
 
             }
@@ -190,20 +186,19 @@ namespace Core
         {
             this.head = head;
             this.tail = tail;
-            for (int i = 0; i < Graph.word_list.Count; i++)
+            foreach (Word word in G.getWordList())
             {
-                Word word = (Word)Graph.word_list[i];
-                if (this.head != '!' && word.word_head == this.head)
+                if (this.head != '0' && word.word_head == this.head)
                 {
-                    bool[] visited = new bool[Graph.word_list.Count];
+                    bool[] visited = new bool[G.getWordList().Count];
                     visited[word.index] = true;
                     ArrayList live_list = new ArrayList();
                     live_list.Add(word.word);
                     rw_DFS(G, word, visited, live_list);
                 }
-                else if (this.head == '!')
+                else if (this.head == '0')
                 {
-                    bool[] visited = new bool[Graph.word_list.Count];
+                    bool[] visited = new bool[G.getWordList().Count];
                     visited[word.index] = true;
                     ArrayList live_list = new ArrayList();
                     live_list.Add(word.word);
@@ -222,7 +217,7 @@ namespace Core
         {
             ArrayList next_node = G.getNextWordList(word);
 
-            if (next_node == null)
+            if (next_node == null || next_node.Count == 0)
             {
                 if (live_list.Count > max)
                 {
@@ -271,9 +266,9 @@ namespace Core
         }
         public void startDFS(Graph G)
         {
-            for (int i = 0; i < Graph.word_list.Count; i++)
+            for (int i = 0; i < G.getWordList().Count; i++)
             {
-                Word word = (Word)Graph.word_list[i];
+                Word word = (Word)G.getWordList()[i];
                 bool[] addAlpha = new bool[26];
                 addAlpha[word.word_head - 'a'] = true;
                 ArrayList live_list = new ArrayList();
@@ -298,15 +293,15 @@ namespace Core
 
         public void graphInitialize (Graph G)
         {
-            for (int i = 0; i < Graph.word_list.Count; i++)
+            for (int i = 0; i < G.getWordList().Count; i++)
             {
                 //清除出入度为0的点
-                ArrayList next_list = G.getNextWordList((Word)Graph.word_list[i]);
-                ArrayList last_list = G.getLastNode((Word)Graph.word_list[i]);
+                ArrayList next_list = G.getNextWordList((Word)G.getWordList()[i]);
+                ArrayList last_list = G.getLastNodeList((Word)G.getWordList()[i]);
                 if (next_list == null
                     && last_list == null)
                 {
-                    Graph.word_list.RemoveAt(i);
+                    G.getWordList().RemoveAt(i);
                     i--;
                     continue;
                 }
@@ -315,7 +310,7 @@ namespace Core
                 {
                     for (int j = 0; j < next_list.Count; j++)
                     {
-                        G.setE(((Word)Graph.word_list[i]).index, ((Word)next_list[j]).index, 1);
+                        G.setE(((Word)G.getWordList()[i]).index, ((Word)next_list[j]).index, 1);
                     }
                 }
             }
@@ -324,7 +319,7 @@ namespace Core
         public void DFS( Graph G, Word word, ArrayList live_list, bool[] visited)
         {
             ArrayList next_node = G.getNextWordList(word);
-            if(next_node == null)
+            if(next_node == null || next_node.Count == 0)
             {
                 return;
             }
@@ -334,10 +329,10 @@ namespace Core
             {
                 Word word1 = (Word)next_node[j];
                 ArrayList tmp = new ArrayList();
-                for (int k = 0; k < live_list.Count; k++)
+                foreach (string s in live_list)
                 {
-                    tmp.Add(live_list[k] + " " + word1.word);
-                    link_set.Add(live_list[k] + " " + word1.word);
+                    tmp.Add(s + " " + word1.word);
+                    link_set.Add(s + " " + word1.word);
                 }
                 if (!visited[word1.index])
                 {
@@ -351,19 +346,20 @@ namespace Core
 
         public bool startTopo(Graph G)
         {
-            bool[] visited = new bool[Graph.original_words_num];
+            bool[] visited = new bool[G.original_words_num];
 
-            for (int i = 0; i < Graph.word_list.Count; i++) {
-                Word word = (Word)Graph.word_list[i];
+            for (int i = 0; i < G.getWordList().Count; i++) {
+                Word word = (Word)G.getWordList()[i];
                 ArrayList live_list = new ArrayList();
                 live_list.Add(word.word);
-                ArrayList last_list = G.getLastNode(word)；
+                ArrayList last_list = G.getLastNodeList(word);
+
                 if (last_list == null || last_list.Count == 0)
                 {
                     DFS(G, word, live_list, visited);
                 }
             }
-            Console.WriteLine("no circle");
+            //Console.WriteLine("no circle");
             return false;
         }
     }
