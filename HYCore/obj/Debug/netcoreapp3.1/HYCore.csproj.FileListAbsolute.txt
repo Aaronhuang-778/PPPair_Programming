@@ -1,8 +1,0 @@
-D:\GitWareHouse\PPPair_Programming\HYCore\bin\Debug\netcoreapp3.1\HYCore.deps.json
-D:\GitWareHouse\PPPair_Programming\HYCore\bin\Debug\netcoreapp3.1\HYCore.dll
-D:\GitWareHouse\PPPair_Programming\HYCore\obj\Debug\netcoreapp3.1\HYCore.csproj.AssemblyReference.cache
-D:\GitWareHouse\PPPair_Programming\HYCore\obj\Debug\netcoreapp3.1\HYCore.GeneratedMSBuildEditorConfig.editorconfig
-D:\GitWareHouse\PPPair_Programming\HYCore\obj\Debug\netcoreapp3.1\HYCore.AssemblyInfoInputs.cache
-D:\GitWareHouse\PPPair_Programming\HYCore\obj\Debug\netcoreapp3.1\HYCore.AssemblyInfo.cs
-D:\GitWareHouse\PPPair_Programming\HYCore\obj\Debug\netcoreapp3.1\HYCore.csproj.CoreCompileInputs.cache
-D:\GitWareHouse\PPPair_Programming\HYCore\obj\Debug\netcoreapp3.1\HYCore.dll

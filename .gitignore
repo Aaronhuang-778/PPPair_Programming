@@ -5,9 +5,9 @@
 */.vscode/
 */.idea/
 
+obj
+release
+packages
 
 *.cache
-*/*.cache
-
 *.pdb
-obj
