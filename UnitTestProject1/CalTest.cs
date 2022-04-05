@@ -262,5 +262,46 @@ namespace UnitTestProject
                     (resArr != null && resArr.Length >= ansArr.Length));
             }
         }
+
+        [TestMethod]
+        public void testNeighbor()
+        {
+            List<string> result = new List<string>();
+            try
+            {
+                Chain.gen_for_gui_para(true, "w_no_circle/neighbor.txt", 'w', false, 'w', '0', result);
+                Assert.Fail("not catch exception");
+            }
+            catch (ChainNotFoundException) { }
+            catch (Exception)
+            {
+                Assert.Fail("wrong type of excetion");
+            }
+
+            result.Clear();
+            try
+            {
+                Chain.gen_for_gui_para(true, "w_no_circle/neighbor.txt", 'w', false, '0', 'g', result);
+                Assert.Fail("not catch exception");
+            }
+            catch (ChainNotFoundException) { }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                Assert.Fail("wrong type of excetion");
+            }
+
+            result.Clear();
+            try
+            {
+                Chain.gen_for_gui_para(true, "w_no_circle/neighbor.txt", 'w', false, '0', 's', result);
+                Assert.Fail("not catch exception");
+            }
+            catch (ChainNotFoundException) { }
+            catch (Exception)
+            {
+                Assert.Fail("wrong type of excetion");
+            }
+        }
     }
 }

@@ -31,14 +31,9 @@ namespace Core
         {
             // Next边：节点n末尾字母e -> 以e开头的字母的集合
             if (!start_list.ContainsKey(w.word_tail)) return null;
-            if (start_list[w.word_tail] == null || start_list[w.word_tail].Count == 0)
-            {
-                start_list.Remove(w.word_tail);
-                return null;
-            }
 
             ArrayList value = (ArrayList) start_list[w.word_tail].Clone();
-            while (value != null && value.Contains(w)) value.Remove(w);
+            while (value.Contains(w)) value.Remove(w);
             return value;
         }
 
@@ -48,7 +43,7 @@ namespace Core
             if (!end_list.ContainsKey(w.word_head)) return null;
             ArrayList value = new ArrayList();
             value = (ArrayList) end_list[w.word_head].Clone();
-            while (value != null && value.Contains(w)) value.Remove(w);
+            while (value.Contains(w)) value.Remove(w);
             return value;
         }
 
@@ -175,20 +170,16 @@ namespace Core
             if (Char.IsLetter(head)) 
             {
                 if (!start_list.ContainsKey(head))
-                    throw new ChainNotFoundException(ChainErrorType.code.head_not_found);
+                    throw new ChainNotFoundException();
                 headWords = start_list[head];
-                if (headWords == null || headWords.Count <= 0)
-                    throw new ChainNotFoundException(ChainErrorType.code.head_not_found);
                 foreach (Word headword in headWords)
                     dist[headword] = headword.weight;
             }
             if (Char.IsLetter(tail)) 
             {
                 if (!end_list.ContainsKey(tail))
-                    throw new ChainNotFoundException(ChainErrorType.code.tail_not_found);
+                    throw new ChainNotFoundException();
                 tailWords = end_list[tail];
-                if (tailWords == null || tailWords.Count <= 0)
-                    throw new ChainNotFoundException(ChainErrorType.code.tail_not_found);
             }
 
 
@@ -227,9 +218,10 @@ namespace Core
                         max_des = tailWord;
                     }
                 }
-                if (max_dist < 0) return -1;
             }
-            else if (max_des == null) return -1;
+
+            if (max_dist <= 0 || max_des == null)
+                throw new ChainNotFoundException();
 
             Word res_word = max_des;
             result.Clear();
@@ -240,7 +232,8 @@ namespace Core
                 result.Push(res_word);
                 //Console.WriteLine(res_word);
             }
-            if (Char.IsLetter(head) && res_word.word_head != head) return -1;
+            if (result.Count < 2)
+                    throw new ChainNotFoundException();
             return max_dist;
         }
 

@@ -38,7 +38,7 @@ namespace Core
                 }
             }*/
 
-            if (ip.type == '\0' || ip.type == '0')
+            if (ip.type == '0')
                 throw new InvalidInputException(InputErrorType.code.no_check_mode);
 
             if (DealWords.words == null || DealWords.words.Count == 0 || DealWords.words[0].Length == 0)
@@ -159,7 +159,7 @@ namespace Core
 
         public static void checkInputFile(string s, InputPara ip)
         {
-            if (s.IndexOfAny(System.IO.Path.GetInvalidPathChars()) >= 0) // 文件路径字符不合法
+            if (s.IndexOfAny(Path.GetInvalidPathChars()) >= 0) // 文件路径字符不合法
             {
                 throw new InvalidInputException(InputErrorType.code.illegal_path);
             }

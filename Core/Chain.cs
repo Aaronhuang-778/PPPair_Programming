@@ -85,11 +85,11 @@ namespace Core
                 ChainAlgorithm ca = new ChainAlgorithm();
                 ArrayList tmp = ca.get_RW(G, head, tail);
 
-                if (tmp == null || tmp.Count == 0)
-                    throw new ChainNotFoundException();
-
                 foreach (string str in tmp)
                     result.Add(str);
+
+                if (result.Count < 2)
+                    throw new ChainNotFoundException();
 
                 writeFile(result);
                 return 0;
@@ -99,8 +99,7 @@ namespace Core
             G.TopologicalSort(sortList);
 
             Stack<Word> res_stack = new Stack<Word>();
-            int dist = G.longestPathDAG(sortList, res_stack, head, tail);
-            if (dist < 0) throw new ChainNotFoundException();
+            G.longestPathDAG(sortList, res_stack, head, tail);
 
             foreach (Word w in res_stack)
                 result.Add(w.word);
@@ -125,8 +124,6 @@ namespace Core
 
             ChainAlgorithm ca = new ChainAlgorithm();
             ArrayList tmp = ca.get_chains_all(G);
-            if (tmp == null || tmp.Count == 0)
-                throw new ChainNotFoundException();
 
             result.Add(tmp.Count.ToString());
             foreach (string word in tmp)
@@ -151,8 +148,6 @@ namespace Core
 
             ChainAlgorithm ca = new ChainAlgorithm(); 
             ArrayList tmp = ca.get_chain_word_unique(G);
-            if (tmp == null || tmp.Count == 0)
-                throw new ChainNotFoundException();
 
             foreach (string word in tmp)
                 result.Add(word);
@@ -180,11 +175,11 @@ namespace Core
                 ChainAlgorithm ca = new ChainAlgorithm();
                 ArrayList tmp = ca.get_RC(G, head, tail);
 
-                if (tmp == null || tmp.Count == 0)
-                    throw new ChainNotFoundException();
-
                 foreach (string word in tmp)
                     result.Add(word);
+
+                if (result.Count < 2)
+                    throw new ChainNotFoundException();
 
                 writeFile(result);
                 return 0;
@@ -194,8 +189,7 @@ namespace Core
             G.TopologicalSort(sortList);
 
             Stack<Word> res_stack = new Stack<Word>();
-            int dist = G.longestPathDAG(sortList, res_stack, head, tail);
-            if (dist < 0) throw new ChainNotFoundException();
+            G.longestPathDAG(sortList, res_stack, head, tail);
 
             foreach (Word w in res_stack)
                 result.Add(w.word);

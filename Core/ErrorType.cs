@@ -30,8 +30,7 @@ namespace Core
             no_filename,
             no_input_text,
             no_check_mode,
-            empty_string,
-            unallowed_circle
+            empty_string
         }
     }
 
@@ -40,33 +39,19 @@ namespace Core
     [Serializable]
     public class InvalidInputException : Exception
     {
-        override public string Message { get; }
-
-        public InvalidInputException() : base() { }
-
-
-        public InvalidInputException(string message)
-            : base(message)
-        {
-            Message = message;
-            Console.WriteLine(message);
-            Console.WriteLine($"[InvalidInputException message]: {message}");
-        }
-
+        public InputErrorType.code code { get; set; }
+        public new string Message;
         
-
         public InvalidInputException(InputErrorType.code code)
             : base()
         {
+            this.code = code;
             Console.WriteLine($"[InvalidInputException code]: {code}");
             string message = "";
             switch (code)
             {
                 case InputErrorType.code.dupli_para:
                     message = "The parameter has already appeared or you have chosen output type!";
-                    break;
-                case InputErrorType.code.not_support:
-                    message = "This command is not supported!";
                     break;
                 case InputErrorType.code.wrong_format:
                     message = "Please check your command's format!";
@@ -99,12 +84,10 @@ namespace Core
                 case InputErrorType.code.no_check_mode:
                     message = "Please check your calculating mode!";
                     break;
-                case InputErrorType.code.unallowed_circle:
-                    message = "Your words-file has illegal circle!";
-                    break;
                 case InputErrorType.code.empty_string:
                     message = "Your input words string to be calculated is empty!";
                     break;
+                case InputErrorType.code.not_support:
                 default:
                     message = "This command is not supported!";
                     break;
@@ -128,53 +111,17 @@ namespace Core
         }
     }
 
-    public class ChainErrorType : ErrorType
-    {
-        public new enum code
-        {
-            head_not_found,
-            tail_not_found,
-            chain_not_found
-        }
-    }
-
     
     [Serializable]
     public class ChainNotFoundException : Exception
     {
-        override public string Message { get; }
 
         public ChainNotFoundException()
-            : base($"ChainNotFoundException")
+            : base("The word chain that you asked for is not found!")
         {
-            Message = "The word chain that you asked for is not found!";
-            Console.WriteLine($"The word chain that you asked for is not found!");
+            Console.WriteLine("[ChainNotFoundException]");
+            Console.WriteLine("The word chain that you asked for is not found!");
             //Environment.Exit(0);
-        }
-
-        public ChainNotFoundException(ChainErrorType.code code)
-                : base()
-        {
-            Console.WriteLine($"[ChainNotFoundException code]: {code}");
-            String message = "";
-            switch (code)
-            {
-                case ChainErrorType.code.head_not_found:
-                    message = "There's no words start with the head you asked for!";
-                    break;
-                case ChainErrorType.code.tail_not_found:
-                    message = "There's no words end with the tail you asked for!";
-                    break;
-                case ChainErrorType.code.chain_not_found:
-                    message = "The word chain that you asked for is not found!";
-                    break;
-                default:
-                    message = "The word chain that you asked for is not found!";
-                    break;
-            }
-            //Environment.Exit(0);
-            Message = message;
-            Console.WriteLine(message);
         }
     }
 }
