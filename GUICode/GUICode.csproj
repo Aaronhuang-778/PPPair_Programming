@@ -48,7 +48,8 @@
     <StartupObject>PPPair_Programming.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Core">
+    <Reference Include="Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Core\bin\Debug\Core.dll</HintPath>
     </Reference>
     <Reference Include="MaterialDesignColors, Version=2.0.5.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">

@@ -48,4 +48,5 @@ D:\GitWareHouse\PPPair_Programming\GUICode\obj\Debug\GUICode.exe
 D:\GitWareHouse\PPPair_Programming\GUICode\obj\Debug\GUICode.pdb
 D:\GitWareHouse\PPPair_Programming\GUICode\obj\Debug\GUICode.csproj.SuggestedBindingRedirects.cache
 D:\GitWareHouse\PPPair_Programming\GUICode\bin\Debug\Core.pdb
+D:\GitWareHouse\PPPair_Programming\GUICode\bin\Debug\Core.dll
 D:\GitWareHouse\PPPair_Programming\GUICode\bin\Debug\ZFCore.dll
