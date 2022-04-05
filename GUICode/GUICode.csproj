@@ -82,8 +82,8 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="WindowsFormsIntegration" />
-    <Reference Include="ZFCore%282%29">
-      <HintPath>lib\ZFCore(2).dll</HintPath>
+    <Reference Include="ZFCore">
+      <HintPath>lib\ZFCore.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -16,4 +16,4 @@ D:\GitWareHouse\PPPair_Programming\UnitTestProject1\obj\Debug\UnitTestProject.cs
 D:\GitWareHouse\PPPair_Programming\UnitTestProject1\obj\Debug\UnitTestProject.csproj.CopyComplete
 D:\GitWareHouse\PPPair_Programming\UnitTestProject1\obj\Debug\UnitTestProject1.dll
 D:\GitWareHouse\PPPair_Programming\UnitTestProject1\obj\Debug\UnitTestProject1.pdb
-D:\GitWareHouse\PPPair_Programming\UnitTestProject1\bin\Debug\Core.dll
+D:\GitWareHouse\PPPair_Programming\UnitTestProject1\bin\Debug\Core.exe

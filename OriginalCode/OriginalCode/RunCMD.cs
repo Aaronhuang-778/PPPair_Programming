@@ -11,12 +11,12 @@ namespace OriginCode
     {
         public static void Main(string[] args)
         {
-            InputPara ip = new InputPara();
-            List<string> words = Program.input(args, out ip);
-            List<string> result = new List<string>();
 
             try
             {
+                InputPara ip = new InputPara();
+                List<string> words = Program.input(args, out ip);
+                List<string> result = new List<string>();
                 switch (ip.type)
                 {
                     case 'n':

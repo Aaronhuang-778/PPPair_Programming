@@ -122,9 +122,11 @@ namespace PPPair_Programming
             if ((bool)radioButtonText.IsChecked)
                 inputSource = textBoxInput.Text;
 
+            string inputStr = inputSource.Replace("\r\n", " ");
+
             Console.WriteLine("[gui] before skip");
             Console.WriteLine("useFileInput=" + useFileInput);
-            Console.WriteLine("inputSource=" + inputSource);
+            Console.WriteLine("inputSource=" + inputStr);
             Console.WriteLine("calType=" + calType);
             Console.WriteLine("isR=" + isR);
             Console.WriteLine("charH=" + charH);
@@ -204,21 +206,25 @@ namespace PPPair_Programming
 
         public void useZFCore()
         {
+            Console.WriteLine("use zf core");
             List<string> words = null;
             if (useFileInput)
             {
+                Console.WriteLine("use file input");
                 StreamReader reader = new StreamReader(inputSource);
                 string str = reader.ReadToEnd();
                 str = str.ToLower();
                 string[] wordsArr = Regex.Split(str, "[^(a-zA-Z)]+");
                 words = new List<string>(wordsArr);
                 if (words[0] == "") words.RemoveAt(0);
+                Console.WriteLine("list<string> words = [" + String.Join(", ", words) + "]");
             }
             else
             {
                 string[] wordsArr = Regex.Split(inputSource.ToLower(), "[^(a-zA-Z)]+");
                 words = new List<string>(wordsArr);
                 if (words[0] == "") words.RemoveAt(0);
+                Console.WriteLine("list<string> words = [" + String.Join(", ", words) + "]");
             }
             if (words == null || words.Count == 0 || words[0].Length == 0)
             {
@@ -241,6 +247,9 @@ namespace PPPair_Programming
                             break;
                         case 'w':
                             //需要传入Global的参数进行处理
+                            Console.WriteLine("ZFCore.PairTestInterface.gen_chain_word()");
+                            Console.WriteLine("list<string> words = [" + String.Join(", ", words) + "]");
+                            Console.WriteLine($"char charH={charH}, char charT={charT}, bool isR={isR}");
                             ZFCore.PairTestInterface.gen_chain_word(words, result, charH, charT, isR);
                             break;
                         case 'c':
@@ -264,7 +273,7 @@ namespace PPPair_Programming
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("[Exception]");
+                    Console.WriteLine("[Exception from ZFCore]");
                     Console.WriteLine(ex.Message);
                     textBoxResult.Text = "错误提示：\n" + ex.Message;
                 }
