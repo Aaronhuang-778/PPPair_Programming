@@ -21,6 +21,13 @@ namespace Core
         public Graph() {
         }
 
+        public Word words_list
+        {
+            get => default;
+            set
+            {
+            }
+        }
 
         public ArrayList getWordList()
         {
@@ -33,7 +40,7 @@ namespace Core
             if (!start_list.ContainsKey(w.word_tail)) return null;
 
             ArrayList value = (ArrayList) start_list[w.word_tail].Clone();
-            while (value.Contains(w)) value.Remove(w);
+            while (value.Count > 0 && value.Contains(w)) value.Remove(w);
             return value;
         }
 
@@ -43,7 +50,7 @@ namespace Core
             if (!end_list.ContainsKey(w.word_head)) return null;
             ArrayList value = new ArrayList();
             value = (ArrayList) end_list[w.word_head].Clone();
-            while (value.Contains(w)) value.Remove(w);
+            while (value.Count > 0 && value.Contains(w)) value.Remove(w);
             return value;
         }
 

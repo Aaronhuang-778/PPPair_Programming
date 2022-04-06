@@ -2,7 +2,37 @@
 
 [TOC]
 
+## ==依赖==
+
+### GUI
+
+**.Net Framework >= 4.7**
+
+NuGet：
+
+```
+MaterialDesignThemes
+ShowMeTheXAML.MSBuild
+```
+
+### Core
+
+**.Net Core >= 3.1**
+
+
+
 ## 代码位置
+
+测试文件夹：`bin/`
+
+项目：
+
+- `Core` 核心模块
+- `GUICode` 可视化界面
+- `TestProject` 单元测试项目（test_data分支）
+- `HYCore` 用于交换的核心计算类库（test_data分支）
+
+组织目录结构如下：
 
 ```shell
 PPPair_Programming/
@@ -45,21 +75,4 @@ PPPair_Programming/
 Google创建的[Material design](https://material.io/design/introduction)
 
 使用的GitHub上面的**[ MaterialDesignInXamlToolkit](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit)**
-
-[快速入门教程](https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit/wiki/Super-Quick-Start)
-
-[学习如何正确使用组件和样式]()
-
-
-
-## 依赖
-
-**.Net Framework >= 4.7**
-
-NuGet：
-
-```
-MaterialDesignThemes
-ShowMeTheXAML.MSBuild
-```
 

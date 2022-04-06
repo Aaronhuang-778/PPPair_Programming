@@ -6,8 +6,9 @@
 */.idea/
 
 obj
-release
+Release
 packages
 
 *.cache
 *.pdb
+*.meta

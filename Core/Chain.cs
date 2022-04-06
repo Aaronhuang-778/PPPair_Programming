@@ -10,6 +10,38 @@ namespace Core
 {
     public static class Chain
     {
+        internal static n_Method gen_n
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        internal static m_Method gen_m
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        internal static ChainAlgorithm ChainAlgorithm
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public static Graph Graph
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         public static int gen_for_gui_para(bool useFileInput, string inputSource,
             char calType, bool isR, char charH, char charT, List<string> result)
         {

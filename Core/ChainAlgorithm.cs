@@ -12,6 +12,22 @@ namespace Core
     {
         public ChainAlgorithm() { }
 
+        internal rc_Method rc_Method
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        internal rw_Method rw_Method
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         /* -n */
         public ArrayList get_chains_all(Graph G)
         {
